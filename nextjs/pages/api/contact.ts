@@ -71,7 +71,7 @@ if (req.method === "POST") {
         const response = await sesClient.send(sendEmailCommand);
         return res.status(200).json(response)
       } catch (e) {
-        return res.status(500).send('Failed to send email. Please try again later or contact us.');
+        return res.status(500).send(e);
       }
     
     } else { // Failed captcha

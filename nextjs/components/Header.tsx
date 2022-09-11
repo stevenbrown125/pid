@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { FaBars, FaPhoneAlt, FaSearch, FaShoppingCart } from 'react-icons/fa'
 import Link from 'next/link'
 import Image from 'next/image'
+import MobileNavigation from './MobileNavigation'
 
 const navigation = [
   { name: 'Products', href: '/products' },
@@ -17,7 +18,11 @@ const Header = (): JSX.Element => {
   return (
     <header className="fixed top-0 z-20 min-w-full border-b border-neutral-100 bg-neutral-100">
       {/* Mobile menu */}
-
+      <MobileNavigation
+        mobileMenuOpen={mobileMenuOpen}
+        setMobileMenuOpen={setMobileMenuOpen}
+        navigation={navigation}
+      />
       {/* Top */}
       <div className="relative px-5 py-1 mx-auto border-b sm:grid sm:grid-cols-3 justify-items-center max-w-7xl border-neutral-300">
         <a
@@ -101,12 +106,12 @@ const Header = (): JSX.Element => {
           </div>
 
           {/* Logo (lg-) */}
-          <div className="flex justify-center w-full -mr-8">
+          <div className="flex justify-center w-full ">
             <Link href="/">
               <button type="button" className="mt-1 md:hidden">
                 <span className="sr-only">PID Analyzers</span>
                 <Image
-                  className="flex-shrink-0 block w-32 h-auto mx-2"
+                  className="flex-shrink-0 block mx-2"
                   src="/images/pid-logo.png"
                   alt="PID Analyzers"
                   height={58}

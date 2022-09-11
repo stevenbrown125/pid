@@ -118,6 +118,7 @@ const ContactPage: NextPage = () => {
       })
     } catch (e: any) {
       // Validation Error already handled
+
       setContact({
         type: ActionKind.HandleInput,
         field: 'phone',
