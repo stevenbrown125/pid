@@ -3,6 +3,7 @@ import { FaBars, FaPhoneAlt, FaSearch, FaShoppingCart } from 'react-icons/fa'
 import Link from 'next/link'
 import Image from 'next/image'
 import MobileNavigation from './MobileNavigation'
+import SearchContainer from './SearchContainer'
 
 const navigation = [
   { name: 'Products', href: '/products' },
@@ -139,6 +140,7 @@ const Header = (): JSX.Element => {
           {/* End Container */}
         </div>
       </nav>
+      <SearchContainer show={searchOpen} setSearchOpen={setSearchOpen} />
     </header>
   )
 }
