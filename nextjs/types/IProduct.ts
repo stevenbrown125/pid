@@ -1,3 +1,5 @@
+import { IGas } from "./IGas"
+
 export default interface IProduct {
     id?: string,
     title: string,
@@ -14,8 +16,3 @@ export default interface IProduct {
     addons?: any
 }
 
-export interface IGas {
-    name: string,
-    symbol: string,
-    description: string,
-}

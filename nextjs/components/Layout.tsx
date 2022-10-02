@@ -1,6 +1,5 @@
 import Footer from './Footer'
 import Head from 'next/head'
-import Link from 'next/link'
 import Header from './Header'
 
 export default function Layout({ children }: any): JSX.Element {

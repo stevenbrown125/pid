@@ -88,7 +88,7 @@ const CompanyPage: NextPage = () => {
           <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:gap-24 lg:items-start">
             <div className="relative sm:py-16 lg:py-0">
               <div className="relative max-w-md px-4 mx-auto sm:max-w-3xl sm:px-6 lg:px-0 lg:max-w-none">
-                <div className="relative pb-6 overflow-hidden shadow-xl rounded-2xl">
+                <div className="relative pb-6 overflow-hidden shadow-xl rounded-2xl h-[560px]">
                   <Image
                     className="object-cover w-full h-full"
                     src="https://images.unsplash.com/photo-1508530786855-dfea35260b8d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&fp-x=0.5&fp-y=0.6&fp-z=3&width=1440&height=1440&sat=-80"
@@ -97,8 +97,8 @@ const CompanyPage: NextPage = () => {
                   />
                   <div className="absolute inset-0 bg-transparent mix-blend-multiply" />
                   <div className="absolute inset-0 bg-gradient-to-t from-red-700 via-transparent opacity-90" />
-                  <div className="relative px-8">
-                    <blockquote className="flex justify-end -mt-20 sm:items-center sm:justify-between">
+                  <div className="absolute w-full px-8 bottom-4">
+                    <blockquote className="flex justify-end sm:items-center sm:justify-between">
                       <div className="relative hidden font-medium text-white sm:block text-md md:flex-grow">
                         <p className="relative">
                           An official supplier to the US Navy since 1982.

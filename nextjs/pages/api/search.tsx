@@ -3,7 +3,7 @@ import IProduct from '../../types/IProduct'
 import client from '../../client'
 import groq from 'groq'
 
-export const allProductQuery = groq`
+const allProductQuery = groq`
 
 //TODO: Refine
 *[_type=="product"]{

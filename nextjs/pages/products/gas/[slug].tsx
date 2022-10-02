@@ -1,0 +1,107 @@
+import { PortableText } from '@portabletext/react'
+import groq from 'groq'
+import Link from 'next/link'
+import React from 'react'
+import { MdSearch } from 'react-icons/md'
+import client from '../../../client'
+import Breadcrumbs from '../../../components/Breadcrumbs'
+import Layout from '../../../components/Layout'
+import ProductGrid from '../../../components/ProductGrid'
+import { allGasQuery } from '../../../lib/sanity/allGasQuery'
+
+export async function getStaticProps({ params }: any) {
+  const gas = await client.fetch(
+    groq`*[_type=="gas" && slug.current==$slug]{
+      name,
+      "id": _id,
+      symbol,
+      "gasSlug": slug.current,
+      description,
+      "products": *[_type=="product" && references(^._id)]{ 
+        title,
+      "productSlug":slug.current,
+      description,
+      "id": _id,
+      "image": image.asset->url}
+    }
+`,
+    { slug: params.slug }
+  )
+  console.log(gas)
+  return {
+    props: {
+      gas,
+      appId: process.env.SQ_APP_ID,
+      locationId: process.env.SQ_LOCATION_ID
+    }
+  }
+}
+
+export async function getStaticPaths() {
+  const gases = await client.fetch(allGasQuery)
+  const paths = gases.map((gas: any) => {
+    const slug = gas.slug
+    return {
+      params: {
+        slug
+      }
+    }
+  })
+
+  return {
+    paths,
+    fallback: false
+  }
+}
+
+const ProductsByGasPage = (props: any) => {
+  console.log(props)
+  const gas = props.gas[0]
+  const products = gas.products
+  const pages = [
+    { name: 'All Products', href: '/products', current: false },
+    { name: 'Primary Gas', href: '/products/gas', current: false },
+    {
+      name: gas.name,
+      href: `/products/gas/${gas.slug}`,
+      current: true
+    }
+  ]
+
+  return (
+    <Layout>
+      <div className="relative px-4 pt-4 pb-10 mx-auto bg-white shadow-md sm:px-12 lg:px-16 lg:max-w-7xl">
+        <Breadcrumbs pages={pages} />
+        <h3 className="block text-4xl font-bold text-red-700">
+          PID {gas.name} Analyzers
+        </h3>
+        {products.length === 0 ? (
+          <>
+            <p className="p-8">
+              Unfortunately, we currently do not have any Analyzers that measure{' '}
+              <span className="font-semibold">{gas.name}</span>.
+            </p>
+            <Link href="/products">
+              <a className="flex items-center max-w-xs p-2 mb-4 mr-2 font-semibold text-white bg-red-500 rounded-md hover:bg-red-700">
+                <MdSearch className="w-5 h-5 mr-1 white" />
+                New Search
+              </a>
+            </Link>
+          </>
+        ) : (
+          <ProductGrid products={products} />
+        )}
+        <dl className="flex mt-10 border rounded-md border-neutral-200 bg-neutral-100 ">
+          <dt className="p-4 text-5xl font-extrabold text-red-700">
+            <PortableText value={gas.symbol} />
+          </dt>
+          <dd className="p-4 text-neutral-600">
+            <span className="font-bold">{gas.name}</span>
+            <PortableText value={gas.description} />
+          </dd>
+        </dl>
+      </div>
+    </Layout>
+  )
+}
+export default ProductsByGasPage

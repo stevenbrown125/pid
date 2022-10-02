@@ -10,6 +10,7 @@ import IndustryGrid from '../components/IndustryGrid'
 import ResponsibleBlurb from '../components/ResponsibleBlurb'
 import LastestNews from '../components/LatestNews'
 import { allPostQuery } from '../lib/sanity/allPostQuery'
+import CTA from '../components/CTA'
 
 export async function getStaticProps() {
   const data = await client.fetch(allProductQuery)
@@ -91,6 +92,7 @@ const Home: NextPage = (props: any) => {
       <LastestNews posts={props.posts} />
       <IndustryGrid />
       <ResponsibleBlurb />
+      <CTA />
     </Layout>
   )
 }

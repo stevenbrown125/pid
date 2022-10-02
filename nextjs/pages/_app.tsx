@@ -5,6 +5,10 @@ import { PortableTextComponentsProvider } from '@portabletext/react'
 import Seo from '../components/SEO'
 
 const components = {
+  block: {
+    span: ({ children }: any) => <span>{children}</span>
+  },
+
   list: {
     // Ex. 1: customizing common list types
     bullet: ({ children }: any) => (
