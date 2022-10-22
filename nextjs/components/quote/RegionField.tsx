@@ -17,7 +17,7 @@ export default function RegionField({ quote, errors, setQuote }: any) {
   }
 
   return (
-    <label htmlFor="state" className="relative block my-4">
+    <label htmlFor="state" className="relative block">
       <span className="flex items-center ">
         <GrMapLocation className="w-5 mx-1" />
         State / Province

@@ -43,7 +43,7 @@ const MobileNavigation = ({
                 <button onClick={() => setMobileMenuOpen(false)} type="button">
                   <Image
                     className="block w-32 h-auto mx-2"
-                    src="/images/logo.png"
+                    src="/images/pid-logo.png"
                     alt="PID Analyzers"
                     width={122}
                     height={56}

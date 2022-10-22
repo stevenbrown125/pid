@@ -2,6 +2,7 @@ import { PortableText } from '@portabletext/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import client from '../../client'
+import CTA from "../../components/CTA";
 import Layout from '../../components/Layout'
 import Seo from '../../components/SEO'
 import { allCategoriesQuery } from '../../lib/sanity/allCategoriesQuery'
@@ -46,7 +47,7 @@ function AnnouncementsPage({ posts, categories }: any) {
             {posts.map((post: any) => {
               const published = new Date(post.publishedAt).toDateString()
               return (
-                <div key={post.title} className="flex flex-col">
+                <div key={post.title} className="flex flex-col py-2">
                   <div className="flex flex-col justify-between flex-1 p-6 bg-white rounded-lg shadow-lg">
                     <div className="flex-1">
                       <p className="text-xl font-semibold text-neutral-900 lg:text-2xl">
@@ -85,6 +86,7 @@ function AnnouncementsPage({ posts, categories }: any) {
           </div>
         </div>
       </section>
+      <CTA />
     </Layout>
   )
 }

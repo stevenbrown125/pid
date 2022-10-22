@@ -12,9 +12,10 @@ const navigation = {
   ],
 
   products: [
-    { name: 'Portable', href: '/products' },
-    { name: 'Continuous', href: '/products' },
-    { name: 'Laboratory', href: '/products' },
+    { name: 'Catalog', href: '/products' },
+    { name: 'Industries', href: '/products/indusry' },
+    { name: 'Gases', href: '/products/gas' },
+    { name: 'Applications', href: '/products/application' },
     { name: 'Request a Quote', href: '/request-a-quote' }
   ],
   social: [
@@ -133,21 +134,22 @@ export default function Footer({ setOpen }: any) {
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
+      
       <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:py-16 lg:px-8">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8 xl:col-span-1">
             <Image
-              className="w-auto h-14"
-              src="/images/pid-logo.png"
+              src="/images/pid-logo-white.png"
               alt="PID Analyzers Logo"
-              height={58}
-              width={118}
+              height={79}
+              width={175}
             />
             <p className="text-lg text-neutral-100">
               PID Analyzers is a global leader in developing sensors &amp;
               analyzers for air, water and process applications and distributes
               these products worldwide.
             </p>
+            { /* Social Media Links */}
             <div className="flex space-x-6">
               {navigation.social.map((item) => (
                 <a
@@ -163,21 +165,20 @@ export default function Footer({ setOpen }: any) {
               ))}
             </div>
           </div>
+
           <div className="grid grid-cols-1 gap-8 mt-12 md:grid-cols-2 xl:mt-0 xl:col-span-2">
             <div className="grid grid-cols-2 gap-8 pb-6">
               <div>
                 <h3 className="text-lg font-semibold tracking-wider text-white uppercase">
-                  Products
+                  Product
                 </h3>
                 <ul className="mt-4 space-y-4">
                   {navigation.products.map((item) => (
                     <li key={item.name}>
-                      <a
-                        href={item.href}
-                        className="text-lg text-neutral-100 hover:text-neutral-300"
-                      >
-                        {item.name}
-                      </a>
+                      <Link href={item.href}>
+                        <a className="text-lg text-neutral-100 hover:text-neutral-300">
+                        {item.name}</a>
+                      </Link>
                     </li>
                   ))}
                 </ul>

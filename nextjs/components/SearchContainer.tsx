@@ -1,15 +1,17 @@
-import { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { FaSearch } from 'react-icons/fa'
-import { GrClose } from 'react-icons/gr'
-import Link from 'next/link'
+import { Fragment, useState } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { FaSearch } from 'react-icons/fa';
+import { GrClose } from 'react-icons/gr';
+import Link from 'next/link';
+import { PortableTextBlock } from '@portabletext/types';
+import { toPlainText } from '@portabletext/react';
 
 const Highlighted = ({ text = '', highlight = '' }) => {
   if (!highlight.trim()) {
-    return <span>{text}</span>
+    return <span>{text}</span>;
   }
-  const regex = new RegExp(`(${highlight})`, 'gi')
-  const parts = text.split(regex)
+  const regex = new RegExp(`(${highlight})`, 'gi');
+  const parts = text.split(regex);
 
   return (
     <span>
@@ -18,70 +20,69 @@ const Highlighted = ({ text = '', highlight = '' }) => {
           <mark key={i}>{part}</mark>
         ) : (
           <span key={i}>{part}</span>
-        )
+        );
       })}
     </span>
-  )
-}
+  );
+};
 
 const submitQuery = async (query: any) => {
   const res = await fetch('/api/search', {
     method: 'POST',
     headers: {
       Accept: 'application/json, text/plain, */*',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      query
-    })
-  })
-  const results = await res.json()
-  return results.results
-}
+      query,
+    }),
+  });
+  const results = await res.json();
+  return results.results;
+};
+
 const SearchContainer = ({ show, setSearchOpen }: any): any => {
   /* Pull Search Data from GraphQL */
 
-  const [query, setQuery] = useState('')
-  const [renderResults, setRenderResults] = useState([])
-  const [isTyping, setIsTyping] = useState(true)
+  const [query, setQuery] = useState('');
+  const [renderResults, setRenderResults] = useState([]);
+  const [isTyping, setIsTyping] = useState(true);
 
   const handleClose = () => {
     /* Uses setTimeout to avoid issues with clicking the search icon to close */
-    setTimeout(() => setSearchOpen(false), 2)
-    setQuery('')
-    setIsTyping(true)
-    setRenderResults([])
-  }
+    setTimeout(() => setSearchOpen(false), 2);
+    setQuery('');
+    setIsTyping(true);
+    setRenderResults([]);
+  };
 
   const handleSubmit = async (e: any) => {
-    e.preventDefault()
-    const results: any = await submitQuery(query)
-    let renderResultsArr: any = []
+    e.preventDefault();
+    const results: any = await submitQuery(query);
+    console.log(results);
+    let renderResultsArr: any = [];
 
     results.forEach((r: any) => {
       renderResultsArr.push({
-        ...r
-      })
-    })
-    setRenderResults(renderResultsArr)
-    setIsTyping(false)
-  }
+        ...r,
+      });
+    });
+    setRenderResults(renderResultsArr);
+    setIsTyping(false);
+  };
 
   /* Pulls an example of the query word being used in the result */
-  const pullContent = (query: any, body: any) => {
-    let content = null
-    for (let i = 0; i < body.length; i++) {
-      for (let j = 0; j < body[i].children.length; j++) {
-        if (body[i].children[j].text.includes(query)) {
-          content = body[i].children[j].text
-          break
-        }
-      }
-      if (content) break
-    }
-    if (content) return content
-    return body[0].children[0].text
-  }
+  const pullContent = (query: string, description: PortableTextBlock) => {
+    let content = '';
+
+    const plainText = toPlainText(description);
+    content = plainText.slice(
+      0,
+      plainText.length > 128 ? 128 : plainText.length
+    );
+
+    return content;
+  };
 
   return (
     <>
@@ -112,7 +113,7 @@ const SearchContainer = ({ show, setSearchOpen }: any): any => {
             leaveFrom="translate-y-0"
             leaveTo="-translate-y-full"
           >
-            <div className="inset-0 flex items-start justify-center pt-24 overflow-scroll md:mt-2">
+            <div className="inset-0 flex items-start justify-center pt-24 md:mt-2">
               <div className="flex-col items-center justify-center w-full shadow-xl bg-neutral-50">
                 {/* Search Form */}
                 <form
@@ -131,7 +132,7 @@ const SearchContainer = ({ show, setSearchOpen }: any): any => {
                         id="query"
                         aria-label="Search"
                         onChange={(e) => {
-                          setQuery(e.target.value)
+                          setQuery(e.target.value);
                         }}
                         value={query}
                         placeholder="Type to search"
@@ -163,7 +164,7 @@ const SearchContainer = ({ show, setSearchOpen }: any): any => {
                   <div
                     className={`${
                       renderResults.length > 3 ? 'pb-56' : 'pb-4'
-                    } w-screen max-h-screen px-4 pt-2  mx-auto overflow-scroll h-fit sm:max-w-2xl xl:max-w-7xl bg-neutral-50`}
+                    } w-screen max-h-screen px-4 pt-2  mx-auto overflow-auto h-fit sm:max-w-2xl xl:max-w-7xl bg-neutral-50`}
                   >
                     {renderResults.length > 0 ? (
                       renderResults.map((result: any) => (
@@ -180,10 +181,10 @@ const SearchContainer = ({ show, setSearchOpen }: any): any => {
                             </a>
                           </Link>
 
-                          {result.content && (
+                          {result.description && (
                             <div className="block text-xs md:text-base">
                               <Highlighted
-                                text={result.content}
+                                text={pullContent(query, result.description)}
                                 highlight={query}
                               />
                             </div>
@@ -216,7 +217,7 @@ const SearchContainer = ({ show, setSearchOpen }: any): any => {
         </Dialog>
       </Transition.Root>
     </>
-  )
-}
+  );
+};
 
-export default SearchContainer
+export default SearchContainer;

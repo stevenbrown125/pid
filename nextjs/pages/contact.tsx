@@ -1,34 +1,34 @@
-import { NextPage } from 'next'
-import Link from 'next/link'
-import { useReducer, useState } from 'react'
-import { FaEnvelope, FaPhone, FaUser } from 'react-icons/fa'
-import PhoneInput, { formatPhoneNumber } from 'react-phone-number-input/input'
-import Layout from '../components/Layout'
+import { NextPage } from 'next';
+import Link from 'next/link';
+import { useReducer, useState } from 'react';
+import { FaEnvelope, FaPhone, FaUser } from 'react-icons/fa';
+import PhoneInput, { formatPhoneNumber } from 'react-phone-number-input/input';
+import Layout from '../components/Layout';
 import {
   ContactReducer,
-  initialContactState
-} from '../lib/helpers/contactReducer'
-import { IContactError } from '../types/IContact'
-import { E164Number } from 'libphonenumber-js/types'
-import { ActionKind } from '../types/IAction'
-import { Switch } from '@headlessui/react'
-import { validateContact } from '../lib/helpers/validator'
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
-import Modal from '../components/Modal'
-import Seo from '../components/SEO'
+  initialContactState,
+} from '../lib/helpers/contactReducer';
+import { IContactError } from '../types/IContact';
+import { E164Number } from 'libphonenumber-js/types';
+import { ActionKind } from '../types/IAction';
+import { Switch } from '@headlessui/react';
+import { validateContact } from '../lib/helpers/validator';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import Modal from '../components/Modal';
+import Seo from '../components/SEO';
 
 const ContactPage: NextPage = () => {
   // Initialize Captcha
-  const { executeRecaptcha } = useGoogleReCaptcha()
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   // Set State
-  const [contact, setContact] = useReducer(ContactReducer, initialContactState)
-  const [errors, setErrors] = useState({} as IContactError)
-  const [isLoading, setIsLoading] = useState(false)
+  const [contact, setContact] = useReducer(ContactReducer, initialContactState);
+  const [errors, setErrors] = useState({} as IContactError);
+  const [isLoading, setIsLoading] = useState(false);
   //TODO: Refactor State into Reducer for  Modal
-  const [open, setOpen] = useState(false) // Modal State
-  const [message, setMessage] = useState('')
-  const [success, setSuccess] = useState(false)
+  const [open, setOpen] = useState(false); // Modal State
+  const [message, setMessage] = useState('');
+  const [success, setSuccess] = useState(false);
 
   // Submit to API
   const submitContactForm = async (gReCaptchaToken: string) => {
@@ -36,97 +36,97 @@ const ContactPage: NextPage = () => {
       method: 'POST',
       headers: {
         Accept: 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         ...contact,
-        gRecaptchaToken: gReCaptchaToken
-      })
-    })
+        gRecaptchaToken: gReCaptchaToken,
+      }),
+    });
 
-    const data = await res.json()
+    const data = await res.json();
 
     if (data.$metadata.httpStatusCode === 200) {
       setMessage(
         'Your message sent successfully. Our team will get back to you within 3 business days.'
-      )
-      setSuccess(true)
-      setOpen(true)
-      setContact({ type: ActionKind.Reset })
+      );
+      setSuccess(true);
+      setOpen(true);
+      setContact({ type: ActionKind.Reset });
     } else {
       setMessage(
         'Your message failed to send due to a server error. Please email us at support@hnu.com with your message.'
-      )
-      setSuccess(false)
-      setOpen(true)
+      );
+      setSuccess(false);
+      setOpen(true);
     }
-    setIsLoading(false)
-  }
+    setIsLoading(false);
+  };
 
   // Handlers
   const handleInput = (e: React.SyntheticEvent) => {
     const target = e.target as typeof e.target & {
-      name: string
-      value: string
-    }
+      name: string;
+      value: string;
+    };
     setContact({
       type: ActionKind.HandleInput,
       field: target.name,
-      payload: target.value
-    })
-  }
+      payload: target.value,
+    });
+  };
 
   const handlePhone = (e: E164Number | undefined) => {
-    if (e === undefined) return
+    if (e === undefined) return;
     setContact({
       type: ActionKind.HandleInput,
       field: 'phone',
-      payload: e
-    })
-  }
+      payload: e,
+    });
+  };
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    const phone = contact.phone
+    e.preventDefault();
+    setIsLoading(true);
+    const phone = contact.phone;
     try {
       /* Validate Client Side */
-      const submissionErrors = validateContact(contact)
-      setErrors(submissionErrors)
-      if (Object.keys(submissionErrors).length > 0) throw 'Validation Error'
+      const submissionErrors = validateContact(contact);
+      setErrors(submissionErrors);
+      if (Object.keys(submissionErrors).length > 0) throw 'Validation Error';
 
       /* Fixes E164Number toString issue */
       setContact({
         type: ActionKind.HandleInput,
         field: 'phone',
-        payload: formatPhoneNumber(contact.phone)
-      })
+        payload: formatPhoneNumber(contact.phone),
+      });
 
       /* No Errors, so send to API and clear any errors */
-      if (!executeRecaptcha) throw 'Execute recaptcha not yet available'
+      if (!executeRecaptcha) throw 'Execute recaptcha not yet available';
 
       // Wrap submission with Recaptcha
-      const gReCaptchaToken = await executeRecaptcha('contactFormSubmit')
+      const gReCaptchaToken = await executeRecaptcha('contactFormSubmit');
 
-      const submissionResponse = await submitContactForm(gReCaptchaToken)
+      const submissionResponse = await submitContactForm(gReCaptchaToken);
 
       /* Return the Phone number back to E164Number */
       setContact({
         type: ActionKind.HandleInput,
         field: 'phone',
-        payload: phone
-      })
+        payload: phone,
+      });
     } catch (e: any) {
       // Validation Error already handled
 
       setContact({
         type: ActionKind.HandleInput,
         field: 'phone',
-        payload: phone
-      })
+        payload: phone,
+      });
     }
-    setIsLoading(false)
-  }
+    setIsLoading(false);
+  };
 
   return (
     <Layout>
@@ -142,11 +142,16 @@ const ContactPage: NextPage = () => {
         success={success}
       />
       <section>
-        <div className="mx-auto bg-white max-w-7xl md:grid md:grid-cols-5">
-          <div className="px-4 py-6 bg-neutral-50 sm:px-6 md:col-span-2 md:px-8 md:py-12 xl:pr-12">
-            <h2 className="text-3xl font-extrabold text-center lg:text-left sm:text-4xl lg:text-5xl text-neutral-800">
-              Get in touch
-            </h2>
+        <div className="relative px-4 pt-6 mx-auto sm:px-12 lg:px-16 lg:max-w-7xl md:grid md:grid-cols-5">
+          <div className="md:col-span-2 xl:pr-12">
+            <div className="text-base">
+              <h2 className="font-semibold leading-6 tracking-wide text-red-600 uppercase">
+                Contact Us
+              </h2>
+              <h3 className="text-3xl font-extrabold leading-8 tracking-tight text-stone-800 sm:text-4xl">
+                Get in touch
+              </h3>
+            </div>
             <p className="mt-3 text-lg leading-6 text-center lg:text-left text-neutral-500">
               We&apos;d love to hear from you! Fill out and submit this form and
               our team will get back to you within 3 business days.
@@ -193,7 +198,7 @@ const ContactPage: NextPage = () => {
               </Link>
             </p>
           </div>
-          <div className="px-4 py-6 bg-white shadow-lg sm:px-6 md:col-span-3 md:py-12 md:px-8 xl:pl-12">
+          <div className="px-4 py-6 bg-white md:shadow-md sm:px-6 md:col-span-3 md:py-12 md:px-8 xl:pl-12">
             <div className="max-w-lg mx-auto lg:max-w-none">
               <form className="grid grid-cols-1 gap-y-6">
                 <label htmlFor="firstName" className="relative block w-full">
@@ -279,7 +284,7 @@ const ContactPage: NextPage = () => {
                     className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300"
                   />
                   {errors.message && (
-                    <span className="absolute pl-1 text-red-600 -bottom-6 ">
+                    <span className="pl-1 text-red-600 md:absolute md:-bottom-6 ">
                       {errors.message}
                     </span>
                   )}
@@ -318,7 +323,7 @@ const ContactPage: NextPage = () => {
                         setContact({
                           type: ActionKind.ToggleConsent,
                           field: 'hasConsent',
-                          payload: e
+                          payload: e,
                         })
                       }
                       className={`${
@@ -357,7 +362,7 @@ const ContactPage: NextPage = () => {
         </div>
       </section>
     </Layout>
-  )
-}
+  );
+};
 
-export default ContactPage
+export default ContactPage;

@@ -3,7 +3,7 @@ import { FaBook, FaEnvelope, FaPencilAlt } from 'react-icons/fa'
 
 export default function CTA() {
   return (
-    <section className="relative z-10 font-medium bg-red-800 shadow-md">
+    <section className="relative font-medium bg-red-800 shadow-md">
       <div className="relative grid grid-cols-1 mx-auto text-xl text-white lg:text-2xl xl:text-4xl md:grid-cols-3 max-w-7xl">
         <div className="p-4 hover:opacity-75">
           <Link href="/products">

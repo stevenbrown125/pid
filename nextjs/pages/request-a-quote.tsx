@@ -1,4 +1,4 @@
-import { useReducer, useState } from 'react'
+import { useReducer, useState } from 'react';
 import {
   FaArrowsAltV,
   FaBuilding,
@@ -6,59 +6,59 @@ import {
   FaCity,
   FaEnvelope,
   FaPhone,
-  FaUser
-} from 'react-icons/fa'
-import { Listbox, Switch, Transition } from '@headlessui/react'
-import CountryField from '../components/quote/CountryField'
-import RegionField from '../components/quote/RegionField'
-import Link from 'next/link'
-import client from '../client'
-import { allProductQuery } from '../lib/sanity/allProductQuery'
-import { initialQuoteState, QuoteReducer } from '../lib/helpers/quoteReducer'
-import { IQuoteErrors } from '../types/IQuote'
-import { NextPage } from 'next'
-import Layout from '../components/Layout'
-import IProduct from '../types/IProduct'
-import validateQuote from '../lib/helpers/validator'
-import PhoneInput from 'react-phone-number-input/input'
-import { formatPhoneNumber } from 'react-phone-number-input'
-import { E164Number } from 'libphonenumber-js/types'
-import { ActionKind } from '../types/IAction'
-import Modal from '../components/Modal'
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
-import { useRouter } from 'next/router'
-import Seo from '../components/SEO'
+  FaUser,
+} from 'react-icons/fa';
+import { Listbox, Switch, Transition } from '@headlessui/react';
+import CountryField from '../components/quote/CountryField';
+import RegionField from '../components/quote/RegionField';
+import Link from 'next/link';
+import client from '../client';
+import { allProductQuery } from '../lib/sanity/allProductQuery';
+import { initialQuoteState, QuoteReducer } from '../lib/helpers/quoteReducer';
+import { IQuoteErrors } from '../types/IQuote';
+import { NextPage } from 'next';
+import Layout from '../components/Layout';
+import IProduct from '../types/IProduct';
+import validateQuote from '../lib/helpers/validator';
+import PhoneInput from 'react-phone-number-input/input';
+import { formatPhoneNumber } from 'react-phone-number-input';
+import { E164Number } from 'libphonenumber-js/types';
+import { ActionKind } from '../types/IAction';
+import Modal from '../components/Modal';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { useRouter } from 'next/router';
+import Seo from '../components/SEO';
 
 function classNames(...classes: any[]) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
 export async function getStaticProps() {
-  const products = await client.fetch(allProductQuery)
+  const products = await client.fetch(allProductQuery);
   return {
     props: {
-      products
-    }
-  }
+      products,
+    },
+  };
 }
 
 const RequestAQuotePage: NextPage = ({ products }: any) => {
   // Initialize Captcha
-  const { executeRecaptcha } = useGoogleReCaptcha()
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   /* Sets up timetable so users have to select atleast 30 days from now */
-  const today = new Date()
-  today.setDate(today.getDate() + 30)
-  const timeTableMin = today.toISOString().slice(0, 10)
+  const today = new Date();
+  today.setDate(today.getDate() + 30);
+  const timeTableMin = today.toISOString().slice(0, 10);
 
   /* Handle the Quote State */
-  const [quote, setQuote] = useReducer(QuoteReducer, initialQuoteState)
-  const [errors, setErrors] = useState({} as IQuoteErrors)
-  const [isLoading, setIsLoading] = useState(false)
+  const [quote, setQuote] = useReducer(QuoteReducer, initialQuoteState);
+  const [errors, setErrors] = useState({} as IQuoteErrors);
+  const [isLoading, setIsLoading] = useState(false);
   //TODO: Refactor State into Reducer for  Modal
-  const [open, setOpen] = useState(false) // Modal State
-  const [message, setMessage] = useState('')
-  const [success, setSuccess] = useState(false)
+  const [open, setOpen] = useState(false); // Modal State
+  const [message, setMessage] = useState('');
+  const [success, setSuccess] = useState(false);
 
   // Submit to API
   const submitQuoteForm = async (gReCaptchaToken: string) => {
@@ -66,106 +66,106 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
       method: 'POST',
       headers: {
         Accept: 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         ...quote,
-        gRecaptchaToken: gReCaptchaToken
-      })
-    })
+        gRecaptchaToken: gReCaptchaToken,
+      }),
+    });
 
-    const data = await res.json()
+    const data = await res.json();
 
     if (data.$metadata.httpStatusCode === 200) {
       setMessage(
         'Your quotation request sent successfully. Our team will get back to you within 3 business days.'
-      )
-      setSuccess(true)
-      setOpen(true)
-      setQuote({ type: ActionKind.Reset })
+      );
+      setSuccess(true);
+      setOpen(true);
+      setQuote({ type: ActionKind.Reset });
     } else {
       setMessage(
         'Your quotation request failed to send due to a server error. Please email us at support@hnu.com with your Quotation Request.'
-      )
-      setSuccess(false)
-      setOpen(true)
+      );
+      setSuccess(false);
+      setOpen(true);
     }
-    setIsLoading(false)
-    return data
-  }
+    setIsLoading(false);
+    return data;
+  };
   // Handlers
   const handleInput = (e: React.SyntheticEvent) => {
     const target = e.target as typeof e.target & {
-      name: string
-      value: string
-    }
+      name: string;
+      value: string;
+    };
     setQuote({
       type: ActionKind.HandleInput,
       field: target.name,
-      payload: target.value
-    })
-  }
+      payload: target.value,
+    });
+  };
 
   const handlePhone = (e: E164Number | undefined) => {
-    if (e === undefined) return
+    if (e === undefined) return;
     setQuote({
       type: ActionKind.HandleInput,
       field: 'phone',
-      payload: e
-    })
-  }
+      payload: e,
+    });
+  };
 
   /* Handle Submit */
   const handleSubmit = async (e: React.SyntheticEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    const phone = quote.phone
+    e.preventDefault();
+    setIsLoading(true);
+    const phone = quote.phone;
     try {
       /* Validate Client Side */
-      const submissionErrors = validateQuote(quote)
-      setErrors(submissionErrors)
-      if (Object.keys(submissionErrors).length > 0) throw 'Validation Error'
+      const submissionErrors = validateQuote(quote);
+      setErrors(submissionErrors);
+      if (Object.keys(submissionErrors).length > 0) throw 'Validation Error';
 
       /* Fixes E164Number toString issue */
       setQuote({
         type: ActionKind.HandleInput,
         field: 'phone',
-        payload: formatPhoneNumber(quote.phone || '')
-      })
+        payload: formatPhoneNumber(quote.phone || ''),
+      });
 
       /* No Errors, so send to API and clear any errors */
-      if (!executeRecaptcha) throw 'Execute recaptcha not yet available'
+      if (!executeRecaptcha) throw 'Execute recaptcha not yet available';
 
       // Wrap submission with Recaptcha
-      const gReCaptchaToken = await executeRecaptcha('contactFormSubmit')
+      const gReCaptchaToken = await executeRecaptcha('contactFormSubmit');
 
-      const submissionResponse = await submitQuoteForm(gReCaptchaToken)
+      const submissionResponse = await submitQuoteForm(gReCaptchaToken);
 
       /* Return the Phone number back to E164Number, unless it is already reset*/
       if (submissionResponse.$metadata.httpStatusCode !== 200) {
         setQuote({
           type: ActionKind.HandleInput,
           field: 'phone',
-          payload: phone
-        })
+          payload: phone,
+        });
       }
     } catch (e: any) {
       setQuote({
         type: ActionKind.HandleInput,
         field: 'phone',
-        payload: phone
-      })
+        payload: phone,
+      });
 
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   /* Handle Initial Product Selection */
-  const router = useRouter()
-  const { slug } = router.query
-  let selectedProduct = products.find((product: any) => product.slug === slug)
+  const router = useRouter();
+  const { slug } = router.query;
+  let selectedProduct = products.find((product: any) => product.slug === slug);
   if (selectedProduct === undefined)
-    selectedProduct = { title: 'No product Selected' }
+    selectedProduct = { title: 'No product Selected' };
 
   return (
     <Layout>
@@ -180,10 +180,10 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
         message={message}
         success={success}
       />
-      <section className="relative bg-cover bg-neutral-50">
+      <section className="px-4 py-6 mx-auto bg-white shadow-md max-w-7xl text-neutral-900 md:px-8 lg:px-16 sm:py-8">
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 px-4 py-6 mx-auto bg-white shadow-md max-w-7xl md:grid-cols-2 text-stone-900 md:px-8 lg:px-16 sm:py-8 lg:gap-x-12 lg:gap-y-8 gap-x-4 gap-y-4"
+          className="grid grid-cols-1 md:grid-cols-2 lg:gap-x-12 lg:gap-y-8 gap-x-4 gap-y-4"
         >
           {/* Contact Information */}
           <h3 className="pt-4 pb-1 text-2xl font-extrabold text-center border-b text-neutral-800 md:col-span-2 md:text-left sm:text-3xl lg:text-4xl filter drop-shadow-sm">
@@ -202,7 +202,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
               placeholder="John Doe"
               value={quote.name}
               onChange={(e) => handleInput(e)}
-              className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-stone-300"
+              className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300"
             />
             {errors.name && (
               <span className="absolute pl-1 text-red-600 -bottom-6">
@@ -224,7 +224,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
               onChange={(e) => handlePhone(e)}
               maxLength={17}
               autoComplete="tel"
-              className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-stone-300"
+              className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300"
               required
             />
             {errors.phone && (
@@ -246,7 +246,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
               value={quote.email}
               onChange={(e) => handleInput(e)}
               autoComplete="email"
-              className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-stone-300"
+              className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300"
             />
             {errors.email && (
               <span className="absolute pl-1 text-red-600 -bottom-6">
@@ -258,7 +258,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
           <label htmlFor="company" className="relative block">
             <span
               id="company-optional"
-              className="absolute right-0 text-sm text-right text-stone-500"
+              className="absolute right-0 text-sm text-right text-neutral-500"
             >
               Optional
             </span>
@@ -272,7 +272,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
               id="company"
               value={quote.company}
               onChange={(e) => handleInput(e)}
-              className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-stone-300"
+              className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300"
               aria-describedby="company-optional"
             />
           </label>
@@ -300,7 +300,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
                 id="city"
                 value={quote.city}
                 onChange={(e) => handleInput(e)}
-                className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-stone-300"
+                className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300"
               />
               {errors.city && (
                 <span className="absolute pl-1 text-red-600 -bottom-6">
@@ -321,13 +321,13 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
                 setQuote({
                   type: ActionKind.HandleInput,
                   field: 'product',
-                  payload: e
+                  payload: e,
                 })
               }
               name="product"
             >
               <Listbox.Label className="block">Analyzer</Listbox.Label>
-              <Listbox.Button className="relative w-full py-3 pl-3 pr-10 mt-2 text-left bg-white border rounded-md shadow-sm cursor-default focus:ring-red-600 border-stone-300 focus:outline-none focus:ring-1 focus:border-red-600 sm:text-sm">
+              <Listbox.Button className="relative w-full py-3 pl-3 pr-10 mt-2 text-left bg-white border rounded-md shadow-sm cursor-default focus:ring-red-600 border-neutral-300 focus:outline-none focus:ring-1 focus:border-red-600 sm:text-sm">
                 <span className="block truncate">
                   {quote.product ? quote.product.title : selectedProduct.title}
                 </span>
@@ -403,7 +403,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
               id="timetable"
               value={quote.timetable}
               onChange={(e) => handleInput(e)}
-              className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-stone-300"
+              className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300"
             />{' '}
             {errors.timetable && (
               <span className="absolute pl-1 text-red-600 -bottom-6 ">
@@ -416,7 +416,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
               Applications
               <span
                 id="application-optional"
-                className="w-full text-sm text-right text-stone-500"
+                className="w-full text-sm text-right text-neutral-500"
               >
                 Optional
               </span>
@@ -427,7 +427,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
               id="applications"
               value={quote.applications}
               onChange={(e) => handleInput(e)}
-              className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-stone-300"
+              className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300"
             />
           </label>
           <label htmlFor="comments" className="relative block md:col-span-2">
@@ -438,7 +438,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
               id="comments"
               onChange={(e) => handleInput(e)}
               value={quote.comments}
-              className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-stone-300"
+              className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300"
             />
             {errors.comments && (
               <span className="absolute pl-1 text-red-600 -bottom-6 ">
@@ -480,7 +480,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
                     setQuote({
                       type: ActionKind.ToggleConsent,
                       field: 'hasConsent',
-                      payload: e
+                      payload: e,
                     })
                   }
                   className={`${
@@ -523,6 +523,6 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
         </form>
       </section>
     </Layout>
-  )
-}
-export default RequestAQuotePage
+  );
+};
+export default RequestAQuotePage;

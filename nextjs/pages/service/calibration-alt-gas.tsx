@@ -1,32 +1,32 @@
-import { NextPage } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import Breadcrumbs from '../../components/Breadcrumbs'
-import Layout from '../../components/Layout'
-import Seo from '../../components/SEO'
+import { NextPage } from 'next';
+import Image from 'next/image';
+import Breadcrumbs from '../../components/Breadcrumbs';
+import CTA from '../../components/CTA';
+import Layout from '../../components/Layout';
+import Seo from '../../components/SEO';
 
 const pages = [
   { name: 'Service', href: '/service', current: false },
   {
     name: 'Calibration with Alternate Gas',
     href: '/service/calibration-alt-gas',
-    current: true
-  }
-]
+    current: true,
+  },
+];
 
 const CalibrationWithAltGasPage: NextPage = () => {
   return (
     <Layout>
       <Seo title="Calibration with an Alternate Gas" />
-      <div className="relative px-4 pt-4 mx-auto bg-white shadow-md sm:px-12 lg:px-16 lg:max-w-7xl">
-        <Breadcrumbs pages={pages} />
+      <section className="relative px-4 py-6 pb-10 mx-auto shadow-md sm:px-12 lg:px-16 lg:max-w-7xl ">
         <div className="text-base">
           <h2 className="font-semibold leading-6 tracking-wide text-red-600 uppercase">
             System Service
           </h2>
-          <h3 className="mb-6 text-3xl font-extrabold leading-8 tracking-tight text-stone-800 sm:text-4xl">
+          <h3 className="text-3xl font-extrabold leading-8 tracking-tight text-stone-800 sm:text-4xl">
             Calibration with an Alternate Gas
           </h3>
+          <Breadcrumbs pages={pages} />
         </div>
         <div className="text-gray-500 md:flex">
           <figure className="mb-4 mr-6">
@@ -34,8 +34,8 @@ const CalibrationWithAltGasPage: NextPage = () => {
               className="object-cover w-64 border shadow-md border-neutral-700"
               src="/images/8-1_calillustration_service.jpg"
               alt="Calibration with an Alternate Gas"
-              height={300}
-              width={300}
+              height={900}
+              width={328}
             />
             <figcaption className="text-xs md:text-right">
               Calibration Checking Set-up
@@ -172,22 +172,12 @@ const CalibrationWithAltGasPage: NextPage = () => {
                 the user should consult PID Analyzers&rsquo; service department.
               </p>
             </div>
-
-            <h4 className="text-2xl font-bold text-red-700 text-md">
-              Want more info?
-            </h4>
-            <div className="flex justify-center pt-4 pb-20 mr-4 md:justify-start">
-              <Link href="/contact">
-                <a className="flex items-center justify-center px-5 py-3 text-base font-medium text-white no-underline bg-red-600 border border-transparent rounded-md hover:bg-red-600-dark">
-                  Contact Us
-                </a>
-              </Link>
-            </div>
           </div>
         </div>
-      </div>
+      </section>
+      <CTA />
     </Layout>
-  )
-}
+  );
+};
 
-export default CalibrationWithAltGasPage
+export default CalibrationWithAltGasPage;

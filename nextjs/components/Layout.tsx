@@ -1,19 +1,13 @@
 import Footer from './Footer'
-import Head from 'next/head'
 import Header from './Header'
 
 export default function Layout({ children }: any): JSX.Element {
   return (
-    <>
-      <Head>
-        <title>PID Analyzers, LLC - Home of the HNU</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+    <div className="flex flex-col justify-between h-screen">
       <Header />
-      <main className="relative pt-2 mt-28 ">{children}</main>
+      <main className="relative mt-28 ">{children}</main>
 
       <Footer setOpen={false} />
-    </>
+    </div>
   )
 }
