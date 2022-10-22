@@ -17,7 +17,7 @@ const Header = (): JSX.Element => {
   const [searchOpen, setSearchOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 z-30 w-screen bg-indigo-50">
+    <header className="fixed top-0 z-30 w-screen bg-red-50">
       {/* Mobile menu */}
       <MobileNavigation
         mobileMenuOpen={mobileMenuOpen}

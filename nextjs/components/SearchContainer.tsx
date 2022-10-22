@@ -89,7 +89,7 @@ const SearchContainer = ({ show, setSearchOpen }: any): any => {
       <Transition.Root show={show} as={Fragment}>
         <Dialog
           as="div"
-          className="fixed inset-0 z-0 w-screen "
+          className="fixed inset-0 z-20 w-screen "
           onClose={handleClose}
         >
           <Transition.Child
