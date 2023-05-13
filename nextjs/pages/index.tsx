@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Layout from "../components/Layout";
 import LogoCloud from "../components/LogoCloud";
 import client from "../client";
@@ -82,8 +82,8 @@ const Home: NextPage = (props: any) => {
             className="object-cover object-right w-full h-56 shadow-inner sm:h-72 md:w-full md:h-full "
             src="/images/pid-home-splash.jpg"
             alt="PID Analyzers Sandwich, MA"
-            layout="fill"
-          />
+            fill
+            sizes="100vw" />
         </div>
         <p className="absolute bottom-0 right-0 z-20 hidden mr-2 text-xs font-light text-white md:block">
           Photo Credit @Hoffmeester-CanStockPhoto

@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Breadcrumbs from '../../components/Breadcrumbs';
 import CTA from '../../components/CTA';
 import Layout from '../../components/Layout';
@@ -36,7 +36,10 @@ const CalibrationWithAltGasPage: NextPage = () => {
               alt="Calibration with an Alternate Gas"
               height={900}
               width={328}
-            />
+              style={{
+                maxWidth: "100%",
+                height: "auto"
+              }} />
             <figcaption className="text-xs md:text-right">
               Calibration Checking Set-up
             </figcaption>

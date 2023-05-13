@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import CTA from "../components/CTA";
 import Layout from "../components/Layout";
@@ -91,8 +91,8 @@ const CompanyPage: NextPage = () => {
                   className="object-cover w-full h-full"
                   src="https://images.unsplash.com/photo-1508530786855-dfea35260b8d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&fp-x=0.5&fp-y=0.6&fp-z=3&width=1440&height=1440&sat=-80"
                   alt=""
-                  layout="fill"
-                />
+                  fill
+                  sizes="100vw" />
                 <div className="absolute inset-0 bg-transparent mix-blend-multiply" />
                 <div className="absolute inset-0 bg-gradient-to-t from-red-700 via-transparent opacity-90" />
                 <div className="absolute w-full px-8 bottom-4">
@@ -109,7 +109,10 @@ const CompanyPage: NextPage = () => {
                         alt="Official Supplier to the US Navy"
                         width={80}
                         height={40}
-                      />
+                        style={{
+                          maxWidth: "100%",
+                          height: "auto"
+                        }} />
                     </div>
                   </blockquote>
                 </div>

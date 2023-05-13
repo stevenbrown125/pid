@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from 'next/link';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import CTA from '../../components/CTA';
@@ -52,7 +52,10 @@ const CalibrationGasHumidifierPage: NextPage = () => {
               alt="Calibration Gas Humidifier"
               width={300}
               height={300}
-            />
+              style={{
+                maxWidth: "100%",
+                height: "auto"
+              }} />
             <figcaption className="text-xs md:text-right">
               Calibration Gas Humidifier
             </figcaption>
@@ -79,7 +82,10 @@ const CalibrationGasHumidifierPage: NextPage = () => {
               className="object-cover aspect-1"
               src="/images/cal_gas_curve.gif"
               alt="Calibration Gas Humidifier Curve"
-            />
+              style={{
+                maxWidth: "100%",
+                height: "auto"
+              }} />
             <figcaption className="text-xs md:text-right">
               Calibration Gas Humidifier
             </figcaption>

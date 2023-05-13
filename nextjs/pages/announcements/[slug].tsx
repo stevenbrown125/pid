@@ -1,7 +1,7 @@
 import { PortableText } from "@portabletext/react";
 import groq from "groq";
 import { NextPage } from "next";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import client from "../../client";
 import Layout from "../../components/Layout";
@@ -106,9 +106,9 @@ const Post: NextPage = ({ category, posts, categories }: any) => {
                           <Image
                             src={post.authorImage}
                             alt={post.author}
-                            layout="fill"
                             className="rounded-full"
-                          />
+                            fill
+                            sizes="100vw" />
                         </div>
                         {post.author}
                       </div>

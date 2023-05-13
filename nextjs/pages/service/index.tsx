@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import { FaFilePdf } from "react-icons/fa";
 import Breadcrumbs from "../../components/Breadcrumbs";
@@ -45,7 +45,10 @@ const ServicePage: NextPage = () => {
                     alt="PID DL101 Field"
                     width={300}
                     height={382}
-                  />
+                    style={{
+                      maxWidth: "100%",
+                      height: "auto"
+                    }} />
                   <figcaption className="text-xs md:text-right">
                     PID Anaylzer DL101 in Field Enviroment
                   </figcaption>

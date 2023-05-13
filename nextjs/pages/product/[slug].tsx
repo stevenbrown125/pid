@@ -1,7 +1,7 @@
 import { PortableText } from "@portabletext/react";
 import groq from "groq";
 import { NextPage } from "next";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import { BsClipboardCheck } from "react-icons/bs";
 import client from "../../client";
@@ -89,9 +89,11 @@ const Product: NextPage = ({ product }: any) => {
                   <Image
                     src={product.image}
                     alt={product.title}
-                    layout="fill"
-                    objectFit="contain"
-                  />
+                    fill
+                    sizes="100vw"
+                    style={{
+                      objectFit: "contain"
+                    }} />
                 </div>
               </div>
             </div>
