@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import { FaBars, FaPhoneAlt, FaSearch, FaShoppingCart } from 'react-icons/fa';
-import Link from 'next/link';
-import Image from 'next/image';
-import MobileNavigation from './MobileNavigation';
-import SearchContainer from './SearchContainer';
+import { useState } from "react";
+import { FaBars, FaPhoneAlt, FaSearch, FaShoppingCart } from "react-icons/fa";
+import Link from "next/link";
+import Image from "next/image";
+import MobileNavigation from "./MobileNavigation";
+import SearchContainer from "./SearchContainer";
 
 const navigation = [
-  { name: 'Products', href: '/products' },
-  { name: 'Service', href: '/service' },
-  { name: 'Company', href: '/company' },
-  { name: 'Contact', href: '/contact' },
+  { name: "Products", href: "/products" },
+  { name: "Service", href: "/service" },
+  { name: "Company", href: "/company" },
+  { name: "Contact", href: "/contact" },
 ];
 
 const Header = (): JSX.Element => {
@@ -51,7 +51,7 @@ const Header = (): JSX.Element => {
         <div className="flex items-center mx-auto sm:py-2 max-w-7xl">
           {/* Logo (lg+) */}
           <div className="hidden -m-2 md:flex lg:items-center">
-            <Link href="/">
+            <Link href="/" legacyBehavior>
               <a className="px-4 mr-4">
                 <span className="sr-only">PID Analyzers</span>
                 <Image
@@ -69,7 +69,7 @@ const Header = (): JSX.Element => {
           <div className="container relative hidden md:flex justify-items-stretch">
             <div className="pt-2 md:space-x-8 lg:ml-10 lg:space-x-10">
               {navigation.map((item) => (
-                <Link key={`nav-${item.name}`} href={item.href}>
+                <Link key={`nav-${item.name}`} href={item.href} legacyBehavior>
                   <a className="font-semibold text-md text-neutral-700 xl:text-xl hover:text-red-600">
                     {item.name}
                   </a>
@@ -77,7 +77,7 @@ const Header = (): JSX.Element => {
               ))}
             </div>
             <div className="pt-2 pl-8 lg:pl-10 shrink-0">
-              <Link href="/request-a-quote">
+              <Link href="/request-a-quote" legacyBehavior>
                 <a className="font-semibold text-red-600 text-md hover:text-red-800 xl:text-xl ">
                   Request a Quote
                 </a>
@@ -99,7 +99,7 @@ const Header = (): JSX.Element => {
 
           {/* Logo (lg-) */}
           <div className="flex justify-center w-full -pl-4">
-            <Link href="/">
+            <Link href="/" legacyBehavior>
               <button type="button" className="mt-1 md:hidden">
                 <span className="sr-only">PID Analyzers</span>
                 <Image
@@ -118,7 +118,7 @@ const Header = (): JSX.Element => {
             <button
               type="button"
               className={`${
-                searchOpen ? 'text-red-500' : 'text-neutral-700'
+                searchOpen ? "text-red-500" : "text-neutral-700"
               } md:flex items-center text-lg font-medium pt-2 hover:text-red-500 hidden `}
               onClick={() => {
                 setSearchOpen(!searchOpen);

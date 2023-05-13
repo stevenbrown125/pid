@@ -1,13 +1,13 @@
-import { NextPage } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import { FaFilePdf } from 'react-icons/fa';
-import Breadcrumbs from '../../components/Breadcrumbs';
-import CTA from '../../components/CTA';
-import Layout from '../../components/Layout';
-import Seo from '../../components/SEO';
+import { NextPage } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { FaFilePdf } from "react-icons/fa";
+import Breadcrumbs from "../../components/Breadcrumbs";
+import CTA from "../../components/CTA";
+import Layout from "../../components/Layout";
+import Seo from "../../components/SEO";
 
-const pages = [{ name: 'Service', href: '/service', current: true }];
+const pages = [{ name: "Service", href: "/service", current: true }];
 
 const ServicePage: NextPage = () => {
   return (
@@ -83,7 +83,7 @@ const ServicePage: NextPage = () => {
                 </p>
                 <p className="mt-4">
                   For information regarding service for your HNU, contact the
-                  service department at{' '}
+                  service department at{" "}
                   <a
                     href="mailto:service@hnu.com"
                     className="text-red-600 no-underline hover:underline"
@@ -95,7 +95,7 @@ const ServicePage: NextPage = () => {
               </div>
             </div>
             <div className="flex justify-center mt-8 mr-4 md:justify-end">
-              <Link href="/contact">
+              <Link href="/contact" legacyBehavior>
                 <a className="flex items-center justify-center px-5 py-3 text-base font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-900">
                   Contact Us
                 </a>
@@ -159,21 +159,21 @@ const ServicePage: NextPage = () => {
                 </a>
               </li>
               <li className="py-2">
-                <Link href="/service/model-101-faqs">
+                <Link href="/service/model-101-faqs" legacyBehavior>
                   <a className="text-red-600 cursor-pointer hover:underline">
                     Model 101 FAQs
                   </a>
                 </Link>
               </li>
               <li className="py-2">
-                <Link href="/service/calibration-alt-gas">
+                <Link href="/service/calibration-alt-gas" legacyBehavior>
                   <a className="text-red-600 cursor-pointer hover:underline">
                     Calibration with an Alternate Gas
                   </a>
                 </Link>
               </li>
               <li className="py-2">
-                <Link href="/service/calibration-gas-humidifier">
+                <Link href="/service/calibration-gas-humidifier" legacyBehavior>
                   <a className="text-red-600 cursor-pointer hover:underline">
                     Calibration Gas Humidifier
                   </a>
@@ -181,7 +181,7 @@ const ServicePage: NextPage = () => {
               </li>
 
               <li className="py-2">
-                <Link href="/service/lapping-compound-msds">
+                <Link href="/service/lapping-compound-msds" legacyBehavior>
                   <a className="text-red-600 cursor-pointer hover:underline">
                     Lapping (Cleaning) Compound MSDS
                   </a>
@@ -189,7 +189,7 @@ const ServicePage: NextPage = () => {
               </li>
 
               <li className="py-2">
-                <Link href="/service/troubleshooting-your-101">
+                <Link href="/service/troubleshooting-your-101" legacyBehavior>
                   <a className="text-red-600 cursor-pointer hover:underline">
                     Troubleshooting your 101
                   </a>
@@ -197,7 +197,10 @@ const ServicePage: NextPage = () => {
               </li>
 
               <li className="py-2">
-                <Link href="/service/dl101-win-file-transfer-instructions">
+                <Link
+                  href="/service/dl101-win-file-transfer-instructions"
+                  legacyBehavior
+                >
                   <a className="text-red-600 cursor-pointer hover:underline">
                     DL-101 Win File Transfer Instructions
                   </a>
@@ -215,12 +218,12 @@ const ServicePage: NextPage = () => {
             </h3>
             <p>
               Manuals for PID Analyzers, LLC, are available for all of our
-              instruments for purchase for $50. Please email us at{' '}
-              <Link href="/contact">
+              instruments for purchase for $50. Please email us at{" "}
+              <Link href="/contact" legacyBehavior>
                 <a className="text-red-600 no-underline hover:underline">
                   sales@hnu.com
                 </a>
-              </Link>{' '}
+              </Link>{" "}
               if you wish to purchase a manual for our instruments.
             </p>
             <p className="mt-4">

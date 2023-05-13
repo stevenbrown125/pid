@@ -1,9 +1,9 @@
-import { NextPage } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import CTA from '../components/CTA';
-import Layout from '../components/Layout';
-import Seo from '../components/SEO';
+import { NextPage } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import CTA from "../components/CTA";
+import Layout from "../components/Layout";
+import Seo from "../components/SEO";
 
 const CompanyPage: NextPage = () => {
   return (
@@ -60,8 +60,8 @@ const CompanyPage: NextPage = () => {
               flame ionization, thermal conductivity, flame photometry, infrared
               &amp; UV absorption, electrochemistry, capacitance, gas
               chromatography. Descriptions of our instrumentation are shown on
-              our web site on our product page at:{' '}
-              <Link href="/products">
+              our web site on our product page at:{" "}
+              <Link href="/products" legacyBehavior>
                 <a className="text-red-600 hover:text-stone-800">here</a>
               </Link>
               .
@@ -75,7 +75,7 @@ const CompanyPage: NextPage = () => {
           </div>
         </div>
         <div className="flex justify-center mt-6 md:justify-end md:pr-12">
-          <Link href="/request-a-quote">
+          <Link href="/request-a-quote" legacyBehavior>
             <a className="flex items-center justify-center px-5 py-3 text-base font-medium text-white bg-red-600 border border-transparent rounded-md shadow-md hover:bg-red-700">
               Request a Quote
             </a>

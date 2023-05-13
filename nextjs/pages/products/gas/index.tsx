@@ -1,12 +1,12 @@
-import { PortableText, toPlainText } from '@portabletext/react';
-import Link from 'next/link';
-import React, { useState } from 'react';
-import client from '../../../client';
-import Breadcrumbs from '../../../components/Breadcrumbs';
-import CTA from '../../../components/CTA';
-import Layout from '../../../components/Layout';
-import { allGasQuery } from '../../../lib/sanity/allGasQuery';
-import { IGas } from '../../../types/IGas';
+import { PortableText, toPlainText } from "@portabletext/react";
+import Link from "next/link";
+import React, { useState } from "react";
+import client from "../../../client";
+import Breadcrumbs from "../../../components/Breadcrumbs";
+import CTA from "../../../components/CTA";
+import Layout from "../../../components/Layout";
+import { allGasQuery } from "../../../lib/sanity/allGasQuery";
+import { IGas } from "../../../types/IGas";
 
 export async function getStaticProps() {
   const gases = await client.fetch(allGasQuery);
@@ -21,13 +21,13 @@ export async function getStaticProps() {
 
 const ProductsByGasPage = (props: any) => {
   const pages = [
-    { name: 'All Products', href: '/products', current: false },
-    { name: 'Primary Gas', href: '/products/gas', current: true },
+    { name: "All Products", href: "/products", current: false },
+    { name: "Primary Gas", href: "/products/gas", current: true },
   ];
   const gases: IGas[] = props.gases;
   const [state, setState] = useState<{ filteredData: IGas[]; query: string }>({
     filteredData: [],
-    query: '',
+    query: "",
   });
 
   const { filteredData, query } = state;
@@ -96,7 +96,7 @@ const ProductsByGasPage = (props: any) => {
                 <p>
                   Sorry! That search produced no results. Try entering something
                   else or
-                  <Link href="/contact">
+                  <Link href="/contact" legacyBehavior>
                     <a className="ml-1 text-red-600 hover:text-red-800">
                       contact us
                     </a>
@@ -106,7 +106,11 @@ const ProductsByGasPage = (props: any) => {
               ) : (
                 <div className="grid items-center justify-center grid-cols-1 text-center lg:grid-cols-4 md:grid-cols-2 justify-items-center">
                   {gases.map((gas) => (
-                    <Link href={`/products/gas/${gas.slug}`} key={gas.id}>
+                    <Link
+                      href={`/products/gas/${gas.slug}`}
+                      key={gas.id}
+                      legacyBehavior
+                    >
                       <a className="w-full h-full px-8 py-12 border hover:bg-neutral-100">
                         <span className='className="py-4 text-5xl font-extrabold text-neutral-500'>
                           <PortableText value={gas.symbol} />
@@ -125,7 +129,11 @@ const ProductsByGasPage = (props: any) => {
           <div className="grid items-center justify-center grid-cols-1 mt-4 text-center lg:grid-cols-4 md:grid-cols-2 justify-items-center">
             {/* Otherwise there was search query so just return all the gases*/}
             {filteredData.map((gas: IGas) => (
-              <Link href={`/products/gas/${gas.slug}`} key={gas.id}>
+              <Link
+                href={`/products/gas/${gas.slug}`}
+                key={gas.id}
+                legacyBehavior
+              >
                 <a className="w-full h-full px-8 py-12 md:py-20 hover:bg-neutral-100 group">
                   <span className="py-4 text-5xl font-extrabold text-neutral-500 group-hover:text-red-800">
                     <PortableText value={gas.symbol} />

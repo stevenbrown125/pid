@@ -1,15 +1,15 @@
-import type { NextPage } from 'next';
-import Link from 'next/link';
-import Image from 'next/image';
-import Layout from '../components/Layout';
-import LogoCloud from '../components/LogoCloud';
-import client from '../client';
-import { allProductQuery } from '../lib/sanity/allProductQuery';
-import IndustryGrid from '../components/IndustryGrid';
-import ResponsibleBlurb from '../components/ResponsibleBlurb';
-import LastestNews from '../components/LatestNews';
-import { allPostQuery } from '../lib/sanity/allPostQuery';
-import CTA from '../components/CTA';
+import type { NextPage } from "next";
+import Link from "next/link";
+import Image from "next/image";
+import Layout from "../components/Layout";
+import LogoCloud from "../components/LogoCloud";
+import client from "../client";
+import { allProductQuery } from "../lib/sanity/allProductQuery";
+import IndustryGrid from "../components/IndustryGrid";
+import ResponsibleBlurb from "../components/ResponsibleBlurb";
+import LastestNews from "../components/LatestNews";
+import { allPostQuery } from "../lib/sanity/allPostQuery";
+import CTA from "../components/CTA";
 
 export async function getStaticProps() {
   const data = await client.fetch(allProductQuery);
@@ -50,14 +50,14 @@ const Home: NextPage = (props: any) => {
                 </p>
                 <div className="justify-center mt-5 sm:mt-8 sm:flex lg:justify-end lg:mr-10 xl:mr-20">
                   <div className="rounded-md shadow">
-                    <Link href="/request-a-quote">
+                    <Link href="/request-a-quote" legacyBehavior>
                       <a className="flex items-center justify-center w-full px-8 py-3 text-base font-medium text-white bg-red-600 border border-transparent sm:rounded-md hover:bg-red-800 md:py-4 lg:text-lg md:px-10">
                         Request a Quote
                       </a>
                     </Link>
                   </div>
                   <div className="mt-3 sm:mt-0 sm:ml-3">
-                    <Link href="/products">
+                    <Link href="/products" legacyBehavior>
                       <a className="flex items-center justify-center w-full px-8 py-3 text-base font-medium text-red-700 bg-red-200 border border-transparent sm:rounded-md hover:bg-red-300 md:py-4 lg:text-lg md:px-10">
                         View our Products
                       </a>

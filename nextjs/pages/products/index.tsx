@@ -1,15 +1,15 @@
-import Link from 'next/link';
-import { GiSteam } from 'react-icons/gi';
-import { IoAnalyticsOutline } from 'react-icons/io5';
-import { MdOutlineMultilineChart, MdDevicesOther } from 'react-icons/md';
-import Layout from '../../components/Layout';
-import { allProductQuery } from '../../lib/sanity/allProductQuery';
-import client from '../../client';
-import { NextPage } from 'next';
-import ProductGrid from '../../components/ProductGrid';
-import Breadcrumbs from '../../components/Breadcrumbs';
-import Seo from '../../components/SEO';
-import CTA from '../../components/CTA';
+import Link from "next/link";
+import { GiSteam } from "react-icons/gi";
+import { IoAnalyticsOutline } from "react-icons/io5";
+import { MdOutlineMultilineChart, MdDevicesOther } from "react-icons/md";
+import Layout from "../../components/Layout";
+import { allProductQuery } from "../../lib/sanity/allProductQuery";
+import client from "../../client";
+import { NextPage } from "next";
+import ProductGrid from "../../components/ProductGrid";
+import Breadcrumbs from "../../components/Breadcrumbs";
+import Seo from "../../components/SEO";
+import CTA from "../../components/CTA";
 
 export async function getStaticProps() {
   const data = await client.fetch(allProductQuery);
@@ -22,7 +22,7 @@ export async function getStaticProps() {
   };
 }
 
-const pages = [{ name: 'All Products', href: '/products', current: true }];
+const pages = [{ name: "All Products", href: "/products", current: true }];
 
 const ProductPage: NextPage = (props: any) => {
   return (
@@ -51,7 +51,7 @@ const ProductPage: NextPage = (props: any) => {
         </p>
         {/* Grid */}
         <div className="grid items-center justify-center grid-cols-1 py-8 text-center lg:grid-cols-4 md:grid-cols-2 justify-items-center">
-          <Link href="/products/gas">
+          <Link href="/products/gas" legacyBehavior>
             <a className="w-full h-full px-8 py-12 border md:py-20 hover:bg-neutral-100">
               <GiSteam className="w-20 h-20 mx-auto text-neutral-400" />
               <p className="py-4 font-medium text-neutral-800">
@@ -59,7 +59,7 @@ const ProductPage: NextPage = (props: any) => {
               </p>
             </a>
           </Link>
-          <Link href="/products/">
+          <Link href="/products/" legacyBehavior>
             <a className="w-full h-full px-8 py-12 border border-l-0 md:py-20 hover:bg-neutral-100">
               <IoAnalyticsOutline className="w-20 h-20 mx-auto text-neutral-400" />
               <p className="py-4 font-medium text-neutral-800">
@@ -67,13 +67,13 @@ const ProductPage: NextPage = (props: any) => {
               </p>
             </a>
           </Link>
-          <Link href="/products/">
+          <Link href="/products/" legacyBehavior>
             <a className="w-full h-full px-8 py-12 border border-l-0 md:py-20 hover:bg-neutral-100">
               <MdDevicesOther className="w-20 h-20 mx-auto text-neutral-400" />
               <p className="py-4 font-medium text-neutral-800">By Industry</p>
             </a>
           </Link>
-          <Link href="/products/">
+          <Link href="/products/" legacyBehavior>
             <a className="w-full h-full px-8 py-12 border border-l-0 md:py-20 hover:bg-neutral-100">
               <MdOutlineMultilineChart className="w-20 h-20 mx-auto text-neutral-400" />
               <p className="py-4 font-medium text-neutral-800">

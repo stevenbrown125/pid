@@ -1,27 +1,27 @@
-import { useState, Fragment } from 'react'
-import { FaCheck } from 'react-icons/fa'
-import Image from 'next/image'
-import Link from 'next/link'
+import { useState, Fragment } from "react";
+import { FaCheck } from "react-icons/fa";
+import Image from "next/image";
+import Link from "next/link";
 
 const navigation = {
   support: [
-    { name: 'Service', href: '/service' },
-    { name: 'Technical Papers', href: '/technical-papers' },
-    { name: 'Company', href: '/company' },
-    { name: 'Contact', href: '/contact' }
+    { name: "Service", href: "/service" },
+    { name: "Technical Papers", href: "/technical-papers" },
+    { name: "Company", href: "/company" },
+    { name: "Contact", href: "/contact" },
   ],
 
   products: [
-    { name: 'Catalog', href: '/products' },
-    { name: 'Industries', href: '/products/indusry' },
-    { name: 'Gases', href: '/products/gas' },
-    { name: 'Applications', href: '/products/application' },
-    { name: 'Request a Quote', href: '/request-a-quote' }
+    { name: "Catalog", href: "/products" },
+    { name: "Industries", href: "/products/indusry" },
+    { name: "Gases", href: "/products/gas" },
+    { name: "Applications", href: "/products/application" },
+    { name: "Request a Quote", href: "/request-a-quote" },
   ],
   social: [
     {
-      name: 'Facebook',
-      href: 'https://www.facebook.com/pidanalyzers',
+      name: "Facebook",
+      href: "https://www.facebook.com/pidanalyzers",
       icon: (props: any) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -30,11 +30,11 @@ const navigation = {
             clipRule="evenodd"
           />
         </svg>
-      )
+      ),
     },
     {
-      name: 'Youtube',
-      href: 'https://www.youtube.com/user/pidgirl/videos',
+      name: "Youtube",
+      href: "https://www.youtube.com/user/pidgirl/videos",
       icon: (props: any) => (
         <svg
           fill="currentColor"
@@ -50,11 +50,11 @@ const navigation = {
             clipRule="evenodd"
           />
         </svg>
-      )
+      ),
     },
     {
-      name: 'Instagram',
-      href: '#',
+      name: "Instagram",
+      href: "#",
       icon: (props: any) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -63,11 +63,11 @@ const navigation = {
             clipRule="evenodd"
           />
         </svg>
-      )
+      ),
     },
     {
-      name: 'Blogger',
-      href: 'https://analyzersource.blogspot.com/',
+      name: "Blogger",
+      href: "https://analyzersource.blogspot.com/",
       icon: (props: any) => (
         <svg fill="currentColor" viewBox="0 0 48 48" {...props}>
           <path
@@ -75,36 +75,36 @@ const navigation = {
             d="M33.5,22h-1c-0.828,0-1.5-0.672-1.5-1.5V20c0-3.866-3.134-7-7-7h-4c-3.866,0-7,3.134-7,7v8 c0,3.866,3.134,7,7,7h8c3.866,0,7-3.134,7-7v-4.5C35,22.672,34.328,22,33.5,22z M20,19h5c0.553,0,1,0.448,1,1s-0.447,1-1,1h-5 c-0.553,0-1-0.448-1-1S19.447,19,20,19z M28,29h-8c-0.553,0-1-0.448-1-1s0.447-1,1-1h8c0.553,0,1,0.448,1,1S28.553,29,28,29z"
           />
         </svg>
-      )
+      ),
     },
     {
-      name: 'Twitter',
-      href: 'https://twitter.com/pidgirl',
+      name: "Twitter",
+      href: "https://twitter.com/pidgirl",
       icon: (props: any) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
         </svg>
-      )
-    }
-  ]
-}
+      ),
+    },
+  ],
+};
 
 export default function Footer({ setOpen }: any) {
-  const [email, setEmail] = useState('')
-  const [subscribed, setSubscribed] = useState(false)
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
   const handleInput = ({ target }: any) => {
-    setEmail(target.value)
-  }
+    setEmail(target.value);
+  };
 
   const handleSubmit = async (e: any) => {
-    e.preventDefault()
+    e.preventDefault();
     // Check if robot filled in value
-    console.log(e)
-    if (e.target[2].value === '') {
-      console.log(email)
+    console.log(e);
+    if (e.target[2].value === "") {
+      console.log(email);
 
-      setSubscribed(true)
-      setOpen(true)
+      setSubscribed(true);
+      setOpen(true);
     }
     // const result = await addToMailchimp(email);
     // console.log(result);
@@ -124,7 +124,7 @@ export default function Footer({ setOpen }: any) {
     console.log('success');
   }
   */
-  }
+  };
 
   return (
     <footer
@@ -134,7 +134,7 @@ export default function Footer({ setOpen }: any) {
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
-      
+
       <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:py-16 lg:px-8">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8 xl:col-span-1">
@@ -149,7 +149,7 @@ export default function Footer({ setOpen }: any) {
               analyzers for air, water and process applications and distributes
               these products worldwide.
             </p>
-            { /* Social Media Links */}
+            {/* Social Media Links */}
             <div className="flex space-x-6">
               {navigation.social.map((item) => (
                 <a
@@ -175,9 +175,10 @@ export default function Footer({ setOpen }: any) {
                 <ul className="mt-4 space-y-4">
                   {navigation.products.map((item) => (
                     <li key={item.name}>
-                      <Link href={item.href}>
+                      <Link href={item.href} legacyBehavior>
                         <a className="text-lg text-neutral-100 hover:text-neutral-300">
-                        {item.name}</a>
+                          {item.name}
+                        </a>
                       </Link>
                     </li>
                   ))}
@@ -190,7 +191,7 @@ export default function Footer({ setOpen }: any) {
                 <ul className="mt-4 space-y-4">
                   {navigation.support.map((item) => (
                     <li key={item.name}>
-                      <Link href={item.href}>
+                      <Link href={item.href} legacyBehavior>
                         <a className="text-lg text-neutral-100 hover:text-neutral-300">
                           {item.name}
                         </a>
@@ -222,7 +223,7 @@ export default function Footer({ setOpen }: any) {
                         id="email"
                         autoComplete="email"
                         onChange={(e) => {
-                          handleInput(e)
+                          handleInput(e);
                         }}
                         required
                         className="w-full min-w-0 px-4 py-2 text-base bg-white border border-transparent rounded-md appearance-none text-neutral-800 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-dark focus:ring-primary focus:border-primary-dark focus:placeholder-neutral-400"
@@ -240,8 +241,8 @@ export default function Footer({ setOpen }: any) {
                         type="submit"
                         className={`${
                           subscribed
-                            ? 'bg-green-100'
-                            : 'hover:bg-neutral-300 bg-white '
+                            ? "bg-green-100"
+                            : "hover:bg-neutral-300 bg-white "
                         } flex items-center justify-center w-full px-4 py-2 text-base font-medium text-black border border-transparent rounded-md  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-800 focus:ring-primary`}
                       >
                         {subscribed ? (
@@ -250,18 +251,18 @@ export default function Footer({ setOpen }: any) {
                             aria-hidden="true"
                           />
                         ) : (
-                          ''
+                          ""
                         )}
                         Subscribe
-                        {subscribed ? 'd' : ''}
+                        {subscribed ? "d" : ""}
                       </button>
                     </div>
                   </fieldset>
                 </form>
                 <div>
                   <p className="py-2 pl-1 text-xs text-white">
-                    By submitting this form you agree to our{' '}
-                    <Link href="/privacy-policy">
+                    By submitting this form you agree to our{" "}
+                    <Link href="/privacy-policy" legacyBehavior>
                       <a className="underline hover:opacity-90">
                         Privacy Policy
                       </a>
@@ -274,8 +275,8 @@ export default function Footer({ setOpen }: any) {
         </div>
         <div className="pt-8 mt-12 border-t border-neutral-100">
           <p className="text-base text-center text-neutral-100 sm:text-left xl:text-center">
-            &copy; 2022 PID Analyzers, LLC. All rights reserved. View our{' '}
-            <Link href="/privacy-policy">
+            &copy; 2022 PID Analyzers, LLC. All rights reserved. View our{" "}
+            <Link href="/privacy-policy" legacyBehavior>
               <a className="hover:text-red-200">Privacy Policy</a>
             </Link>
             .
@@ -283,5 +284,5 @@ export default function Footer({ setOpen }: any) {
         </div>
       </div>
     </footer>
-  )
+  );
 }

@@ -1,7 +1,7 @@
-import { NextPage } from 'next'
-import Link from 'next/link'
-import Layout from '../components/Layout'
-import Seo from '../components/SEO'
+import { NextPage } from "next";
+import Link from "next/link";
+import Layout from "../components/Layout";
+import Seo from "../components/SEO";
 
 const PrivacyPolicyPage: NextPage = () => {
   return (
@@ -119,7 +119,7 @@ const PrivacyPolicyPage: NextPage = () => {
               <strong>Facebook Fan Page</strong> is a public profile named PID
               Analyzers for air, water, and process monitoring specifically
               created by the Company on the Facebook social network, accessible
-              from{' '}
+              from{" "}
               <a
                 className="px-1 text-red-600 hover:text-red-800"
                 href="https://www.facebook.com/pidanalyzers"
@@ -187,7 +187,7 @@ const PrivacyPolicyPage: NextPage = () => {
           <li>
             <p>
               <strong>Website</strong> refers to PID Analyzers, LLC, accessible
-              from{' '}
+              from{" "}
               <a
                 className="px-1 text-red-600 hover:text-red-800"
                 href="https://hnu.com"
@@ -280,7 +280,7 @@ const PrivacyPolicyPage: NextPage = () => {
             Flash Cookies are not managed by the same browser settings as those
             used for Browser Cookies. For more information on how You can delete
             Flash Cookies, please read &quot;Where can I change the settings for
-            disabling, or deleting local shared objects?&quot; available at{' '}
+            disabling, or deleting local shared objects?&quot; available at{" "}
             <a
               className="px-1 text-red-600 hover:text-red-800"
               href="https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html#main_Where_can_I_change_the_settings_for_disabling__or_deleting_local_shared_objects_"
@@ -721,7 +721,7 @@ const PrivacyPolicyPage: NextPage = () => {
           <li>
             <strong>
               Request correction of the Personal Data that We hold about You.
-            </strong>{' '}
+            </strong>{" "}
             You have the right to have any incomplete or inaccurate information
             We hold about You corrected.
           </li>
@@ -805,7 +805,7 @@ const PrivacyPolicyPage: NextPage = () => {
             target="_blank"
           >
             https://www.facebook.com/policy.php
-          </a>{' '}
+          </a>{" "}
           for more information about how Facebook manages Personal data or
           contact Facebook online, or by mail: Facebook, Inc. ATTN, Privacy
           Operations, 1601 Willow Road, Menlo Park, CA 94025, United States.
@@ -1285,7 +1285,7 @@ const PrivacyPolicyPage: NextPage = () => {
           <li>
             <strong>
               The right to say no to the sale of Personal Data (opt-out).
-            </strong>{' '}
+            </strong>{" "}
             You have the right to direct Us to not sell Your personal
             information. To submit an opt-out request please contact Us.
           </li>
@@ -1612,7 +1612,7 @@ const PrivacyPolicyPage: NextPage = () => {
           <li>
             <p>
               By visiting this page on our website:
-              <Link href="/contact">
+              <Link href="/contact" legacyBehavior>
                 <a className="px-1 text-red-600 hover:text-red-800">
                   https://www.hnu.com/contact
                 </a>
@@ -1622,7 +1622,7 @@ const PrivacyPolicyPage: NextPage = () => {
         </ul>
       </section>
     </Layout>
-  )
-}
+  );
+};
 
-export default PrivacyPolicyPage
+export default PrivacyPolicyPage;

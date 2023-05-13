@@ -1,14 +1,14 @@
-import { PortableText } from '@portabletext/react';
-import groq from 'groq';
-import Link from 'next/link';
-import React from 'react';
-import { MdSearch } from 'react-icons/md';
-import client from '../../../client';
-import Breadcrumbs from '../../../components/Breadcrumbs';
-import CTA from '../../../components/CTA';
-import Layout from '../../../components/Layout';
-import ProductGrid from '../../../components/ProductGrid';
-import { allGasQuery } from '../../../lib/sanity/allGasQuery';
+import { PortableText } from "@portabletext/react";
+import groq from "groq";
+import Link from "next/link";
+import React from "react";
+import { MdSearch } from "react-icons/md";
+import client from "../../../client";
+import Breadcrumbs from "../../../components/Breadcrumbs";
+import CTA from "../../../components/CTA";
+import Layout from "../../../components/Layout";
+import ProductGrid from "../../../components/ProductGrid";
+import { allGasQuery } from "../../../lib/sanity/allGasQuery";
 
 export async function getStaticProps({ params }: any) {
   const gas = await client.fetch(
@@ -58,8 +58,8 @@ const ProductsByGasPage = (props: any) => {
   const gas = props.gas[0];
   const products = gas.products;
   const pages = [
-    { name: 'All Products', href: '/products', current: false },
-    { name: 'Primary Gas', href: '/products/gas', current: false },
+    { name: "All Products", href: "/products", current: false },
+    { name: "Primary Gas", href: "/products/gas", current: false },
     {
       name: gas.name,
       href: `/products/gas/${gas.slug}`,
@@ -82,10 +82,10 @@ const ProductsByGasPage = (props: any) => {
         {products.length === 0 ? (
           <>
             <p className="pb-8">
-              Unfortunately, we currently do not have any analyzers that measure{' '}
+              Unfortunately, we currently do not have any analyzers that measure{" "}
               <span className="font-semibold">{gas.name}</span>.
             </p>
-            <Link href="/products">
+            <Link href="/products" legacyBehavior>
               <a className="flex items-center max-w-xs p-2 mb-4 mr-2 font-semibold text-white bg-red-500 rounded-md hover:bg-red-700">
                 <MdSearch className="w-5 h-5 mr-1 white" />
                 New Search
