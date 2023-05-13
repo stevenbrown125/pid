@@ -1,7 +1,7 @@
 import { PortableText } from "@portabletext/react";
 import groq from "groq";
 import { NextPage } from "next";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import client from "../../client";
 import Layout from "../../components/Layout";

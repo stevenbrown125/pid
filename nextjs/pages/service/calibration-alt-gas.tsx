@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import Breadcrumbs from '../../components/Breadcrumbs';
 import CTA from '../../components/CTA';
 import Layout from '../../components/Layout';

@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import { FaFilePdf } from "react-icons/fa";
 import Breadcrumbs from "../../components/Breadcrumbs";
