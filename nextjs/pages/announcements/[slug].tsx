@@ -58,16 +58,26 @@ const Post: NextPage = ({ category, posts, categories }: any) => {
       <Seo title={`${category} Announcements`} />
       <section>
         <div className="grid grid-cols-6 px-8 pt-8 pb-16 mx-auto max-w-7xl">
+          <div className="text-base md:col-span-6 mb-6">
+            <h2 className="font-semibold leading-6 tracking-wide text-red-600 uppercase">
+              <span className="uppercase">{category.replace("-", " ")}</span>{" "}
+              Announcements
+            </h2>
+            <h3 className="text-3xl font-extrabold leading-8 tracking-tight text-stone-800 sm:text-4xl">
+              Announcements
+            </h3>
+          </div>
           {/* Category Filter */}
           <div className="col-span-1 py-4">
             <h3 className="text-3xl">Categories</h3>
             <ul className="py-2 text-lg">
               {categories.map((category: any) => (
                 <li className="p-2" key={category.slug}>
-                  <Link href={`/announcements/${category.slug}`} legacyBehavior>
-                    <a className="text-red-600 hover:underline">
-                      {category.name}
-                    </a>
+                  <Link
+                    href={`/announcements/${category.slug}`}
+                    className="text-red-600 hover:underline"
+                  >
+                    {category.name}
                   </Link>
                 </li>
               ))}
@@ -78,7 +88,7 @@ const Post: NextPage = ({ category, posts, categories }: any) => {
             {posts.map((post: any) => {
               const published = new Date(post.publishedAt).toDateString();
               return (
-                <div key={post.title} className="flex flex-col">
+                <div key={post.title} className="flex flex-col py-2">
                   <div className="flex flex-col justify-between flex-1 p-6 bg-white rounded-lg shadow-lg">
                     <div className="flex-1">
                       <p className="text-xl font-semibold text-gray-900 lg:text-2xl">
@@ -87,12 +97,10 @@ const Post: NextPage = ({ category, posts, categories }: any) => {
                       <p className="text-sm font-base lg:text-md text-neutral-500">
                         Posted on {published} in
                         <Link
+                          className="ml-1 text-red-600 hover:underline"
                           href={`/announcements/${post.categorySlug}`}
-                          legacyBehavior
                         >
-                          <a className="ml-1 text-red-600 hover:underline">
-                            {post.category}
-                          </a>
+                          {post.category}
                         </Link>
                       </p>
                       <div className="mt-3 text-gray-500 break-words text-md lg:text-lg">
@@ -108,7 +116,8 @@ const Post: NextPage = ({ category, posts, categories }: any) => {
                             alt={post.author}
                             className="rounded-full"
                             fill
-                            sizes="100vw" />
+                            sizes="100vw"
+                          />
                         </div>
                         {post.author}
                       </div>

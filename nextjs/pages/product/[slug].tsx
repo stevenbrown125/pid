@@ -53,7 +53,7 @@ const Product: NextPage = ({ product }: any) => {
   return (
     <Layout>
       <Seo title={product.title} description={product?.SEODescription} />
-      <section className="bg-neutral-50">
+      <section className="bg-neutral-50 -mt-1">
         <div className="container mx-auto bg-white shadow-sm sm:px-8 max-w-7xl lg:px-12 border-x border-neutral-100">
           <div className="pb-8">
             <div className="grid grid-cols-1 pt-8 md:grid-cols-5">
@@ -92,8 +92,9 @@ const Product: NextPage = ({ product }: any) => {
                     fill
                     sizes="100vw"
                     style={{
-                      objectFit: "contain"
-                    }} />
+                      objectFit: "contain",
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -141,7 +142,7 @@ const Product: NextPage = ({ product }: any) => {
           )}
         </div>
       </section>
-      <div className="p-12 shadow-inner bg-neutral-200">
+      <div className="p-12 shadow-inner bg-[#fff7d3]">
         <div className="mx-auto lg:max-w-5xl ">
           <h4 className="flex items-center justify-center text-3xl font-extrabold tracking-tight text-neutral-800 sm:text-4xl">
             <svg viewBox="0 0 495 495" className="mr-4 text-red-500 max-h-12">

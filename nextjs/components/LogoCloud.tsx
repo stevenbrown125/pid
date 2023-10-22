@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function LogoCloud(): JSX.Element {
   return (
@@ -9,9 +9,8 @@ export default function LogoCloud(): JSX.Element {
             <Image
               width={75}
               height={75}
-              className="w-auto h-12"
+              className="w-auto h-12 object-contain"
               src="/images/HSY.png"
-              objectFit="contain"
               alt="HSY"
             />
           </div>
@@ -21,7 +20,6 @@ export default function LogoCloud(): JSX.Element {
               height={75}
               className="w-auto h-12"
               src="/images/Kokkola.png"
-              objectFit="contain"
               alt="Kokkola"
             />
           </div>
@@ -29,9 +27,8 @@ export default function LogoCloud(): JSX.Element {
             <Image
               width={75}
               height={75}
-              className="w-auto h-12"
+              className="w-auto h-12 object-contain"
               src="/images/Lahti-logo.png"
-              objectFit="contain"
               alt="Lahti"
             />
           </div>
@@ -39,9 +36,8 @@ export default function LogoCloud(): JSX.Element {
             <Image
               width={75}
               height={75}
-              className="w-auto h-12"
+              className="w-auto h-12 object-contain"
               src="/images/University_of_Helsinki.png"
-              objectFit="contain"
               alt="University of Helsinki"
             />
           </div>
@@ -49,14 +45,13 @@ export default function LogoCloud(): JSX.Element {
             <Image
               width={75}
               height={75}
-              className="w-auto h-12"
+              className="w-auto h-12 object-contain"
               alt="Lataus"
               src="/images/lataus-1.png"
-              objectFit="contain"
             />
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

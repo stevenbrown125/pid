@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function IndustryGrid() {
   return (
@@ -12,7 +12,7 @@ export default function IndustryGrid() {
             Enviromental
           </p>
           <Image
-            layout="fill"
+            fill
             className="object-cover w-full h-full hover:grayscale brightness-50"
             src="https://images.unsplash.com/photo-1486754735734-325b5831c3ad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
             alt="Enviromental"
@@ -23,7 +23,7 @@ export default function IndustryGrid() {
             Universities
           </p>
           <Image
-            layout="fill"
+            fill
             className="object-cover w-full h-full hover:grayscale brightness-50"
             src="https://images.unsplash.com/photo-1504817343863-5092a923803e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
             alt="Universities"
@@ -34,7 +34,7 @@ export default function IndustryGrid() {
             Industrial
           </p>
           <Image
-            layout="fill"
+            fill
             className="object-cover w-full h-full hover:grayscale brightness-50"
             src="https://images.unsplash.com/photo-1600684249816-38cdfcf95c17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
             alt="Industrial"
@@ -45,7 +45,7 @@ export default function IndustryGrid() {
             Research
           </p>
           <Image
-            layout="fill"
+            fill
             className="object-cover w-full h-full hover:grayscale brightness-50"
             src="https://images.unsplash.com/photo-1518152006812-edab29b069ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
             alt="Research"
@@ -56,7 +56,7 @@ export default function IndustryGrid() {
             Urban
           </p>
           <Image
-            layout="fill"
+            fill
             className="object-cover w-full h-full hover:grayscale brightness-50"
             src="https://images.unsplash.com/photo-1513977911461-891dadb252ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
             alt="Urban"
@@ -64,5 +64,5 @@ export default function IndustryGrid() {
         </div>
       </div>
     </section>
-  )
+  );
 }

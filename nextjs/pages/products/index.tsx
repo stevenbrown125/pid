@@ -51,35 +51,37 @@ const ProductPage: NextPage = (props: any) => {
         </p>
         {/* Grid */}
         <div className="grid items-center justify-center grid-cols-1 py-8 text-center lg:grid-cols-4 md:grid-cols-2 justify-items-center">
-          <Link href="/products/gas" legacyBehavior>
-            <a className="w-full h-full px-8 py-12 border md:py-20 hover:bg-neutral-100">
-              <GiSteam className="w-20 h-20 mx-auto text-neutral-400" />
-              <p className="py-4 font-medium text-neutral-800">
-                By Primary Gas to be Measured
-              </p>
-            </a>
+          <Link
+            href="/products/gas"
+            className="w-full h-full px-8 py-12 border md:py-20 hover:bg-neutral-100"
+          >
+            <GiSteam className="w-20 h-20 mx-auto text-neutral-400" />
+            <p className=" font-medium text-neutral-800">
+              By Primary Gas to be Measured
+            </p>
           </Link>
-          <Link href="/products/" legacyBehavior>
-            <a className="w-full h-full px-8 py-12 border border-l-0 md:py-20 hover:bg-neutral-100">
-              <IoAnalyticsOutline className="w-20 h-20 mx-auto text-neutral-400" />
-              <p className="py-4 font-medium text-neutral-800">
-                By Application
-              </p>
-            </a>
+          <Link
+            href="/products/"
+            className="w-full h-full px-8 py-12 border md:py-20 hover:bg-neutral-100"
+          >
+            <IoAnalyticsOutline className="w-20 h-20 mx-auto text-neutral-400" />
+            <p className="py-4 font-medium text-neutral-800">By Application</p>
           </Link>
-          <Link href="/products/" legacyBehavior>
-            <a className="w-full h-full px-8 py-12 border border-l-0 md:py-20 hover:bg-neutral-100">
-              <MdDevicesOther className="w-20 h-20 mx-auto text-neutral-400" />
-              <p className="py-4 font-medium text-neutral-800">By Industry</p>
-            </a>
+          <Link
+            href="/products/"
+            className="w-full h-full px-8 py-12 border md:py-20 hover:bg-neutral-100"
+          >
+            <MdDevicesOther className="w-20 h-20 mx-auto text-neutral-400" />
+            <p className="py-4 font-medium text-neutral-800">By Industry</p>
           </Link>
-          <Link href="/products/" legacyBehavior>
-            <a className="w-full h-full px-8 py-12 border border-l-0 md:py-20 hover:bg-neutral-100">
-              <MdOutlineMultilineChart className="w-20 h-20 mx-auto text-neutral-400" />
-              <p className="py-4 font-medium text-neutral-800">
-                Multigas Analyzers
-              </p>
-            </a>
+          <Link
+            href="/products/"
+            className="w-full h-full px-8 py-12 border md:py-20 hover:bg-neutral-100"
+          >
+            <MdOutlineMultilineChart className="w-20 h-20 mx-auto text-neutral-400" />
+            <p className="py-4 font-medium text-neutral-800">
+              Multigas Analyzers
+            </p>
           </Link>
         </div>
         <ProductGrid products={props.data} />

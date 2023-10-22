@@ -12,9 +12,9 @@ export default function LastestNews({ posts }: any) {
               <p className="pb-2 font-medium text-red-600 text-md lg:text-lg">
                 <Link
                   href={`/announcements/${post.categorySlug}`}
-                  legacyBehavior
+                  className="hover:underline"
                 >
-                  <a className="hover:underline">{post.category}</a>
+                  {post.category}
                 </Link>
               </p>
               <div className="flex flex-col justify-between flex-1 p-6 bg-white rounded-lg shadow-lg">
@@ -36,7 +36,8 @@ export default function LastestNews({ posts }: any) {
                       <Image
                         src={post.authorImage}
                         alt={post.author}
-                        layout="fill"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="rounded-full"
                       />
                     </div>

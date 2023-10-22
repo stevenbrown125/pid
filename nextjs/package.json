@@ -33,7 +33,7 @@
     "react-phone-number-input": "^3.2.11",
     "react-square-web-payments-sdk": "^3.2.1",
     "sanitize-html": "^2.7.1",
-    "square": "^26.0.0",
+    "square": "^32.0.0",
     "swr": "^2.1.5",
     "validator": "^13.7.0"
   },

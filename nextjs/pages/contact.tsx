@@ -133,7 +133,7 @@ const ContactPage: NextPage = () => {
       <Seo
         title="Contact Us"
         description=" We'd love to hear from you! Fill out and submit this form and
-              our team will get back to you within 3 business days."
+              our team will get back to you as soon as possible."
       />
       <Modal
         open={open}
@@ -142,9 +142,9 @@ const ContactPage: NextPage = () => {
         success={success}
       />
       <section>
-        <div className="relative px-4 pt-6 mx-auto sm:px-12 lg:px-16 lg:max-w-7xl md:grid md:grid-cols-5">
+        <div className="relative px-4 -mt-2 mx-auto sm:px-12 lg:px-16 lg:max-w-7xl md:grid md:grid-cols-5">
           <div className="md:col-span-2 xl:pr-12">
-            <div className="text-base">
+            <div className="text-base pt-8">
               <h2 className="font-semibold leading-6 tracking-wide text-red-600 uppercase">
                 Contact Us
               </h2>
@@ -152,11 +152,11 @@ const ContactPage: NextPage = () => {
                 Get in touch
               </h3>
             </div>
-            <p className="mt-3 text-lg leading-6 text-center lg:text-left text-neutral-500">
+            <p className="mt-6 text-lg ml-6 leading-6 text-center lg:text-left text-neutral-500">
               We&apos;d love to hear from you! Fill out and submit this form and
-              our team will get back to you within 3 business days.
+              our team will get back to you as soon as possible.
             </p>
-            <dl className="mt-6 text-base text-center text-neutral-500 lg:text-left">
+            <dl className="mt-6 ml-6  text-base text-center text-neutral-500 lg:text-left">
               <div>
                 <dt className="sr-only">Postal address</dt>
                 <dd>
@@ -164,7 +164,7 @@ const ContactPage: NextPage = () => {
                   <p>Sandwich, Ma 02563</p>
                 </dd>
               </div>
-              <div className="mt-6">
+              <div className="mt-6 ml-6 ">
                 <dt className="sr-only">Phone number</dt>
                 <dd className="flex justify-center lg:justify-start">
                   <a
@@ -176,7 +176,7 @@ const ContactPage: NextPage = () => {
                   </a>
                 </dd>
               </div>
-              <div className="mt-3">
+              <div className="mt-3 ml-6 ">
                 <dt className="sr-only">Email</dt>
                 <dd className="flex justify-center lg:justify-start">
                   <a

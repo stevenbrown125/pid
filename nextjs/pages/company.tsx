@@ -25,7 +25,7 @@ const CompanyPage: NextPage = () => {
         </div>
         <div className="w-full px-4 prose prose-lg lg:grid lg:grid-cols-2 lg:gap-6 md:max-w-none">
           <div className="prose-lg text-gray-500 lg:max-w-none">
-            <p>
+            <p className="mt-4">
               PID Analyzers, LLC was formed in April 2003 to acquire the assets
               of HNU Systems. Inc. (developer of the first commercial
               photoionization instrumentation).
@@ -47,7 +47,7 @@ const CompanyPage: NextPage = () => {
             </p>
           </div>
           <div className="mt-6 prose-lg text-gray-500 lg:mt-0">
-            <p>
+            <p className="mt-4">
               These can be used to process high impedence voltage (microvolts)
               or currrent (nanoamps), a Wheatstone bridge for combustible gas,
               capacitance, thermal conductivity, or infrared (microbolometer)
@@ -60,9 +60,12 @@ const CompanyPage: NextPage = () => {
               flame ionization, thermal conductivity, flame photometry, infrared
               &amp; UV absorption, electrochemistry, capacitance, gas
               chromatography. Descriptions of our instrumentation are shown on
-              our web site on our product page at:{" "}
-              <Link href="/products" legacyBehavior>
-                <a className="text-red-600 hover:text-stone-800">here</a>
+              our web site on our
+              <Link
+                href="/products"
+                className="text-red-600 hover:text-stone-800 ml-1"
+              >
+                product page
               </Link>
               .
             </p>
@@ -75,10 +78,11 @@ const CompanyPage: NextPage = () => {
           </div>
         </div>
         <div className="flex justify-center mt-6 md:justify-end md:pr-12">
-          <Link href="/request-a-quote" legacyBehavior>
-            <a className="flex items-center justify-center px-5 py-3 text-base font-medium text-white bg-red-600 border border-transparent rounded-md shadow-md hover:bg-red-700">
-              Request a Quote
-            </a>
+          <Link
+            href="/request-a-quote"
+            className="flex items-center justify-center px-5 py-3 text-base font-medium text-white bg-red-600 border border-transparent rounded-md shadow-md hover:bg-red-700"
+          >
+            Request a Quote
           </Link>
         </div>
       </section>
@@ -92,7 +96,8 @@ const CompanyPage: NextPage = () => {
                   src="https://images.unsplash.com/photo-1508530786855-dfea35260b8d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&fp-x=0.5&fp-y=0.6&fp-z=3&width=1440&height=1440&sat=-80"
                   alt=""
                   fill
-                  sizes="100vw" />
+                  sizes="100vw"
+                />
                 <div className="absolute inset-0 bg-transparent mix-blend-multiply" />
                 <div className="absolute inset-0 bg-gradient-to-t from-red-700 via-transparent opacity-90" />
                 <div className="absolute w-full px-8 bottom-4">
@@ -111,8 +116,9 @@ const CompanyPage: NextPage = () => {
                         height={40}
                         style={{
                           maxWidth: "100%",
-                          height: "auto"
-                        }} />
+                          height: "auto",
+                        }}
+                      />
                     </div>
                   </blockquote>
                 </div>
@@ -129,7 +135,7 @@ const CompanyPage: NextPage = () => {
               <div className="mt-6 space-y-6 text-gray-500">
                 <p className="text-lg">
                   We have worked with the US Navy since 1982 to provide portable
-                  VOC Analyzers (HNU Model 101, spare parts and service. Now we
+                  VOC Analyzers (HNU Model 101), spare parts and service. Now we
                   provide the PID Model 102 VOC Analyzers to the Navy Undersea
                   Systems for all submarines in the US fleet.
                 </p>

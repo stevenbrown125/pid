@@ -114,7 +114,7 @@ const SearchContainer = ({ show, setSearchOpen }: any): any => {
             leaveTo="-translate-y-full"
           >
             <div className="inset-0 flex items-start justify-center pt-24 md:mt-2">
-              <div className="flex-col items-center justify-center w-full shadow-xl bg-neutral-50">
+              <div className="flex-col items-center justify-center w-full shadow-xl bg-[#ffe4e4]">
                 {/* Search Form */}
                 <form
                   onSubmit={handleSubmit}

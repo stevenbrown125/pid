@@ -27,16 +27,25 @@ function AnnouncementsPage({ posts, categories }: any) {
       <Seo title="All Announcments" />
       <section>
         <div className="grid px-8 pt-8 pb-16 mx-auto lg:grid-cols-6 max-w-7xl lg:order-1">
+          <div className="text-base md:col-span-6 mb-6">
+            <h2 className="font-semibold leading-6 tracking-wide text-red-600 uppercase">
+              All Announcements
+            </h2>
+            <h3 className="text-3xl font-extrabold leading-8 tracking-tight text-stone-800 sm:text-4xl">
+              Announcements
+            </h3>
+          </div>
           {/* Category Filter */}
           <div className="order-2 col-span-1 py-4">
             <h3 className="text-3xl">Categories</h3>
             <ul className="py-2 text-lg">
               {categories.map((category: any) => (
                 <li className="p-2" key={category.slug}>
-                  <Link href={`/announcements/${category.slug}`} legacyBehavior>
-                    <a className="text-red-600 hover:underline">
-                      {category.name}
-                    </a>
+                  <Link
+                    href={`/announcements/${category.slug}`}
+                    className="text-red-600 hover:underline"
+                  >
+                    {category.name}
                   </Link>
                 </li>
               ))}
@@ -57,11 +66,9 @@ function AnnouncementsPage({ posts, categories }: any) {
                         Posted on {published} in
                         <Link
                           href={`/announcements/${post.categorySlug}`}
-                          legacyBehavior
+                          className="ml-1 text-red-600 hover:underline"
                         >
-                          <a className="ml-1 text-red-600 hover:underline">
-                            {post.category}
-                          </a>
+                          {post.category}
                         </Link>
                       </p>
                       <div className="mt-3 break-words text-neutral-600 text-md lg:text-lg">
@@ -77,7 +84,8 @@ function AnnouncementsPage({ posts, categories }: any) {
                             alt={post.author}
                             className="rounded-full"
                             fill
-                            sizes="100vw" />
+                            sizes="100vw"
+                          />
                         </div>
                         {post.author}
                       </div>

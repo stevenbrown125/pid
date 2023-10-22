@@ -180,15 +180,20 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
         message={message}
         success={success}
       />
-      <section className="px-4 py-6 mx-auto bg-white shadow-md max-w-7xl text-neutral-900 md:px-8 lg:px-16 sm:py-8">
+      <section className="relative px-4 pt-6 mx-auto sm:px-12 lg:px-16 lg:max-w-7xl pb-12">
         <form
           onSubmit={handleSubmit}
           className="grid grid-cols-1 md:grid-cols-2 lg:gap-x-12 lg:gap-y-8 gap-x-4 gap-y-4"
         >
           {/* Contact Information */}
-          <h3 className="pt-4 pb-1 text-2xl font-extrabold text-center border-b text-neutral-800 md:col-span-2 md:text-left sm:text-3xl lg:text-4xl filter drop-shadow-sm">
-            Contact Info
-          </h3>
+          <div className="text-base md:col-span-2">
+            <h2 className="font-semibold leading-6 tracking-wide text-red-600 uppercase">
+              Contact Us
+            </h2>
+            <h3 className="text-3xl font-extrabold leading-8 tracking-tight text-stone-800 sm:text-4xl">
+              Request a Quote
+            </h3>
+          </div>
           <label htmlFor="firstName" className="relative block w-full">
             <span className="flex items-center">
               <FaUser className="w-5 mx-1" />

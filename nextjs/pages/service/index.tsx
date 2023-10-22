@@ -47,8 +47,9 @@ const ServicePage: NextPage = () => {
                     height={382}
                     style={{
                       maxWidth: "100%",
-                      height: "auto"
-                    }} />
+                      height: "auto",
+                    }}
+                  />
                   <figcaption className="text-xs md:text-right">
                     PID Anaylzer DL101 in Field Enviroment
                   </figcaption>
@@ -62,12 +63,18 @@ const ServicePage: NextPage = () => {
                   telephone.
                 </p>
                 <p className="mt-4">
-                  For customers requiring 101/102 service please email:
-                  service@hnu.com and we will return your request as soon as
-                  possible. Please familiarize yourself with our service links
-                  below. Whether you have questions about troubleshooting your
-                  101, calibration with an alternate gas, or return
-                  authorization, these links should help you find your answer.
+                  For customers requiring 101/102 service please email:{" "}
+                  <a
+                    href="mailto:service@hnu.com"
+                    className="text-red-600 no-underline hover:underline"
+                  >
+                    service@hnu.com
+                  </a>{" "}
+                  and we will return your request as soon as possible. Please
+                  familiarize yourself with our service links below. Whether you
+                  have questions about troubleshooting your 101, calibration
+                  with an alternate gas, or return authorization, these links
+                  should help you find your answer.
                 </p>
                 <p className="mt-4">
                   If you are sending in your unit for cleaning and calibration,
@@ -98,14 +105,15 @@ const ServicePage: NextPage = () => {
               </div>
             </div>
             <div className="flex justify-center mt-8 mr-4 md:justify-end">
-              <Link href="/contact" legacyBehavior>
-                <a className="flex items-center justify-center px-5 py-3 text-base font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-900">
-                  Contact Us
-                </a>
+              <Link
+                href="/contact"
+                className="flex items-center justify-center px-5 py-3 text-base font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-900"
+              >
+                Contact Us
               </Link>
             </div>
           </div>
-          <div className="relative pb-6 md:-mr-4 md:border-l md:pl-4 md:order-2 md:col-span-3 md:py-6 border-neutral-100">
+          <div className="relative pb-6 md:-mr-4  md:pl-4 md:order-2 md:col-span-3 md:py-6 border-neutral-100">
             <blockquote className="w-full py-4 -mx-2 text-lg font-bold text-center text-red-700 break-normal border-y md:border-t-0 md:pt-0 border-neutral-100">
               DO NOT SEND YOUR CALIBRATION GAS TO PID ANALYZERS, LLC. UNDECLARED
               HAZARDOUS MATERIALS WILL RESULT IN FINES FROM THE DEPARTMENT OF
@@ -162,51 +170,54 @@ const ServicePage: NextPage = () => {
                 </a>
               </li>
               <li className="py-2">
-                <Link href="/service/model-101-faqs" legacyBehavior>
-                  <a className="text-red-600 cursor-pointer hover:underline">
-                    Model 101 FAQs
-                  </a>
+                <Link
+                  href="/service/model-101-faqs"
+                  className="text-red-600 cursor-pointer hover:underline"
+                >
+                  Model 101 FAQs
                 </Link>
               </li>
               <li className="py-2">
-                <Link href="/service/calibration-alt-gas" legacyBehavior>
-                  <a className="text-red-600 cursor-pointer hover:underline">
-                    Calibration with an Alternate Gas
-                  </a>
+                <Link
+                  href="/service/calibration-alt-gas"
+                  className="text-red-600 cursor-pointer hover:underline"
+                >
+                  Calibration with an Alternate Gas
                 </Link>
               </li>
               <li className="py-2">
-                <Link href="/service/calibration-gas-humidifier" legacyBehavior>
-                  <a className="text-red-600 cursor-pointer hover:underline">
-                    Calibration Gas Humidifier
-                  </a>
-                </Link>
-              </li>
-
-              <li className="py-2">
-                <Link href="/service/lapping-compound-msds" legacyBehavior>
-                  <a className="text-red-600 cursor-pointer hover:underline">
-                    Lapping (Cleaning) Compound MSDS
-                  </a>
+                <Link
+                  href="/service/calibration-gas-humidifier"
+                  className="text-red-600 cursor-pointer hover:underline"
+                >
+                  Calibration Gas Humidifier
                 </Link>
               </li>
 
               <li className="py-2">
-                <Link href="/service/troubleshooting-your-101" legacyBehavior>
-                  <a className="text-red-600 cursor-pointer hover:underline">
-                    Troubleshooting your 101
-                  </a>
+                <Link
+                  href="/service/lapping-compound-msds"
+                  className="text-red-600 cursor-pointer hover:underline"
+                >
+                  Lapping (Cleaning) Compound MSDS
+                </Link>
+              </li>
+
+              <li className="py-2">
+                <Link
+                  href="/service/troubleshooting-your-101"
+                  className="text-red-600 cursor-pointer hover:underline"
+                >
+                  Troubleshooting your 101
                 </Link>
               </li>
 
               <li className="py-2">
                 <Link
                   href="/service/dl101-win-file-transfer-instructions"
-                  legacyBehavior
+                  className="text-red-600 cursor-pointer hover:underline"
                 >
-                  <a className="text-red-600 cursor-pointer hover:underline">
-                    DL-101 Win File Transfer Instructions
-                  </a>
+                  DL-101 Win File Transfer Instructions
                 </Link>
               </li>
             </ul>
@@ -222,10 +233,11 @@ const ServicePage: NextPage = () => {
             <p>
               Manuals for PID Analyzers, LLC, are available for all of our
               instruments for purchase for $50. Please email us at{" "}
-              <Link href="/contact" legacyBehavior>
-                <a className="text-red-600 no-underline hover:underline">
-                  sales@hnu.com
-                </a>
+              <Link
+                href="/contact"
+                className="text-red-600 no-underline hover:underline"
+              >
+                sales@hnu.com
               </Link>{" "}
               if you wish to purchase a manual for our instruments.
             </p>
