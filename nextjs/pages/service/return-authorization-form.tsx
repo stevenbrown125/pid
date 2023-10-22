@@ -1,3 +1,9 @@
+import { NextPage } from "next";
+
+const RMAPage: NextPage = ({ products }: any) => {
+  return <div>RMA Page</div>;
+};
+
 // import { useReducer, useState } from "react";
 // import {
 //   FaArrowsAltV,
