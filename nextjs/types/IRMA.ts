@@ -13,8 +13,15 @@ export default interface IRMA {
   shippingAddress: IAddress;
   hasConsented: boolean;
   refId?: string;
+  ownEquipment: boolean;
+  whoOwnsEquipment: string;
+  communicatedWithUs: boolean;
+  whoWorkingWith: string;
+  reasonForReturn: string;
+  turnaroundTime: string;
+  holdingAccessories: string;
+  otherComments: string;
 }
-
 export interface IRMAErrors {
   name?: string | null;
   company?: string | null;

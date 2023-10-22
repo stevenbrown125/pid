@@ -14,14 +14,6 @@ export default interface IQuote {
   country: string;
   hasConsented: boolean;
   refId?: string;
-  ownEquipment: boolean;
-  whoOwnsEquipment: string;
-  communicatedWithUs: boolean;
-  whoWorkingWith: string;
-  reasonForReturn: string;
-  turnaroundTime: string;
-  holdingAccessories: string;
-  otherComments: string;
 }
 
 export interface IQuoteErrors {
