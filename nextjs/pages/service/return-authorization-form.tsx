@@ -4,6 +4,8 @@ const RMAPage: NextPage = ({ products }: any) => {
   return <div>RMA Page</div>;
 };
 
+export default RMAPage;
+
 // import { useReducer, useState } from "react";
 // import {
 //   FaArrowsAltV,
