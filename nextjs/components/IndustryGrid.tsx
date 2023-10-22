@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function IndustryGrid() {
   return (
@@ -7,62 +7,62 @@ export default function IndustryGrid() {
         Our Industries
       </h2>
       <div className="relative grid w-full h-full gap-2 gird-cols-1 lg:grid-cols-3 md:gap-6">
-        <div className="relative z-0 h-40 md:h-80">
+        <div className="relative z-0 h-40 md:h-80 hover:cursor-pointer group">
           <p className="absolute z-10 w-full text-2xl font-extrabold text-center text-white top-1/3 md:top-1/2 md:text-3xl lg:text-4xl filter drop-shadow">
-            Enviromental
+            Ambient Air
           </p>
           <Image
-            layout="fill"
-            className="object-cover w-full h-full hover:grayscale brightness-50"
-            src="https://images.unsplash.com/photo-1486754735734-325b5831c3ad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
-            alt="Enviromental"
+            fill
+            className="object-cover w-full h-full group-hover:grayscale brightness-50"
+            src="/images/categories/resized_ambientair.jpg"
+            alt="Ambient Air"
           />
         </div>
-        <div className="relative z-0 h-40 row-span-1 md:h-80 lg:h-auto lg:row-span-2">
+        <div className="relative z-0 h-40 row-span-1 md:h-80 lg:h-auto lg:row-span-2 hover:cursor-pointer group">
           <p className="absolute z-10 w-full text-2xl font-extrabold text-center text-white top-1/3 md:top-1/2 md:text-3xl lg:text-4xl filter drop-shadow">
-            Universities
+            Fixed, Continuous
           </p>
           <Image
-            layout="fill"
-            className="object-cover w-full h-full hover:grayscale brightness-50"
-            src="https://images.unsplash.com/photo-1504817343863-5092a923803e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
-            alt="Universities"
+            fill
+            className="object-cover w-full h-full group-hover:grayscale brightness-50"
+            src="/images/categories/resized_Fixed-continuous.jpg"
+            alt="Fixed, Continuous"
           />
         </div>
-        <div className="relative z-0 h-40 md:h-80">
+        <div className="relative z-0 h-40 md:h-80 hover:cursor-pointer group">
           <p className="absolute z-10 w-full text-2xl font-extrabold text-center text-white top-1/3 md:top-1/2 md:text-3xl lg:text-4xl filter drop-shadow">
-            Industrial
+            Laboratory
           </p>
           <Image
-            layout="fill"
-            className="object-cover w-full h-full hover:grayscale brightness-50"
-            src="https://images.unsplash.com/photo-1600684249816-38cdfcf95c17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
-            alt="Industrial"
+            fill
+            className="object-cover w-full h-full group-hover:grayscale brightness-50"
+            src="/images/categories/resized_Laboratory.jpg"
+            alt="Laboratory"
           />
         </div>
-        <div className="relative z-0 h-40 md:h-80">
+        <div className="relative z-0 h-40 md:h-80 hover:cursor-pointer group">
           <p className="absolute z-10 w-full text-2xl font-extrabold text-center text-white top-1/3 md:top-1/2 md:text-3xl lg:text-4xl filter drop-shadow">
-            Research
+            Portable
           </p>
           <Image
-            layout="fill"
-            className="object-cover w-full h-full hover:grayscale brightness-50"
-            src="https://images.unsplash.com/photo-1518152006812-edab29b069ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
-            alt="Research"
+            fill
+            className="object-cover w-full h-full group-hover:grayscale brightness-50"
+            src="/images/categories/resized_Portables.jpg"
+            alt="Portable"
           />
         </div>
-        <div className="relative z-0 h-40 md:h-80">
+        <div className="relative z-0 h-40 md:h-80 hover:cursor-pointer group">
           <p className="absolute z-10 w-full text-2xl font-extrabold text-center text-white top-1/3 md:top-1/2 md:text-3xl lg:text-4xl filter drop-shadow">
-            Urban
+            Water Quality
           </p>
           <Image
-            layout="fill"
-            className="object-cover w-full h-full hover:grayscale brightness-50"
-            src="https://images.unsplash.com/photo-1513977911461-891dadb252ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
-            alt="Urban"
+            fill
+            className="object-cover w-full h-full group-hover:grayscale brightness-50"
+            src="/images/categories/resized_waterquality.jpg"
+            alt="Water Quality"
           />
         </div>
       </div>
     </section>
-  )
+  );
 }

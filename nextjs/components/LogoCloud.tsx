@@ -1,62 +1,78 @@
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function LogoCloud(): JSX.Element {
   return (
-    <div className="bg-red-800 border-b shadow-inner border-neutral-500">
+    <section className="bg-red-800 border-b shadow-inner border-neutral-500">
+      <h2 className="sr-only">Social Networks</h2>
       <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5">
-          <div className="flex justify-center col-span-1 md:col-span-2 lg:col-span-1">
+        <div className="grid grid-cols-2 gap-8 text-neutral-100 md:grid-cols-5">
+          <a
+            href="https://www.facebook.com/pidanalyzers"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image
               width={75}
               height={75}
-              className="w-auto h-12"
-              src="/images/HSY.png"
-              objectFit="contain"
-              alt="HSY"
+              className="object-contain w-auto h-12 hover:opacity-60"
+              src="/images/social/fb.png"
+              alt="Facebook"
             />
-          </div>
-          <div className="flex justify-center col-span-1 md:col-span-2 lg:col-span-1">
+          </a>
+          <a
+            href="https://twitter.com/pidgirl"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image
               width={75}
               height={75}
-              className="w-auto h-12"
-              src="/images/Kokkola.png"
-              objectFit="contain"
-              alt="Kokkola"
+              className="object-contain w-auto h-12 hover:opacity-60"
+              src="/images/social/x.png"
+              alt="X"
             />
-          </div>
-          <div className="flex justify-center col-span-1 md:col-span-2 lg:col-span-1">
+          </a>
+          <a
+            href="https://www.instagram.com/hnu_pid/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image
               width={75}
               height={75}
-              className="w-auto h-12"
-              src="/images/Lahti-logo.png"
-              objectFit="contain"
-              alt="Lahti"
+              className="object-contain w-auto h-12 hover:opacity-60"
+              src="/images/social/IG.png"
+              alt="Instagram"
             />
-          </div>
-          <div className="flex justify-center col-span-1 md:col-span-3 lg:col-span-1">
+          </a>
+          <a
+            href="https://analyzersource.blogspot.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image
               width={75}
               height={75}
-              className="w-auto h-12"
-              src="/images/University_of_Helsinki.png"
-              objectFit="contain"
-              alt="University of Helsinki"
+              className="object-contain w-auto h-12 hover:opacity-60"
+              src="/images/social/blogger-logo-icon-png-6.png"
+              alt="Blogger"
             />
-          </div>
-          <div className="justify-center hidden col-span-2 md:col-span-3 lg:col-span-1 md:block">
+          </a>
+          <a
+            href="https://www.linkedin.com/company/pid-analyzers-llc"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image
               width={75}
               height={75}
-              className="w-auto h-12"
-              alt="Lataus"
-              src="/images/lataus-1.png"
-              objectFit="contain"
+              className="object-contain w-auto h-12 hover:opacity-60"
+              alt="Linkedin"
+              src="/images/social/LI.png"
             />
-          </div>
+          </a>
         </div>
       </div>
-    </div>
-  )
+    </section>
+  );
 }

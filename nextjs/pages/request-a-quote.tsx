@@ -1,4 +1,4 @@
-import { useReducer, useState } from 'react';
+import { useReducer, useState } from "react";
 import {
   FaArrowsAltV,
   FaBuilding,
@@ -7,30 +7,30 @@ import {
   FaEnvelope,
   FaPhone,
   FaUser,
-} from 'react-icons/fa';
-import { Listbox, Switch, Transition } from '@headlessui/react';
-import CountryField from '../components/quote/CountryField';
-import RegionField from '../components/quote/RegionField';
-import Link from 'next/link';
-import client from '../client';
-import { allProductQuery } from '../lib/sanity/allProductQuery';
-import { initialQuoteState, QuoteReducer } from '../lib/helpers/quoteReducer';
-import { IQuoteErrors } from '../types/IQuote';
-import { NextPage } from 'next';
-import Layout from '../components/Layout';
-import IProduct from '../types/IProduct';
-import validateQuote from '../lib/helpers/validator';
-import PhoneInput from 'react-phone-number-input/input';
-import { formatPhoneNumber } from 'react-phone-number-input';
-import { E164Number } from 'libphonenumber-js/types';
-import { ActionKind } from '../types/IAction';
-import Modal from '../components/Modal';
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
-import { useRouter } from 'next/router';
-import Seo from '../components/SEO';
+} from "react-icons/fa";
+import { Listbox, Switch, Transition } from "@headlessui/react";
+import CountryField from "../components/quote/CountryField";
+import RegionField from "../components/quote/RegionField";
+import Link from "next/link";
+import client from "../client";
+import { allProductQuery } from "../lib/sanity/allProductQuery";
+import { initialQuoteState, QuoteReducer } from "../lib/helpers/quoteReducer";
+import { IQuoteErrors } from "../types/IQuote";
+import { NextPage } from "next";
+import Layout from "../components/Layout";
+import IProduct from "../types/IProduct";
+import validateQuote from "../lib/helpers/validator";
+import PhoneInput from "react-phone-number-input/input";
+import { formatPhoneNumber } from "react-phone-number-input";
+import { E164Number } from "libphonenumber-js/types";
+import { ActionKind } from "../types/IAction";
+import Modal from "../components/Modal";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { useRouter } from "next/router";
+import Seo from "../components/SEO";
 
 function classNames(...classes: any[]) {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 }
 
 export async function getStaticProps() {
@@ -57,16 +57,16 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
   const [isLoading, setIsLoading] = useState(false);
   //TODO: Refactor State into Reducer for  Modal
   const [open, setOpen] = useState(false); // Modal State
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
 
   // Submit to API
   const submitQuoteForm = async (gReCaptchaToken: string) => {
-    const res = await fetch('/api/quote', {
-      method: 'POST',
+    const res = await fetch("/api/quote", {
+      method: "POST",
       headers: {
-        Accept: 'application/json, text/plain, */*',
-        'Content-Type': 'application/json',
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         ...quote,
@@ -78,14 +78,14 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
 
     if (data.$metadata.httpStatusCode === 200) {
       setMessage(
-        'Your quotation request sent successfully. Our team will get back to you within 3 business days.'
+        "Your quotation request sent successfully. Our team will get back to you within 1 business day."
       );
       setSuccess(true);
       setOpen(true);
       setQuote({ type: ActionKind.Reset });
     } else {
       setMessage(
-        'Your quotation request failed to send due to a server error. Please email us at support@hnu.com with your Quotation Request.'
+        "Your quotation request failed to send due to a server error. Please email us at support@hnu.com with your Quotation Request."
       );
       setSuccess(false);
       setOpen(true);
@@ -110,7 +110,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
     if (e === undefined) return;
     setQuote({
       type: ActionKind.HandleInput,
-      field: 'phone',
+      field: "phone",
       payload: e,
     });
   };
@@ -124,20 +124,20 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
       /* Validate Client Side */
       const submissionErrors = validateQuote(quote);
       setErrors(submissionErrors);
-      if (Object.keys(submissionErrors).length > 0) throw 'Validation Error';
+      if (Object.keys(submissionErrors).length > 0) throw "Validation Error";
 
       /* Fixes E164Number toString issue */
       setQuote({
         type: ActionKind.HandleInput,
-        field: 'phone',
-        payload: formatPhoneNumber(quote.phone || ''),
+        field: "phone",
+        payload: formatPhoneNumber(quote.phone || ""),
       });
 
       /* No Errors, so send to API and clear any errors */
-      if (!executeRecaptcha) throw 'Execute recaptcha not yet available';
+      if (!executeRecaptcha) throw "Execute recaptcha not yet available";
 
       // Wrap submission with Recaptcha
-      const gReCaptchaToken = await executeRecaptcha('contactFormSubmit');
+      const gReCaptchaToken = await executeRecaptcha("contactFormSubmit");
 
       const submissionResponse = await submitQuoteForm(gReCaptchaToken);
 
@@ -145,14 +145,14 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
       if (submissionResponse.$metadata.httpStatusCode !== 200) {
         setQuote({
           type: ActionKind.HandleInput,
-          field: 'phone',
+          field: "phone",
           payload: phone,
         });
       }
     } catch (e: any) {
       setQuote({
         type: ActionKind.HandleInput,
-        field: 'phone',
+        field: "phone",
         payload: phone,
       });
 
@@ -165,7 +165,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
   const { slug } = router.query;
   let selectedProduct = products.find((product: any) => product.slug === slug);
   if (selectedProduct === undefined)
-    selectedProduct = { title: 'No product Selected' };
+    selectedProduct = { title: "No product Selected" };
 
   return (
     <Layout>
@@ -180,15 +180,20 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
         message={message}
         success={success}
       />
-      <section className="px-4 py-6 mx-auto bg-white shadow-md max-w-7xl text-neutral-900 md:px-8 lg:px-16 sm:py-8">
+      <section className="relative px-4 pt-6 pb-12 mx-auto sm:px-12 lg:px-16 lg:max-w-7xl">
         <form
           onSubmit={handleSubmit}
           className="grid grid-cols-1 md:grid-cols-2 lg:gap-x-12 lg:gap-y-8 gap-x-4 gap-y-4"
         >
           {/* Contact Information */}
-          <h3 className="pt-4 pb-1 text-2xl font-extrabold text-center border-b text-neutral-800 md:col-span-2 md:text-left sm:text-3xl lg:text-4xl filter drop-shadow-sm">
-            Contact Info
-          </h3>
+          <div className="text-base md:col-span-2">
+            <h2 className="font-semibold leading-6 tracking-wide text-red-600 uppercase">
+              Contact Us
+            </h2>
+            <h3 className="text-3xl font-extrabold leading-8 tracking-tight text-stone-800 sm:text-4xl">
+              Request a Quote
+            </h3>
+          </div>
           <label htmlFor="firstName" className="relative block w-full">
             <span className="flex items-center">
               <FaUser className="w-5 mx-1" />
@@ -320,7 +325,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
               onChange={(e: IProduct) =>
                 setQuote({
                   type: ActionKind.HandleInput,
-                  field: 'product',
+                  field: "product",
                   payload: e,
                 })
               }
@@ -352,8 +357,8 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
                       key={`${product.id}-${product.title}`}
                       className={({ active }) =>
                         classNames(
-                          active ? 'text-white bg-red-600' : 'text-gray-900',
-                          'cursor-default select-none relative py-2 pl-8 pr-4'
+                          active ? "text-white bg-red-600" : "text-gray-900",
+                          "cursor-default select-none relative py-2 pl-8 pr-4"
                         )
                       }
                       value={product}
@@ -362,8 +367,8 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
                         <>
                           <span
                             className={classNames(
-                              selected ? 'font-semibold' : 'font-normal',
-                              'block truncate'
+                              selected ? "font-semibold" : "font-normal",
+                              "block truncate"
                             )}
                           >
                             {product.title}
@@ -371,8 +376,8 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
                           {selected ? (
                             <span
                               className={classNames(
-                                active ? 'text-white' : 'text-red-600',
-                                'absolute inset-y-0 left-0 flex items-center  pl-1.5'
+                                active ? "text-white" : "text-red-600",
+                                "absolute inset-y-0 left-0 flex items-center  pl-1.5"
                               )}
                             >
                               <FaCheck
@@ -387,7 +392,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
                   ))}
                 </Listbox.Options>
               </Transition>
-            </Listbox>{' '}
+            </Listbox>{" "}
             {errors.product && (
               <span className="float-left pl-1 text-red-600 ">
                 {errors.product}
@@ -404,7 +409,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
               value={quote.timetable}
               onChange={(e) => handleInput(e)}
               className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300"
-            />{' '}
+            />{" "}
             {errors.timetable && (
               <span className="absolute pl-1 text-red-600 -bottom-6 ">
                 {errors.timetable}
@@ -459,8 +464,8 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
             >
               <p className="order-2 pl-2 text-sm font-normal text-gray-500">
                 By checking this box you acknowledge that you have read and
-                accepted our{' '}
-                <Link href="/privacy-policy">
+                accepted our{" "}
+                <Link href="/privacy-policy" legacyBehavior>
                   <a
                     className="text-red-600 underline hover:text-red-800"
                     target="_blank"
@@ -479,18 +484,18 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
                   onChange={(e: boolean) =>
                     setQuote({
                       type: ActionKind.ToggleConsent,
-                      field: 'hasConsent',
+                      field: "hasConsent",
                       payload: e,
                     })
                   }
                   className={`${
-                    quote.hasConsented ? 'bg-red-600' : 'bg-gray-200'
+                    quote.hasConsented ? "bg-red-600" : "bg-gray-200"
                   } relative inline-flex h-6 w-11 items-center rounded-full`}
                 >
                   <span className="sr-only">Toggle Consent</span>
                   <span
                     className={`${
-                      quote.hasConsented ? 'translate-x-6' : 'translate-x-1'
+                      quote.hasConsented ? "translate-x-6" : "translate-x-1"
                     } inline-block h-4 w-4 transform rounded-full bg-white`}
                   />
                 </Switch>

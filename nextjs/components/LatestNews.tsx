@@ -1,6 +1,6 @@
-import { PortableText } from '@portabletext/react'
-import Image from 'next/image'
-import Link from 'next/link'
+import { PortableText } from "@portabletext/react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function LastestNews({ posts }: any) {
   return (
@@ -10,8 +10,11 @@ export default function LastestNews({ posts }: any) {
           {posts.map((post: any) => (
             <div key={post.title} className="flex flex-col">
               <p className="pb-2 font-medium text-red-600 text-md lg:text-lg">
-                <Link href={`/announcements/${post.categorySlug}`}>
-                  <a className="hover:underline">{post.category}</a>
+                <Link
+                  href={`/announcements/${post.categorySlug}`}
+                  className="hover:underline"
+                >
+                  {post.category}
                 </Link>
               </p>
               <div className="flex flex-col justify-between flex-1 p-6 bg-white rounded-lg shadow-lg">
@@ -28,12 +31,13 @@ export default function LastestNews({ posts }: any) {
                 </div>
                 <div className="pt-4 text-right">
                   <div className="flex items-center justify-end">
-                    Posted by{' '}
+                    Posted by{" "}
                     <div className="relative w-6 h-6 mx-2 rounded-full">
                       <Image
                         src={post.authorImage}
                         alt={post.author}
-                        layout="fill"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="rounded-full"
                       />
                     </div>
@@ -50,5 +54,5 @@ export default function LastestNews({ posts }: any) {
         <Link href="/announcements">See more annoucements</Link>
       </div>
     </section>
-  )
+  );
 }

@@ -8,27 +8,21 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "sanity start",
-    "build": "sanity build"
+    "build": "sanity build",
+    "dev": "sanity dev"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
-    "@sanity/base": "^2.31.1",
-    "@sanity/core": "^2.31.1",
-    "@sanity/default-layout": "^2.31.1",
-    "@sanity/default-login": "^2.31.1",
-    "@sanity/desk-tool": "^2.31.1",
-    "@sanity/eslint-config-studio": "^2.0.0",
-    "@sanity/vision": "^2.31.1",
+    "@sanity/orderable-document-list": "^1.0.4",
+    "@sanity/vision": "^3.18.1",
     "eslint": "^8.6.0",
     "prop-types": "^15.7",
-    "react": "^17.0",
-    "react-dom": "^17.0",
-    "sanity-plugin-asset-source-cloudinary": "^0.1.2",
-    "sanity-plugin-cloudinary": "^0.2.2",
-    "sanity-plugin-order-documents": "^0.0.23",
-    "styled-components": "^5.2.0"
-  },
-  "devDependencies": {}
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sanity": "^3.10.3",
+    "sanity-plugin-cloudinary": "^1.1.1",
+    "styled-components": "^6.1.0"
+  }
 }

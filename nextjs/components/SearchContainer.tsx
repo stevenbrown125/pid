@@ -1,16 +1,16 @@
-import { Fragment, useState } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
-import { FaSearch } from 'react-icons/fa';
-import { GrClose } from 'react-icons/gr';
-import Link from 'next/link';
-import { PortableTextBlock } from '@portabletext/types';
-import { toPlainText } from '@portabletext/react';
+import { Fragment, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { FaSearch } from "react-icons/fa";
+import { GrClose } from "react-icons/gr";
+import Link from "next/link";
+import { PortableTextBlock } from "@portabletext/types";
+import { toPlainText } from "@portabletext/react";
 
-const Highlighted = ({ text = '', highlight = '' }) => {
+const Highlighted = ({ text = "", highlight = "" }) => {
   if (!highlight.trim()) {
     return <span>{text}</span>;
   }
-  const regex = new RegExp(`(${highlight})`, 'gi');
+  const regex = new RegExp(`(${highlight})`, "gi");
   const parts = text.split(regex);
 
   return (
@@ -27,11 +27,11 @@ const Highlighted = ({ text = '', highlight = '' }) => {
 };
 
 const submitQuery = async (query: any) => {
-  const res = await fetch('/api/search', {
-    method: 'POST',
+  const res = await fetch("/api/search", {
+    method: "POST",
     headers: {
-      Accept: 'application/json, text/plain, */*',
-      'Content-Type': 'application/json',
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       query,
@@ -44,14 +44,14 @@ const submitQuery = async (query: any) => {
 const SearchContainer = ({ show, setSearchOpen }: any): any => {
   /* Pull Search Data from GraphQL */
 
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [renderResults, setRenderResults] = useState([]);
   const [isTyping, setIsTyping] = useState(true);
 
   const handleClose = () => {
     /* Uses setTimeout to avoid issues with clicking the search icon to close */
     setTimeout(() => setSearchOpen(false), 2);
-    setQuery('');
+    setQuery("");
     setIsTyping(true);
     setRenderResults([]);
   };
@@ -73,7 +73,7 @@ const SearchContainer = ({ show, setSearchOpen }: any): any => {
 
   /* Pulls an example of the query word being used in the result */
   const pullContent = (query: string, description: PortableTextBlock) => {
-    let content = '';
+    let content = "";
 
     const plainText = toPlainText(description);
     content = plainText.slice(
@@ -159,17 +159,17 @@ const SearchContainer = ({ show, setSearchOpen }: any): any => {
 
                 {/* Search Result Listings */}
                 {isTyping === true && renderResults.length === 0 ? (
-                  ''
+                  ""
                 ) : (
                   <div
                     className={`${
-                      renderResults.length > 3 ? 'pb-56' : 'pb-4'
+                      renderResults.length > 3 ? "pb-56" : "pb-4"
                     } w-screen max-h-screen px-4 pt-2  mx-auto overflow-auto h-fit sm:max-w-2xl xl:max-w-7xl bg-neutral-50`}
                   >
                     {renderResults.length > 0 ? (
                       renderResults.map((result: any) => (
                         <div key={result.id} className="px-4 py-2 lg:px-0">
-                          <Link href={`/product/${result.slug}`}>
+                          <Link href={`/product/${result.slug}`} legacyBehavior>
                             <a
                               className="font-bold text-red-600 hover:text-red-900"
                               onClick={() => handleClose()}
@@ -196,8 +196,8 @@ const SearchContainer = ({ show, setSearchOpen }: any): any => {
                         <p className="font-bold text-red-600">No results</p>
                         <div className="block text-xs md:text-base">
                           Your search query produced no results. Try a different
-                          search term or browse our{' '}
-                          <Link href="/products/">
+                          search term or browse our{" "}
+                          <Link href="/products/" legacyBehavior>
                             <a
                               onClick={() => handleClose()}
                               className="text-red-600 hover:text-red-900"

@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from "next/link";
 
 const ResponsibleBlurb = () => {
   return (
@@ -30,7 +30,7 @@ const ResponsibleBlurb = () => {
           </p>
           <div className="mt-8">
             <div className="inline-flex rounded-md shadow">
-              <Link href="/company">
+              <Link href="/company" legacyBehavior>
                 <a className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-gray-900 bg-white border border-transparent rounded-md hover:bg-neutral-200">
                   Our Company
                 </a>
@@ -40,7 +40,7 @@ const ResponsibleBlurb = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ResponsibleBlurb
+export default ResponsibleBlurb;

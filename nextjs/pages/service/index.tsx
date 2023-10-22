@@ -1,13 +1,13 @@
-import { NextPage } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import { FaFilePdf } from 'react-icons/fa';
-import Breadcrumbs from '../../components/Breadcrumbs';
-import CTA from '../../components/CTA';
-import Layout from '../../components/Layout';
-import Seo from '../../components/SEO';
+import { NextPage } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { FaFilePdf } from "react-icons/fa";
+import Breadcrumbs from "../../components/Breadcrumbs";
+import CTA from "../../components/CTA";
+import Layout from "../../components/Layout";
+import Seo from "../../components/SEO";
 
-const pages = [{ name: 'Service', href: '/service', current: true }];
+const pages = [{ name: "Service", href: "/service", current: true }];
 
 const ServicePage: NextPage = () => {
   return (
@@ -26,7 +26,7 @@ const ServicePage: NextPage = () => {
           {/* Service Links */}
 
           {/* Main Content */}
-          <div className="relative pb-6 md:col-span-9 md:bg-white">
+          <div className="relative pb-6 md:col-span-12 md:bg-white">
             <div className="text-base">
               <h2 className="font-semibold leading-6 tracking-wide text-red-600 uppercase">
                 System Service
@@ -41,68 +41,73 @@ const ServicePage: NextPage = () => {
                 <figure className="mt-8 mb-4 ml-6 md:float-right">
                   <Image
                     className="object-cover w-64 border shadow-md border-neutral-700"
-                    src="/images/dl101field_color_lowres.jpg"
+                    src="/images/static/new102blueall_smres.jpg"
                     alt="PID DL101 Field"
                     width={300}
                     height={382}
+                    style={{
+                      maxWidth: "100%",
+                      height: "auto",
+                    }}
                   />
                   <figcaption className="text-xs md:text-right">
-                    PID Anaylzer DL101 in Field Enviroment
+                    PID Anaylzer with additional Sensors
                   </figcaption>
                 </figure>
                 <p>
                   PID Analyzers, LLC, provides service as well as customer
-                  support for hnu, hnu systems, Process Analyzers and PID
-                  Analyzers&rsquo; instruments. If you have service questions,
-                  need to calibrate your PIDs, GCs, or get annual maintenance
-                  and service contracts you may contact us via E-mail or
-                  telephone.
-                </p>
-                <p className="mt-4">
-                  For customers requiring 101/102 service please email:
-                  service@hnu.com and we will return your request as soon as
-                  possible. Please familiarize yourself with our service links
-                  below. Whether you have questions about troubleshooting your
-                  101, calibration with an alternate gas, or return
-                  authorization, these links should help you find your answer.
-                </p>
-                <p className="mt-4">
-                  If you are sending in your unit for cleaning and calibration,
-                  please look at our RA Checklist to make sure that you include
-                  all components needed to diagnose and repair your instruments.
-                  If you have any questions regarding packaging and shipping
-                  address you will find this information there. Likewise, you
-                  may fill out our online return authorization form for fastest
-                  service.
-                </p>
-                <p className="mt-4">
-                  When we recieve your instrument, we will fax to you a repair
-                  estimate. No work will be performed until this repair estimate
-                  has been approved by you. If the repair estimate is declined
-                  we will charge a one time evaluation fee of $95.
-                </p>
-                <p className="mt-4">
-                  For information regarding service for your HNU, contact the
-                  service department at{' '}
+                  support for HNU, HNU Systems, Process Analyzers and PID
+                  Analyzers' instruments. If you have service questions, need to
+                  calibrate your PIDs, GCs, or get annual maintenance and
+                  service contracts you may contact us via{" "}
                   <a
                     href="mailto:service@hnu.com"
                     className="text-red-600 no-underline hover:underline"
                   >
-                    service@hnu.com
-                  </a>
-                  .
+                    email
+                  </a>{" "}
+                  or telephone at 774-413-5281 X0.
+                </p>
+
+                <p className="mt-4">
+                  If you are sending in your unit for cleaning and calibration
+                  or repair, please fill out our online Return Authorization
+                  (RA) form to make sure that you include all the components
+                  needed to diagnose and/or repair your instruments. If you have
+                  any questions regarding packaging and shipping address you
+                  will find this information there.
+                </p>
+                <p className="mt-4">
+                  When we receive your instrument, we will email you to let you
+                  know that it has been received and is in the service queue.
+                  This will be followed by a second email providing a repair
+                  estimate. The Clean and Calibrate service is $350.00, not
+                  including shipping charges. However, replacement parts, if
+                  needed, are billed at cost. Additional work will be charged at
+                  a rate of $125.00 per hour. No work will be performed until
+                  this repair estimate has been approved by you. If the repair
+                  estimate is declined we will charge a one time evaluation fee
+                  of $150.
                 </p>
               </div>
             </div>
-            <div className="flex justify-center mt-8 mr-4 md:justify-end">
-              <Link href="/contact">
-                <a className="flex items-center justify-center px-5 py-3 text-base font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-900">
-                  Contact Us
-                </a>
+            <div className="flex justify-center gap-8 mx-4 mt-8 md:justify-start">
+              <Link
+                href="/service/return-authorization-form"
+                className="flex items-center justify-center px-5 py-3 text-base font-medium text-red-600 bg-red-100 border border-transparent rounded-md md:px-12 hover:bg-red-300"
+              >
+                Return Authorization Form
+              </Link>
+              <Link
+                href="/contact"
+                className="flex items-center justify-center px-5 py-3 text-base font-medium text-white bg-red-600 border border-transparent rounded-md md:px-12 hover:bg-red-900"
+              >
+                Contact Us
               </Link>
             </div>
           </div>
-          <div className="relative pb-6 md:-mr-4 md:border-l md:pl-4 md:order-2 md:col-span-3 md:py-6 border-neutral-100">
+          {/*           
+          <div className="relative pb-6 md:-mr-4 md:pl-4 md:order-2 md:col-span-3 md:py-6 border-neutral-100">
             <blockquote className="w-full py-4 -mx-2 text-lg font-bold text-center text-red-700 break-normal border-y md:border-t-0 md:pt-0 border-neutral-100">
               DO NOT SEND YOUR CALIBRATION GAS TO PID ANALYZERS, LLC. UNDECLARED
               HAZARDOUS MATERIALS WILL RESULT IN FINES FROM THE DEPARTMENT OF
@@ -159,52 +164,58 @@ const ServicePage: NextPage = () => {
                 </a>
               </li>
               <li className="py-2">
-                <Link href="/service/model-101-faqs">
-                  <a className="text-red-600 cursor-pointer hover:underline">
-                    Model 101 FAQs
-                  </a>
+                <Link
+                  href="/service/model-101-faqs"
+                  className="text-red-600 cursor-pointer hover:underline"
+                >
+                  Model 101 FAQs
                 </Link>
               </li>
               <li className="py-2">
-                <Link href="/service/calibration-alt-gas">
-                  <a className="text-red-600 cursor-pointer hover:underline">
-                    Calibration with an Alternate Gas
-                  </a>
+                <Link
+                  href="/service/calibration-alt-gas"
+                  className="text-red-600 cursor-pointer hover:underline"
+                >
+                  Calibration with an Alternate Gas
                 </Link>
               </li>
               <li className="py-2">
-                <Link href="/service/calibration-gas-humidifier">
-                  <a className="text-red-600 cursor-pointer hover:underline">
-                    Calibration Gas Humidifier
-                  </a>
-                </Link>
-              </li>
-
-              <li className="py-2">
-                <Link href="/service/lapping-compound-msds">
-                  <a className="text-red-600 cursor-pointer hover:underline">
-                    Lapping (Cleaning) Compound MSDS
-                  </a>
+                <Link
+                  href="/service/calibration-gas-humidifier"
+                  className="text-red-600 cursor-pointer hover:underline"
+                >
+                  Calibration Gas Humidifier
                 </Link>
               </li>
 
               <li className="py-2">
-                <Link href="/service/troubleshooting-your-101">
-                  <a className="text-red-600 cursor-pointer hover:underline">
-                    Troubleshooting your 101
-                  </a>
+                <Link
+                  href="/service/lapping-compound-msds"
+                  className="text-red-600 cursor-pointer hover:underline"
+                >
+                  Lapping (Cleaning) Compound MSDS
                 </Link>
               </li>
 
               <li className="py-2">
-                <Link href="/service/dl101-win-file-transfer-instructions">
-                  <a className="text-red-600 cursor-pointer hover:underline">
-                    DL-101 Win File Transfer Instructions
-                  </a>
+                <Link
+                  href="/service/troubleshooting-your-101"
+                  className="text-red-600 cursor-pointer hover:underline"
+                >
+                  Troubleshooting your 101
+                </Link>
+              </li>
+
+              <li className="py-2">
+                <Link
+                  href="/service/dl101-win-file-transfer-instructions"
+                  className="text-red-600 cursor-pointer hover:underline"
+                >
+                  DL-101 Win File Transfer Instructions
                 </Link>
               </li>
             </ul>
-          </div>
+          </div>*/}
         </div>
       </section>
       <section className="relative py-6 shadow-inner md:py-12 bg-neutral-100">
@@ -215,12 +226,13 @@ const ServicePage: NextPage = () => {
             </h3>
             <p>
               Manuals for PID Analyzers, LLC, are available for all of our
-              instruments for purchase for $50. Please email us at{' '}
-              <Link href="/contact">
-                <a className="text-red-600 no-underline hover:underline">
-                  sales@hnu.com
-                </a>
-              </Link>{' '}
+              instruments for purchase for $50. Please email us at{" "}
+              <Link
+                href="/contact"
+                className="text-red-600 no-underline hover:underline"
+              >
+                sales@hnu.com
+              </Link>{" "}
               if you wish to purchase a manual for our instruments.
             </p>
             <p className="mt-4">

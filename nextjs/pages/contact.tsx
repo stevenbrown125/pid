@@ -1,21 +1,21 @@
-import { NextPage } from 'next';
-import Link from 'next/link';
-import { useReducer, useState } from 'react';
-import { FaEnvelope, FaPhone, FaUser } from 'react-icons/fa';
-import PhoneInput, { formatPhoneNumber } from 'react-phone-number-input/input';
-import Layout from '../components/Layout';
+import { NextPage } from "next";
+import Link from "next/link";
+import { useReducer, useState } from "react";
+import { FaEnvelope, FaPhone, FaUser } from "react-icons/fa";
+import PhoneInput, { formatPhoneNumber } from "react-phone-number-input/input";
+import Layout from "../components/Layout";
 import {
   ContactReducer,
   initialContactState,
-} from '../lib/helpers/contactReducer';
-import { IContactError } from '../types/IContact';
-import { E164Number } from 'libphonenumber-js/types';
-import { ActionKind } from '../types/IAction';
-import { Switch } from '@headlessui/react';
-import { validateContact } from '../lib/helpers/validator';
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
-import Modal from '../components/Modal';
-import Seo from '../components/SEO';
+} from "../lib/helpers/contactReducer";
+import { IContactError } from "../types/IContact";
+import { E164Number } from "libphonenumber-js/types";
+import { ActionKind } from "../types/IAction";
+import { Switch } from "@headlessui/react";
+import { validateContact } from "../lib/helpers/validator";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import Modal from "../components/Modal";
+import Seo from "../components/SEO";
 
 const ContactPage: NextPage = () => {
   // Initialize Captcha
@@ -27,16 +27,16 @@ const ContactPage: NextPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   //TODO: Refactor State into Reducer for  Modal
   const [open, setOpen] = useState(false); // Modal State
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
 
   // Submit to API
   const submitContactForm = async (gReCaptchaToken: string) => {
-    const res = await fetch('/api/contact', {
-      method: 'POST',
+    const res = await fetch("/api/contact", {
+      method: "POST",
       headers: {
-        Accept: 'application/json, text/plain, */*',
-        'Content-Type': 'application/json',
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         ...contact,
@@ -48,14 +48,14 @@ const ContactPage: NextPage = () => {
 
     if (data.$metadata.httpStatusCode === 200) {
       setMessage(
-        'Your message sent successfully. Our team will get back to you within 3 business days.'
+        "Your message sent successfully. Our team will get back to you within 3 business days."
       );
       setSuccess(true);
       setOpen(true);
       setContact({ type: ActionKind.Reset });
     } else {
       setMessage(
-        'Your message failed to send due to a server error. Please email us at support@hnu.com with your message.'
+        "Your message failed to send due to a server error. Please email us at support@hnu.com with your message."
       );
       setSuccess(false);
       setOpen(true);
@@ -80,7 +80,7 @@ const ContactPage: NextPage = () => {
     if (e === undefined) return;
     setContact({
       type: ActionKind.HandleInput,
-      field: 'phone',
+      field: "phone",
       payload: e,
     });
   };
@@ -93,27 +93,27 @@ const ContactPage: NextPage = () => {
       /* Validate Client Side */
       const submissionErrors = validateContact(contact);
       setErrors(submissionErrors);
-      if (Object.keys(submissionErrors).length > 0) throw 'Validation Error';
+      if (Object.keys(submissionErrors).length > 0) throw "Validation Error";
 
       /* Fixes E164Number toString issue */
       setContact({
         type: ActionKind.HandleInput,
-        field: 'phone',
+        field: "phone",
         payload: formatPhoneNumber(contact.phone),
       });
 
       /* No Errors, so send to API and clear any errors */
-      if (!executeRecaptcha) throw 'Execute recaptcha not yet available';
+      if (!executeRecaptcha) throw "Execute recaptcha not yet available";
 
       // Wrap submission with Recaptcha
-      const gReCaptchaToken = await executeRecaptcha('contactFormSubmit');
+      const gReCaptchaToken = await executeRecaptcha("contactFormSubmit");
 
       const submissionResponse = await submitContactForm(gReCaptchaToken);
 
       /* Return the Phone number back to E164Number */
       setContact({
         type: ActionKind.HandleInput,
-        field: 'phone',
+        field: "phone",
         payload: phone,
       });
     } catch (e: any) {
@@ -121,7 +121,7 @@ const ContactPage: NextPage = () => {
 
       setContact({
         type: ActionKind.HandleInput,
-        field: 'phone',
+        field: "phone",
         payload: phone,
       });
     }
@@ -133,7 +133,7 @@ const ContactPage: NextPage = () => {
       <Seo
         title="Contact Us"
         description=" We'd love to hear from you! Fill out and submit this form and
-              our team will get back to you within 3 business days."
+              our team will get back to you as soon as possible."
       />
       <Modal
         open={open}
@@ -142,9 +142,9 @@ const ContactPage: NextPage = () => {
         success={success}
       />
       <section>
-        <div className="relative px-4 pt-6 mx-auto sm:px-12 lg:px-16 lg:max-w-7xl md:grid md:grid-cols-5">
+        <div className="relative px-4 mx-auto -mt-2 sm:px-12 lg:px-16 lg:max-w-7xl md:grid md:grid-cols-5">
           <div className="md:col-span-2 xl:pr-12">
-            <div className="text-base">
+            <div className="pt-8 text-base">
               <h2 className="font-semibold leading-6 tracking-wide text-red-600 uppercase">
                 Contact Us
               </h2>
@@ -152,9 +152,9 @@ const ContactPage: NextPage = () => {
                 Get in touch
               </h3>
             </div>
-            <p className="mt-3 text-lg leading-6 text-center lg:text-left text-neutral-500">
+            <p className="mt-6 text-lg leading-6 text-center lg:text-left text-neutral-500">
               We&apos;d love to hear from you! Fill out and submit this form and
-              our team will get back to you within 3 business days.
+              our team will get back to you within 1 business day.
             </p>
             <dl className="mt-6 text-base text-center text-neutral-500 lg:text-left">
               <div>
@@ -191,10 +191,11 @@ const ContactPage: NextPage = () => {
             </dl>
             <p className="mt-6 text-base text-center text-neutral-500 lg:text-left">
               Looking for a price estimate?
-              <Link href="/request-a-quote">
-                <a className="ml-1 font-medium underline text-neutral-700 hover:text-red-600">
-                  Request a Quote
-                </a>
+              <Link
+                href="/request-a-quote"
+                className="ml-1 font-medium underline text-neutral-700 hover:text-red-600"
+              >
+                Request a Quote
               </Link>
             </p>
           </div>
@@ -215,7 +216,6 @@ const ContactPage: NextPage = () => {
                     value={contact.name}
                     disabled={isLoading}
                     onChange={(e) => handleInput(e)}
-                    className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300"
                   />
                   {errors.name && (
                     <span className="absolute pl-1 text-red-600 -bottom-6">
@@ -237,7 +237,6 @@ const ContactPage: NextPage = () => {
                     disabled={isLoading}
                     onChange={(e) => handleInput(e)}
                     autoComplete="email"
-                    className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300"
                   />
                   {errors.email && (
                     <span className="absolute pl-1 text-red-600 -bottom-6">
@@ -260,7 +259,6 @@ const ContactPage: NextPage = () => {
                     onChange={(e) => handlePhone(e)}
                     maxLength={17}
                     autoComplete="tel"
-                    className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300"
                     required
                   />
                   {errors.phone && (
@@ -281,7 +279,6 @@ const ContactPage: NextPage = () => {
                     disabled={isLoading}
                     onChange={(e) => handleInput(e)}
                     value={contact.message}
-                    className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300"
                   />
                   {errors.message && (
                     <span className="pl-1 text-red-600 md:absolute md:-bottom-6 ">
@@ -301,8 +298,8 @@ const ContactPage: NextPage = () => {
                 >
                   <p className="order-2 pl-2 text-sm font-normal text-neutral-500">
                     By checking this box you acknowledge that you have read and
-                    accepted our{' '}
-                    <Link href="/privacy-policy">
+                    accepted our{" "}
+                    <Link href="/privacy-policy" legacyBehavior>
                       <a
                         className="text-red-600 underline hover:text-red-800"
                         target="_blank"
@@ -322,20 +319,20 @@ const ContactPage: NextPage = () => {
                       onChange={(e: boolean) =>
                         setContact({
                           type: ActionKind.ToggleConsent,
-                          field: 'hasConsent',
+                          field: "hasConsent",
                           payload: e,
                         })
                       }
                       className={`${
-                        contact.hasConsented ? 'bg-red-600' : 'bg-neutral-200'
+                        contact.hasConsented ? "bg-red-600" : "bg-neutral-200"
                       } relative inline-flex h-6 w-11 items-center rounded-full`}
                     >
                       <span className="sr-only">Toggle Consent</span>
                       <span
                         className={`${
                           contact.hasConsented
-                            ? 'translate-x-6'
-                            : 'translate-x-1'
+                            ? "translate-x-6"
+                            : "translate-x-1"
                         } inline-block h-4 w-4 transform rounded-full bg-white`}
                       />
                     </Switch>

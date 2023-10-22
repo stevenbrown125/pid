@@ -3,39 +3,40 @@ import IQuote from "../../types/IQuote";
 
 /* Exports */
 
-export const initialQuoteState : IQuote = {
-  name: '',
-  company: '',
+export const initialQuoteState: IQuote = {
+  name: "",
+  company: "",
   phone: undefined,
-  email: '',
-  timetable: 0,
-  applications: '',
-  comments: '',
+  email: "",
+  timetable: new Date(new Date().setMonth(new Date().getMonth() + 1))
+    .toISOString()
+    .slice(0, 10),
+  applications: "",
+  comments: "",
   product: null,
-  city: '',
-  state: '',
-  country: '',
+  city: "",
+  state: "",
+  country: "",
   hasConsented: false,
-}
+};
 
-export const QuoteReducer = (state: IQuote, action: IAction) : IQuote => {
-  switch(action.type) {
+export const QuoteReducer = (state: IQuote, action: IAction): IQuote => {
+  switch (action.type) {
     case "HANDLE_INPUT":
       return {
         ...state,
         [action.field]: action.payload,
-      
       };
     case "TOGGLE_CONSENT":
       return {
         ...state,
         hasConsented: !state.hasConsented,
-      }
+      };
     case "RESET":
       return {
-        ...initialQuoteState
-      }
-    default: 
-      return state
+        ...initialQuoteState,
+      };
+    default:
+      return state;
   }
-}
+};

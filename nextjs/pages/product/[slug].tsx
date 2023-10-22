@@ -1,14 +1,14 @@
-import { PortableText } from '@portabletext/react'
-import groq from 'groq'
-import { NextPage } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import { BsClipboardCheck } from 'react-icons/bs'
-import client from '../../client'
-import Layout from '../../components/Layout'
-import { allProductQuery } from '../../lib/sanity/allProductQuery'
-import { HiOutlineBadgeCheck } from 'react-icons/hi'
-import Seo from '../../components/SEO'
+import { PortableText } from "@portabletext/react";
+import groq from "groq";
+import { NextPage } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { BsClipboardCheck } from "react-icons/bs";
+import client from "../../client";
+import Layout from "../../components/Layout";
+import { allProductQuery } from "../../lib/sanity/allProductQuery";
+import { HiOutlineBadgeCheck } from "react-icons/hi";
+import Seo from "../../components/SEO";
 
 export async function getStaticProps({ params }: any) {
   const product = await client.fetch(
@@ -23,37 +23,37 @@ export async function getStaticProps({ params }: any) {
     "pdf": pdf.asset->url
   }`,
     { slug: params.slug }
-  )
+  );
   return {
     props: {
       product: product[0],
       appId: process.env.SQ_APP_ID,
-      locationId: process.env.SQ_LOCATION_ID
-    }
-  }
+      locationId: process.env.SQ_LOCATION_ID,
+    },
+  };
 }
 
 export async function getStaticPaths() {
-  const products = await client.fetch(allProductQuery)
+  const products = await client.fetch(allProductQuery);
   const paths = products.map((product: any) => {
-    const slug = product.slug
+    const slug = product.slug;
     return {
       params: {
-        slug
-      }
-    }
-  })
+        slug,
+      },
+    };
+  });
   return {
     paths,
-    fallback: false
-  }
+    fallback: false,
+  };
 }
 
 const Product: NextPage = ({ product }: any) => {
   return (
     <Layout>
       <Seo title={product.title} description={product?.SEODescription} />
-      <section className="bg-neutral-50">
+      <section className="bg-neutral-50 -mt-1">
         <div className="container mx-auto bg-white shadow-sm sm:px-8 max-w-7xl lg:px-12 border-x border-neutral-100">
           <div className="pb-8">
             <div className="grid grid-cols-1 pt-8 md:grid-cols-5">
@@ -74,8 +74,9 @@ const Product: NextPage = ({ product }: any) => {
                   <Link
                     href={{
                       pathname: `/request-a-quote`,
-                      query: { slug: product.slug }
+                      query: { slug: product.slug },
                     }}
+                    legacyBehavior
                   >
                     <a className="flex items-center justify-center w-full px-8 py-3 text-base font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-50 focus:ring-red-700">
                       Request a Quote
@@ -88,8 +89,11 @@ const Product: NextPage = ({ product }: any) => {
                   <Image
                     src={product.image}
                     alt={product.title}
-                    layout="fill"
-                    objectFit="contain"
+                    fill
+                    sizes="100vw"
+                    style={{
+                      objectFit: "contain",
+                    }}
                   />
                 </div>
               </div>
@@ -138,7 +142,7 @@ const Product: NextPage = ({ product }: any) => {
           )}
         </div>
       </section>
-      <div className="p-12 shadow-inner bg-neutral-200">
+      <div className="p-12 shadow-inner bg-[#fff7d3]">
         <div className="mx-auto lg:max-w-5xl ">
           <h4 className="flex items-center justify-center text-3xl font-extrabold tracking-tight text-neutral-800 sm:text-4xl">
             <svg viewBox="0 0 495 495" className="mr-4 text-red-500 max-h-12">
@@ -159,7 +163,7 @@ const Product: NextPage = ({ product }: any) => {
           </h4>
           <div
             className={`${
-              product?.pdf ? 'md:grid-cols-3' : 'max-w-sm mx-auto'
+              product?.pdf ? "md:grid-cols-3" : "max-w-sm mx-auto"
             } grid grid-cols-1 md:p-8 py-8 items-center`}
           >
             {product.pdf ? (
@@ -170,14 +174,14 @@ const Product: NextPage = ({ product }: any) => {
                     target="_blank"
                     className={`${
                       product.pdf
-                        ? 'bg-red-600 hover:bg-red-700 '
-                        : 'bg-neutral-400'
+                        ? "bg-red-600 hover:bg-red-700 "
+                        : "bg-neutral-400"
                     } flex items-center text-center justify-center w-full px-8 py-3 text-base font-medium text-white border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-50 focus:ring-red-700`}
                     rel="noreferrer"
                   >
                     {product.pdf
-                      ? 'Check out our Brochure'
-                      : 'Brochure not available'}
+                      ? "Check out our Brochure"
+                      : "Brochure not available"}
                   </a>
                 </div>
                 <div className="py-4 text-2xl font-bold text-center">
@@ -185,10 +189,10 @@ const Product: NextPage = ({ product }: any) => {
                 </div>
               </>
             ) : (
-              ''
+              ""
             )}
             <div>
-              <Link href="/contact">
+              <Link href="/contact" legacyBehavior>
                 <a className="flex items-center justify-center w-full px-8 py-3 text-base font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-50 focus:ring-red-700">
                   Contact Us
                 </a>
@@ -198,7 +202,7 @@ const Product: NextPage = ({ product }: any) => {
         </div>
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default Product
+export default Product;

@@ -1,4 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Base styles */
+@layer base {
+  form {
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    textarea {
+      @apply block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300;
+    }
+  }
+}
+
+/* Component styles */
+@layer components {
+  /* Define component-specific styles here */
+}
+
+/* Utility styles */
+@layer utilities {
+  /* Define utility classes here */
+  .custom-button {
+    @apply px-4 py-2 text-white bg-blue-500 rounded-md;
+  }
+}

@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import { FaBars, FaPhoneAlt, FaSearch, FaShoppingCart } from 'react-icons/fa';
-import Link from 'next/link';
-import Image from 'next/image';
-import MobileNavigation from './MobileNavigation';
-import SearchContainer from './SearchContainer';
+import { useState } from "react";
+import { FaBars, FaPhoneAlt, FaSearch } from "react-icons/fa";
+import Link from "next/link";
+import Image from "next/image";
+import MobileNavigation from "./MobileNavigation";
+import SearchContainer from "./SearchContainer";
 
 const navigation = [
-  { name: 'Products', href: '/products' },
-  { name: 'Service', href: '/service' },
-  { name: 'Company', href: '/company' },
-  { name: 'Contact', href: '/contact' },
+  { name: "Products", href: "/products" },
+  { name: "Service", href: "/service" },
+  { name: "Company", href: "/company" },
+  { name: "Contact", href: "/contact" },
 ];
 
 const Header = (): JSX.Element => {
@@ -17,7 +17,7 @@ const Header = (): JSX.Element => {
   const [searchOpen, setSearchOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 z-30 w-screen bg-red-50">
+    <header className="fixed top-0 z-30 w-screen bg-gradient-to-t from-[#FFFFFF] via-[#FFFFFF] to-red-50">
       {/* Mobile menu */}
       <MobileNavigation
         mobileMenuOpen={mobileMenuOpen}
@@ -30,11 +30,17 @@ const Header = (): JSX.Element => {
           href="tel:1-774-413-5281"
           className="items-center hidden pr-2 text-xs font-bold text-neutral-800 md:flex md:pr-5 justify-self-start"
         >
-          <FaPhoneAlt className="w-4 h-3 mr-1 " />
+          <FaPhoneAlt className="w-4 h-3 mr-1" />
           +1 (774) 413-5281
         </a>
         <div className="flex items-center justify-center col-start-2 md:col-start-auto">
-          <Image src="/images/hnu.png" alt="HNU Logo" height={20} width={45} />
+          <Image
+            src="/images/hnu.png"
+            alt="HNU Logo"
+            height={20}
+            width={45}
+            className="w-auto h-auto"
+          />
 
           <p className="pt-1 pl-2 text-xs font-semibold tracking-widest text-center uppercase text-neutral-800 md:font-extrabold lg:flex-none">
             Home of the HNU
@@ -51,17 +57,15 @@ const Header = (): JSX.Element => {
         <div className="flex items-center mx-auto sm:py-2 max-w-7xl">
           {/* Logo (lg+) */}
           <div className="hidden -m-2 md:flex lg:items-center">
-            <Link href="/">
-              <a className="px-4 mr-4">
-                <span className="sr-only">PID Analyzers</span>
-                <Image
-                  className="flex-shrink-0 mx-2"
-                  src="/images/pid-logo.png"
-                  alt="PID Analyzers"
-                  height={227}
-                  width={472}
-                />
-              </a>
+            <Link href="/" className="px-4 mr-4">
+              <span className="sr-only">PID Analyzers</span>
+              <Image
+                className="flex-shrink-0 mx-2"
+                src="/images/pid-logo.png"
+                alt="PID Analyzers"
+                height={227}
+                width={472}
+              />
             </Link>
           </div>
 
@@ -69,18 +73,21 @@ const Header = (): JSX.Element => {
           <div className="container relative hidden md:flex justify-items-stretch">
             <div className="pt-2 md:space-x-8 lg:ml-10 lg:space-x-10">
               {navigation.map((item) => (
-                <Link key={`nav-${item.name}`} href={item.href}>
-                  <a className="font-semibold text-md text-neutral-700 xl:text-xl hover:text-red-600">
-                    {item.name}
-                  </a>
+                <Link
+                  key={`nav-${item.name}`}
+                  href={item.href}
+                  className="font-semibold text-md text-neutral-700 xl:text-xl hover:text-red-600"
+                >
+                  {item.name}
                 </Link>
               ))}
             </div>
             <div className="pt-2 pl-8 lg:pl-10 shrink-0">
-              <Link href="/request-a-quote">
-                <a className="font-semibold text-red-600 text-md hover:text-red-800 xl:text-xl ">
-                  Request a Quote
-                </a>
+              <Link
+                href="/request-a-quote"
+                className="font-semibold text-red-600 text-md hover:text-red-800 xl:text-xl"
+              >
+                Request a Quote
               </Link>
             </div>
           </div>
@@ -103,7 +110,7 @@ const Header = (): JSX.Element => {
               <button type="button" className="mt-1 md:hidden">
                 <span className="sr-only">PID Analyzers</span>
                 <Image
-                  className="flex-shrink-0"
+                  className="flex-shrink-0 w-auto h-auto"
                   src="/images/pid-logo.png"
                   alt="PID Analyzers"
                   height={58}
@@ -118,7 +125,7 @@ const Header = (): JSX.Element => {
             <button
               type="button"
               className={`${
-                searchOpen ? 'text-red-500' : 'text-neutral-700'
+                searchOpen ? "text-red-500" : "text-neutral-700"
               } md:flex items-center text-lg font-medium pt-2 hover:text-red-500 hidden `}
               onClick={() => {
                 setSearchOpen(!searchOpen);
