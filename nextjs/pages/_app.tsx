@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import type { AppProps } from "next/app";
 import Seo from "../components/SEO";
+import Head from "next/head";
 
 //TODO: Disable Captcha if did not accept cookies
 function MyApp({ Component, pageProps }: AppProps) {
@@ -19,6 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       }}
     >
       <Seo />
+
       <Component {...pageProps} />
     </GoogleReCaptchaProvider>
   );

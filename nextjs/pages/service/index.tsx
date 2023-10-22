@@ -26,7 +26,7 @@ const ServicePage: NextPage = () => {
           {/* Service Links */}
 
           {/* Main Content */}
-          <div className="relative pb-6 md:col-span-9 md:bg-white">
+          <div className="relative pb-6 md:col-span-12 md:bg-white">
             <div className="text-base">
               <h2 className="font-semibold leading-6 tracking-wide text-red-600 uppercase">
                 System Service
@@ -41,7 +41,7 @@ const ServicePage: NextPage = () => {
                 <figure className="mt-8 mb-4 ml-6 md:float-right">
                   <Image
                     className="object-cover w-64 border shadow-md border-neutral-700"
-                    src="/images/dl101field_color_lowres.jpg"
+                    src="/images/static/new102blueall_smres.jpg"
                     alt="PID DL101 Field"
                     width={300}
                     height={382}
@@ -51,69 +51,63 @@ const ServicePage: NextPage = () => {
                     }}
                   />
                   <figcaption className="text-xs md:text-right">
-                    PID Anaylzer DL101 in Field Enviroment
+                    PID Anaylzer with additional Sensors
                   </figcaption>
                 </figure>
                 <p>
                   PID Analyzers, LLC, provides service as well as customer
-                  support for hnu, hnu systems, Process Analyzers and PID
-                  Analyzers&rsquo; instruments. If you have service questions,
-                  need to calibrate your PIDs, GCs, or get annual maintenance
-                  and service contracts you may contact us via E-mail or
-                  telephone.
-                </p>
-                <p className="mt-4">
-                  For customers requiring 101/102 service please email:{" "}
+                  support for HNU, HNU Systems, Process Analyzers and PID
+                  Analyzers' instruments. If you have service questions, need to
+                  calibrate your PIDs, GCs, or get annual maintenance and
+                  service contracts you may contact us via{" "}
                   <a
                     href="mailto:service@hnu.com"
                     className="text-red-600 no-underline hover:underline"
                   >
-                    service@hnu.com
+                    email
                   </a>{" "}
-                  and we will return your request as soon as possible. Please
-                  familiarize yourself with our service links below. Whether you
-                  have questions about troubleshooting your 101, calibration
-                  with an alternate gas, or return authorization, these links
-                  should help you find your answer.
+                  or telephone at 774-413-5281 X0.
+                </p>
+
+                <p className="mt-4">
+                  If you are sending in your unit for cleaning and calibration
+                  or repair, please fill out our online Return Authorization
+                  (RA) form to make sure that you include all the components
+                  needed to diagnose and/or repair your instruments. If you have
+                  any questions regarding packaging and shipping address you
+                  will find this information there.
                 </p>
                 <p className="mt-4">
-                  If you are sending in your unit for cleaning and calibration,
-                  please look at our RA Checklist to make sure that you include
-                  all components needed to diagnose and repair your instruments.
-                  If you have any questions regarding packaging and shipping
-                  address you will find this information there. Likewise, you
-                  may fill out our online return authorization form for fastest
-                  service.
-                </p>
-                <p className="mt-4">
-                  When we recieve your instrument, we will fax to you a repair
-                  estimate. No work will be performed until this repair estimate
-                  has been approved by you. If the repair estimate is declined
-                  we will charge a one time evaluation fee of $95.
-                </p>
-                <p className="mt-4">
-                  For information regarding service for your HNU, contact the
-                  service department at{" "}
-                  <a
-                    href="mailto:service@hnu.com"
-                    className="text-red-600 no-underline hover:underline"
-                  >
-                    service@hnu.com
-                  </a>
-                  .
+                  When we receive your instrument, we will email you to let you
+                  know that it has been received and is in the service queue.
+                  This will be followed by a second email providing a repair
+                  estimate. The Clean and Calibrate service is $350.00, not
+                  including shipping charges. However, replacement parts, if
+                  needed, are billed at cost. Additional work will be charged at
+                  a rate of $125.00 per hour. No work will be performed until
+                  this repair estimate has been approved by you. If the repair
+                  estimate is declined we will charge a one time evaluation fee
+                  of $150.
                 </p>
               </div>
             </div>
-            <div className="flex justify-center mt-8 mr-4 md:justify-end">
+            <div className="flex justify-center gap-8 mx-4 mt-8 md:justify-start">
+              <Link
+                href="/service/return-authorization-form"
+                className="flex items-center justify-center px-5 py-3 text-base font-medium text-red-600 bg-red-100 border border-transparent rounded-md md:px-12 hover:bg-red-300"
+              >
+                Return Authorization Form
+              </Link>
               <Link
                 href="/contact"
-                className="flex items-center justify-center px-5 py-3 text-base font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-900"
+                className="flex items-center justify-center px-5 py-3 text-base font-medium text-white bg-red-600 border border-transparent rounded-md md:px-12 hover:bg-red-900"
               >
                 Contact Us
               </Link>
             </div>
           </div>
-          <div className="relative pb-6 md:-mr-4  md:pl-4 md:order-2 md:col-span-3 md:py-6 border-neutral-100">
+          {/*           
+          <div className="relative pb-6 md:-mr-4 md:pl-4 md:order-2 md:col-span-3 md:py-6 border-neutral-100">
             <blockquote className="w-full py-4 -mx-2 text-lg font-bold text-center text-red-700 break-normal border-y md:border-t-0 md:pt-0 border-neutral-100">
               DO NOT SEND YOUR CALIBRATION GAS TO PID ANALYZERS, LLC. UNDECLARED
               HAZARDOUS MATERIALS WILL RESULT IN FINES FROM THE DEPARTMENT OF
@@ -221,7 +215,7 @@ const ServicePage: NextPage = () => {
                 </Link>
               </li>
             </ul>
-          </div>
+          </div>*/}
         </div>
       </section>
       <section className="relative py-6 shadow-inner md:py-12 bg-neutral-100">

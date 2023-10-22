@@ -78,7 +78,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
 
     if (data.$metadata.httpStatusCode === 200) {
       setMessage(
-        "Your quotation request sent successfully. Our team will get back to you within 3 business days."
+        "Your quotation request sent successfully. Our team will get back to you within 1 business day."
       );
       setSuccess(true);
       setOpen(true);
@@ -180,7 +180,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
         message={message}
         success={success}
       />
-      <section className="relative px-4 pt-6 mx-auto sm:px-12 lg:px-16 lg:max-w-7xl pb-12">
+      <section className="relative px-4 pt-6 pb-12 mx-auto sm:px-12 lg:px-16 lg:max-w-7xl">
         <form
           onSubmit={handleSubmit}
           className="grid grid-cols-1 md:grid-cols-2 lg:gap-x-12 lg:gap-y-8 gap-x-4 gap-y-4"

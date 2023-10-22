@@ -142,9 +142,9 @@ const ContactPage: NextPage = () => {
         success={success}
       />
       <section>
-        <div className="relative px-4 -mt-2 mx-auto sm:px-12 lg:px-16 lg:max-w-7xl md:grid md:grid-cols-5">
+        <div className="relative px-4 mx-auto -mt-2 sm:px-12 lg:px-16 lg:max-w-7xl md:grid md:grid-cols-5">
           <div className="md:col-span-2 xl:pr-12">
-            <div className="text-base pt-8">
+            <div className="pt-8 text-base">
               <h2 className="font-semibold leading-6 tracking-wide text-red-600 uppercase">
                 Contact Us
               </h2>
@@ -152,11 +152,11 @@ const ContactPage: NextPage = () => {
                 Get in touch
               </h3>
             </div>
-            <p className="mt-6 text-lg ml-6 leading-6 text-center lg:text-left text-neutral-500">
+            <p className="mt-6 text-lg leading-6 text-center lg:text-left text-neutral-500">
               We&apos;d love to hear from you! Fill out and submit this form and
-              our team will get back to you as soon as possible.
+              our team will get back to you within 1 business day.
             </p>
-            <dl className="mt-6 ml-6  text-base text-center text-neutral-500 lg:text-left">
+            <dl className="mt-6 text-base text-center text-neutral-500 lg:text-left">
               <div>
                 <dt className="sr-only">Postal address</dt>
                 <dd>
@@ -164,7 +164,7 @@ const ContactPage: NextPage = () => {
                   <p>Sandwich, Ma 02563</p>
                 </dd>
               </div>
-              <div className="mt-6 ml-6 ">
+              <div className="mt-6">
                 <dt className="sr-only">Phone number</dt>
                 <dd className="flex justify-center lg:justify-start">
                   <a
@@ -176,7 +176,7 @@ const ContactPage: NextPage = () => {
                   </a>
                 </dd>
               </div>
-              <div className="mt-3 ml-6 ">
+              <div className="mt-3">
                 <dt className="sr-only">Email</dt>
                 <dd className="flex justify-center lg:justify-start">
                   <a
@@ -191,10 +191,11 @@ const ContactPage: NextPage = () => {
             </dl>
             <p className="mt-6 text-base text-center text-neutral-500 lg:text-left">
               Looking for a price estimate?
-              <Link href="/request-a-quote" legacyBehavior>
-                <a className="ml-1 font-medium underline text-neutral-700 hover:text-red-600">
-                  Request a Quote
-                </a>
+              <Link
+                href="/request-a-quote"
+                className="ml-1 font-medium underline text-neutral-700 hover:text-red-600"
+              >
+                Request a Quote
               </Link>
             </p>
           </div>
@@ -215,7 +216,6 @@ const ContactPage: NextPage = () => {
                     value={contact.name}
                     disabled={isLoading}
                     onChange={(e) => handleInput(e)}
-                    className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300"
                   />
                   {errors.name && (
                     <span className="absolute pl-1 text-red-600 -bottom-6">
@@ -237,7 +237,6 @@ const ContactPage: NextPage = () => {
                     disabled={isLoading}
                     onChange={(e) => handleInput(e)}
                     autoComplete="email"
-                    className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300"
                   />
                   {errors.email && (
                     <span className="absolute pl-1 text-red-600 -bottom-6">
@@ -260,7 +259,6 @@ const ContactPage: NextPage = () => {
                     onChange={(e) => handlePhone(e)}
                     maxLength={17}
                     autoComplete="tel"
-                    className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300"
                     required
                   />
                   {errors.phone && (
@@ -281,7 +279,6 @@ const ContactPage: NextPage = () => {
                     disabled={isLoading}
                     onChange={(e) => handleInput(e)}
                     value={contact.message}
-                    className="block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300"
                   />
                   {errors.message && (
                     <span className="pl-1 text-red-600 md:absolute md:-bottom-6 ">

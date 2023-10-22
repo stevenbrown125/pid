@@ -17,7 +17,7 @@ const Header = (): JSX.Element => {
   const [searchOpen, setSearchOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 z-30 w-screen bg-gradient-to-t from-[#FFFFFF] via-[#FFFFFF] to-[#F7E8A4]">
+    <header className="fixed top-0 z-30 w-screen bg-gradient-to-t from-[#FFFFFF] via-[#FFFFFF] to-red-50">
       {/* Mobile menu */}
       <MobileNavigation
         mobileMenuOpen={mobileMenuOpen}
@@ -30,7 +30,7 @@ const Header = (): JSX.Element => {
           href="tel:1-774-413-5281"
           className="items-center hidden pr-2 text-xs font-bold text-neutral-800 md:flex md:pr-5 justify-self-start"
         >
-          <FaPhoneAlt className="w-4 h-3 mr-1 " />
+          <FaPhoneAlt className="w-4 h-3 mr-1" />
           +1 (774) 413-5281
         </a>
         <div className="flex items-center justify-center col-start-2 md:col-start-auto">
@@ -60,7 +60,7 @@ const Header = (): JSX.Element => {
             <Link href="/" className="px-4 mr-4">
               <span className="sr-only">PID Analyzers</span>
               <Image
-                className="flex-shrink-0 mx-2 w-auto h-auto"
+                className="flex-shrink-0 mx-2"
                 src="/images/pid-logo.png"
                 alt="PID Analyzers"
                 height={227}
@@ -76,7 +76,7 @@ const Header = (): JSX.Element => {
                 <Link
                   key={`nav-${item.name}`}
                   href={item.href}
-                  className="font-base text-md text-neutral-700 xl:text-xl hover:text-red-600"
+                  className="font-semibold text-md text-neutral-700 xl:text-xl hover:text-red-600"
                 >
                   {item.name}
                 </Link>
@@ -85,7 +85,7 @@ const Header = (): JSX.Element => {
             <div className="pt-2 pl-8 lg:pl-10 shrink-0">
               <Link
                 href="/request-a-quote"
-                className="font-base text-red-600 text-md hover:text-red-800 xl:text-xl"
+                className="font-semibold text-red-600 text-md hover:text-red-800 xl:text-xl"
               >
                 Request a Quote
               </Link>
