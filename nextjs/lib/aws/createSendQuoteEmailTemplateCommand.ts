@@ -1,5 +1,5 @@
 import { SendTemplatedEmailCommand } from "@aws-sdk/client-ses";
-import IQuote from "../../types/IQuote";
+import IQuote from "../types/IQuote";
 
 const toAddress = "sales@hnu.com";
 const fromAddress = "sales@hnu.com";

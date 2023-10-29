@@ -6,7 +6,7 @@ import Breadcrumbs from "../../../components/Breadcrumbs";
 import CTA from "../../../components/CTA";
 import Layout from "../../../components/Layout";
 import { allGasQuery } from "../../../lib/sanity/allGasQuery";
-import { IGas } from "../../../types/IGas";
+import { IGas } from "../../../lib/types/IGas";
 
 export async function getStaticProps() {
   const gases = await client.fetch(allGasQuery);

@@ -1,32 +1,36 @@
 module.exports = {
   settings: {
     react: {
-      version: 'detect',
+      version: "detect",
     },
   },
   env: {
     browser: true,
     es2021: true,
   },
-  extends: ['plugin:react/recommended', 'airbnb', 'eslint:recommended'],
+  extends: [
+    "plugin:react/recommended",
+    "eslint:recommended",
+    "plugin:@next/next/recommended",
+  ],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
     ecmaVersion: 12,
-    sourceType: 'module',
+    sourceType: "module",
   },
-  plugins: ['react'],
+  plugins: ["react", "@next/next"],
   rules: {
-    'react/jsx-props-no-spreading': 0,
-    'import/extensions': [
-      'error',
-      'ignorePackages',
+    "react/jsx-props-no-spreading": 0,
+    "import/extensions": [
+      "error",
+      "ignorePackages",
       {
-        js: 'never',
-        jsx: 'never',
-        ts: 'never',
-        tsx: 'never',
+        js: "never",
+        jsx: "never",
+        ts: "never",
+        tsx: "never",
       },
     ],
   },

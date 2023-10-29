@@ -1,8 +1,8 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import IProduct from '../../types/IProduct';
-import client from '../../client';
-import groq from 'groq';
-import { toPlainText } from '@portabletext/react';
+import { NextApiRequest, NextApiResponse } from "next";
+import IProduct from "../../lib/types/IProduct";
+import client from "../../client";
+import groq from "groq";
+import { toPlainText } from "@portabletext/react";
 
 const allProductQuery = groq`
 *[_type=="product"]{
@@ -25,7 +25,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   let products = await getProducts();
   const query =
-    req.body.query === undefined ? '' : req.body.query.toString().toLowerCase();
+    req.body.query === undefined ? "" : req.body.query.toString().toLowerCase();
   let results = [];
   if (query.length > 3) {
     results = products.filter((product: IProduct) => {
@@ -71,6 +71,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
+  res.setHeader("Content-Type", "application/json");
   res.end(JSON.stringify({ results }));
 };

@@ -11,6 +11,27 @@
     textarea {
       @apply block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300;
     }
+    input[type="text"]:disabled,
+    select:disabled {
+      @apply text-neutral-500;
+    }
+  }
+  fieldset {
+    div {
+      @apply relative block w-full my-1;
+    }
+    legend {
+      @apply mb-2 font-semibold tracking-wide;
+    }
+    label {
+      @apply flex items-center;
+    }
+    svg {
+      @apply w-5 mx-1;
+    }
+    > span {
+      @apply absolute pl-1 text-red-600 -bottom-6;
+    }
   }
 }
 
@@ -22,7 +43,7 @@
 /* Utility styles */
 @layer utilities {
   /* Define utility classes here */
-  .custom-button {
-    @apply px-4 py-2 text-white bg-blue-500 rounded-md;
+  .customField {
+    @apply block w-full px-4 py-3 mt-2 rounded-md shadow-sm focus:ring-red-600 focus:border-white border-neutral-300;
   }
 }

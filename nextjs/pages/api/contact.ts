@@ -4,8 +4,8 @@ import sanitizeHtml from "sanitize-html";
 import { randomUUID } from "crypto";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 import isEmail from "validator/lib/isEmail";
-import IContact from "../../types/IContact";
-import { initialContactState } from "../../lib/helpers/contactReducer";
+import IContact from "../../lib/types/IContact";
+import initialContactState from "../../lib/initialState/contact";
 import { createSendContactEmailTemplateCommand } from "../../lib/aws/createSendContactEmailTemplateCommand";
 
 export default async function contactHandler(

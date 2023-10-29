@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import IProduct from "../types/IProduct";
+import IProduct from "../lib/types/IProduct";
 
 const ProductGrid = ({ products }: { products: IProduct[] }) => {
   return (

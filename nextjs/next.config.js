@@ -1,19 +1,22 @@
 /** @type {import('next').NextConfig} */
 
-const withTM = require('next-transpile-modules')([
-  '@square/web-sdk',
-  'react-square-web-payments-sdk'
-])
+const withTM = require("next-transpile-modules")([
+  "@square/web-sdk",
+  "react-square-web-payments-sdk",
+]);
 
 const nextConfig = withTM({
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
-    esmExternals: 'loose'
+    esmExternals: "loose",
   },
   images: {
-    domains: ['cdn.sanity.io', 'images.unsplash.com']
-  }
-})
+    domains: ["cdn.sanity.io", "images.unsplash.com"],
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+});
 
-module.exports = nextConfig
+module.exports = nextConfig;

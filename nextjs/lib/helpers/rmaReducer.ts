@@ -1,37 +1,24 @@
-// import { IAction } from "../../types/IAction";
-// import IQuote from "../../types/IQuote";
+import { IAction } from "../types/IAction";
+import IRMA from "../types/IRMA";
+import initialRMAState from "../initialState/rma";
 
-// // export const initialQuoteState: IQuote = {
-// //   name: "",
-// //   company: "",
-// //   phone: undefined,
-// //   email: "",
-// //   applications: "",
-// //   comments: "",
-// //   product: null,
-// //   city: "",
-// //   state: "",
-// //   country: "",
-// //   hasConsented: false,
-// // };
-
-// export const QuoteReducer = (state: IQuote, action: IAction): IQuote => {
-//   switch (action.type) {
-//     case "HANDLE_INPUT":
-//       return {
-//         ...state,
-//         [action.field]: action.payload,
-//       };
-//     case "TOGGLE_CONSENT":
-//       return {
-//         ...state,
-//         hasConsented: !state.hasConsented,
-//       };
-//     case "RESET":
-//       return {
-//         ...initialQuoteState,
-//       };
-//     default:
-//       return state;
-//   }
-// };
+export const RMAReducer = (state: IRMA, action: IAction): IRMA => {
+  switch (action.type) {
+    case "HANDLE_INPUT":
+      return {
+        ...state,
+        [action.field]: action.payload,
+      };
+    case "TOGGLE_CONSENT":
+      return {
+        ...state,
+        hasConsented: !state.hasConsented,
+      };
+    case "RESET":
+      return {
+        ...initialRMAState,
+      };
+    default:
+      return state;
+  }
+};

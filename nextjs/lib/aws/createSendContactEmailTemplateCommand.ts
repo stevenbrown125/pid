@@ -1,5 +1,5 @@
 import { SendTemplatedEmailCommand } from "@aws-sdk/client-ses";
-import IContact from "../../types/IContact";
+import IContact from "../types/IContact";
 
 const toAddress = "sales@hnu.com";
 const fromAddress = "sales@hnu.com";

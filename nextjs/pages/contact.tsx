@@ -4,18 +4,16 @@ import { useReducer, useState } from "react";
 import { FaEnvelope, FaPhone, FaUser } from "react-icons/fa";
 import PhoneInput, { formatPhoneNumber } from "react-phone-number-input/input";
 import Layout from "../components/Layout";
-import {
-  ContactReducer,
-  initialContactState,
-} from "../lib/helpers/contactReducer";
-import { IContactError } from "../types/IContact";
+import { ContactReducer } from "../lib/helpers/contactReducer";
+import { IContactError } from "../lib/types/IContact";
 import { E164Number } from "libphonenumber-js/types";
-import { ActionKind } from "../types/IAction";
+import { ActionKind } from "../lib/types/IAction";
 import { Switch } from "@headlessui/react";
 import { validateContact } from "../lib/helpers/validator";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import Modal from "../components/Modal";
 import Seo from "../components/SEO";
+import initialContactState from "../lib/initialState/contact";
 
 const ContactPage: NextPage = () => {
   // Initialize Captcha

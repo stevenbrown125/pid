@@ -9,25 +9,26 @@ import {
   FaUser,
 } from "react-icons/fa";
 import { Listbox, Switch, Transition } from "@headlessui/react";
-import CountryField from "../components/quote/CountryField";
-import RegionField from "../components/quote/RegionField";
+import CountryField from "../components/form/CountryField";
+import RegionField from "../components/form/RegionField";
 import Link from "next/link";
 import client from "../client";
 import { allProductQuery } from "../lib/sanity/allProductQuery";
-import { initialQuoteState, QuoteReducer } from "../lib/helpers/quoteReducer";
-import { IQuoteErrors } from "../types/IQuote";
+import { QuoteReducer } from "../lib/helpers/quoteReducer";
+import { IQuoteErrors } from "../lib/types/IQuote";
 import { NextPage } from "next";
 import Layout from "../components/Layout";
-import IProduct from "../types/IProduct";
+import IProduct from "../lib/types/IProduct";
 import validateQuote from "../lib/helpers/validator";
 import PhoneInput from "react-phone-number-input/input";
 import { formatPhoneNumber } from "react-phone-number-input";
 import { E164Number } from "libphonenumber-js/types";
-import { ActionKind } from "../types/IAction";
+import { ActionKind } from "../lib/types/IAction";
 import Modal from "../components/Modal";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { useRouter } from "next/router";
 import Seo from "../components/SEO";
+import initialQuoteState from "../lib/initialState/quote";
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");

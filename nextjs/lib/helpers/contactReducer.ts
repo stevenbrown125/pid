@@ -1,18 +1,9 @@
-import { IAction } from "../../types/IAction";
-import IContact from "../../types/IContact";
+import { IAction } from "../types/IAction";
+import IContact from "../types/IContact";
+import initialContactState from "../initialState/contact";
 
-/* Exports */
-
-export const initialContactState : IContact = {
-  name: '',
-  phone: '',
-  email: '',
-  message: '',
-  hasConsented: false,
-}
-
-export const ContactReducer = (state: IContact, action: IAction) : IContact => {
-  switch(action.type) {
+export const ContactReducer = (state: IContact, action: IAction): IContact => {
+  switch (action.type) {
     case "HANDLE_INPUT":
       return {
         ...state,
@@ -22,12 +13,12 @@ export const ContactReducer = (state: IContact, action: IAction) : IContact => {
       return {
         ...state,
         hasConsented: !state.hasConsented,
-      }
+      };
     case "RESET":
       return {
-        ...initialContactState
-      }
-    default: 
-      return state
+        ...initialContactState,
+      };
+    default:
+      return state;
   }
-}
+};
