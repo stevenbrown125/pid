@@ -1,8 +1,9 @@
-import { Fragment } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { FaCheck } from 'react-icons/fa'
-import { IoAlert } from 'react-icons/io5'
+import { Fragment } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { FaCheck } from "react-icons/fa";
+import { IoAlert } from "react-icons/io5";
 
+//! DEPRECATED
 const Modal = ({ open, setOpen, message, success }: any): JSX.Element => {
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -87,7 +88,7 @@ const Modal = ({ open, setOpen, message, success }: any): JSX.Element => {
         </div>
       </Dialog>
     </Transition.Root>
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;

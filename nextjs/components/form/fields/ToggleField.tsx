@@ -20,8 +20,8 @@ const ToggleField: React.FC<ToggleSwitchProps> = ({
   activeColor = "bg-red-600",
 }) => {
   return (
-    <div className="relative flex items-center justify-start font-medium text-gray-700 ">
-      <p className="order-2 pl-2 text-sm font-normal text-gray-500">
+    <div className="relative flex items-center justify-start font-medium text-neutral-700 ">
+      <p className="order-2 pl-2 text-sm font-normal text-neutral-500">
         {description}
       </p>
       <div className="flex items-center h-5 ml-3 w-min">
@@ -32,7 +32,7 @@ const ToggleField: React.FC<ToggleSwitchProps> = ({
           checked={isChecked}
           onChange={(e: boolean) => onToggle(e)}
           className={`${
-            isChecked ? activeColor : "bg-gray-200"
+            isChecked ? activeColor : "bg-neutral-200"
           } relative inline-flex h-6 w-11 items-center rounded-full`}
         >
           <label htmlFor={id} className="sr-only">

@@ -1,6 +1,8 @@
-import ToggleField from "./ToggleField";
+import ToggleField from "./fields/ToggleField";
 import IRMA, { IRMAErrors } from "../../lib/types/IRMA";
 import { ActionKind } from "../../lib/types/IAction";
+import TextAreaField from "./fields/TextAreaField";
+import InputField from "./fields/InputField";
 
 interface ReturnAuthorizationFieldsetProps {
   rma: IRMA;
@@ -25,7 +27,7 @@ const ReturnAuthorizationFieldset: React.FC<
   };
   return (
     <fieldset className="grid items-center grid-cols-2 col-span-2 ">
-      <legend>Return Authorization</legend>
+      <legend>Equipment Details</legend>
 
       <ToggleField
         isChecked={rma.ownEquipment}
@@ -34,20 +36,15 @@ const ReturnAuthorizationFieldset: React.FC<
         name="ownEquipment"
         description="Do you own this equipment?"
       />
-
-      <div>
-        <input
-          type="text"
-          name="whoOwnsEquipment"
-          placeholder="If no, who does this equipment belong to?"
-          value={rma.whoOwnsEquipment || ""}
-          onChange={handleInput}
-          disabled={!rma.ownEquipment}
-        />
-        {errors.ownEquipment && (
-          <span className="text-red-600">{errors.whoOwnsEquipment}</span>
-        )}
-      </div>
+      <InputField
+        id="whoOwnsEquipment"
+        label="If no, who does this equipment belong to?"
+        placeholder=""
+        value={rma.whoOwnsEquipment || ""}
+        onChange={handleInput}
+        disabled={rma.ownEquipment}
+        errors={errors.ownEquipment}
+      />
 
       <ToggleField
         isChecked={rma.communicatedWithUs}
@@ -59,17 +56,47 @@ const ReturnAuthorizationFieldset: React.FC<
         description="Have you communicated this return with us?"
       />
 
-      <input
-        type="text"
-        name="whoWorkingWith"
-        placeholder="If yes, who are you working with at PID?"
-        value={rma.whoWorkingWith || ""}
+      <InputField
+        id="whoWorkingWith"
+        label="If yes, who are you working with at PID?"
+        placeholder=""
+        value={rma.whoOwnsEquipment || ""}
         onChange={handleInput}
         disabled={!rma.communicatedWithUs}
+        errors={errors.communicatedWithUs}
       />
-      {errors.communicatedWithUs && (
-        <span className="text-red-600">{errors.communicatedWithUs}</span>
-      )}
+
+      <div className="grid grid-cols-1 col-span-2 gap-y-2">
+        <TextAreaField
+          id="reasonForReturn"
+          label="Briefly explain the reason for return"
+          onChange={handleInput}
+          value={rma.reasonForReturn}
+          errors={errors.reasonForReturn}
+        />
+        <InputField
+          id="turnaroundTime"
+          placeholder="6-8 weeks"
+          value={rma.turnaroundTime}
+          onChange={handleInput}
+          errors={errors.turnaroundTime}
+          label={<>Please indicate how fast a turnaround you need.</>}
+        />
+        <TextAreaField
+          id="holdingAccessories"
+          label="Please let us know if you are holding back any accessories ie) battery charger, etc."
+          onChange={handleInput}
+          value={rma.holdingAccessories}
+          errors={errors.holdingAccessories}
+        />
+        <TextAreaField
+          id="otherComments"
+          label="Is there anything else that you'd like us to know about this equipment?"
+          onChange={handleInput}
+          value={rma.otherComments}
+          errors={errors.otherComments}
+        />
+      </div>
     </fieldset>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { RegionDropdown } from "react-country-region-selector";
 import { GrMapLocation } from "react-icons/gr";
-import { ActionKind } from "../../lib/types/IAction";
+import { ActionKind } from "../../../lib/types/IAction";
 
 export default function RegionField({ quote, errors, setQuote }: any) {
   const [selectRegion, setSelectedRegion] = useState(quote.state);

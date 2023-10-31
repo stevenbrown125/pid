@@ -9,8 +9,8 @@ import {
   FaUser,
 } from "react-icons/fa";
 import { Listbox, Switch, Transition } from "@headlessui/react";
-import CountryField from "../components/form/CountryField";
-import RegionField from "../components/form/RegionField";
+import CountryField from "../components/form/fields/CountryField";
+import RegionField from "../components/form/fields/RegionField";
 import Link from "next/link";
 import client from "../client";
 import { allProductQuery } from "../lib/sanity/allProductQuery";
@@ -283,7 +283,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
             />
           </label>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 md:col-span-2 gap-x-5 ">
+          <div className="grid grid-cols-1 md:grid-cols-3 md:col-span-2 gap-x-5">
             <CountryField
               quote={quote}
               setQuote={setQuote}

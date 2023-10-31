@@ -1,11 +1,9 @@
-import { useReducer, useState } from "react";
-import { FaBuilding, FaEnvelope, FaUser } from "react-icons/fa";
+import { useContext, useReducer, useState } from "react";
 import { NextPage } from "next";
 import Layout from "../../components/Layout";
 import { validateRMA } from "../../lib/helpers/validator";
 import { formatPhoneNumber } from "react-phone-number-input";
 import { E164Number } from "libphonenumber-js/types";
-import Modal from "../../components/Modal";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import Seo from "../../components/SEO";
 import initialRMAState from "../../lib/initialState/rma";
@@ -15,24 +13,23 @@ import AddressFieldset from "../../components/form/AddressFieldset";
 import { IAddress } from "../../lib/types/common";
 import PrivacyCheckbox from "../../components/form/PrivacyCheckbox";
 import { ActionKind } from "../../lib/types/IAction";
-import PhoneField from "../../components/form/PhoneField";
-import ToggleField from "../../components/form/ToggleField";
+import ToggleField from "../../components/form/fields/ToggleField";
 import CustomerFieldset from "../../components/form/CustomerFieldset";
 import ReturnAuthorizationFieldset from "../../components/form/ReturnAuthorizationFieldset";
+import HoneyPotField from "../../components/form/fields/HoneypotField";
+import { ModalContext } from "../../providers/ModalProvider";
+import SuccessModal from "../../components/modal/SuccessModal";
+import ErrorModal from "../../components/modal/ErrorModal";
 
 const RMAPage: NextPage = () => {
   const { executeRecaptcha } = useGoogleReCaptcha();
+  const { showModal } = useContext(ModalContext);
 
   /* Handle the RMA State */
   const [rma, setRMA] = useReducer(RMAReducer, initialRMAState);
   const [isSameAddress, setIsSameAddress] = useState(false);
-
   const [errors, setErrors] = useState({} as IRMAErrors);
   const [isLoading, setIsLoading] = useState(false);
-
-  const [open, setOpen] = useState(false); // Modal State
-  const [message, setMessage] = useState("");
-  const [success, setSuccess] = useState(false);
 
   const handleBillingAddressChange = (updatedAddress: IAddress) => {
     setRMA({
@@ -67,23 +64,27 @@ const RMAPage: NextPage = () => {
     const data = await res.json();
 
     if (data.$metadata.httpStatusCode === 200) {
-      setMessage(
-        "Your quotation request sent successfully. Our team will get back to you within 1 business day."
+      showModal(
+        <SuccessModal
+          message={
+            "Your quotation request sent successfully. Our team will get back to you within 1 business day."
+          }
+        />
       );
-      setSuccess(true);
-      setOpen(true);
       setRMA({ type: ActionKind.Reset });
     } else {
-      setMessage(
-        "Your quotation request failed to send due to a server error. Please email us at support@hnu.com with your Quotation Request."
+      showModal(
+        <ErrorModal
+          message={
+            "Your quotation request failed to send due to a server error. Please email us at support@hnu.com with your Quotation Request."
+          }
+        />
       );
-      setSuccess(false);
-      setOpen(true);
     }
     setIsLoading(false);
     return data;
   };
-  // Handlers
+
   const handleInput = (e: React.SyntheticEvent) => {
     const target = e.target as typeof e.target & {
       name: string;
@@ -105,7 +106,6 @@ const RMAPage: NextPage = () => {
     });
   };
 
-  /* Handle Submit */
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     console.log(rma);
@@ -157,18 +157,12 @@ const RMAPage: NextPage = () => {
         title="Return Authorization Form"
         description="Interested in purchasing one of our products? Please fill in the details below so that we can get in contact with you."
       />
-      <Modal
-        open={open}
-        setOpen={setOpen}
-        message={message}
-        success={success}
-      />
+
       <section className="relative px-4 pt-6 pb-12 mx-auto sm:px-12 lg:px-16 lg:max-w-7xl">
         <form
           onSubmit={handleSubmit}
           className="grid grid-cols-1 md:grid-cols-2 lg:gap-x-12 lg:gap-y-8 gap-x-4 gap-y-4"
         >
-          {/* Contact Information */}
           <div className="text-base md:col-span-2">
             <h2 className="font-semibold leading-6 tracking-wide text-red-600 uppercase">
               PID Analyzers
@@ -178,13 +172,13 @@ const RMAPage: NextPage = () => {
             </h3>
           </div>
 
+          {/* Fieldsets */}
           <CustomerFieldset
             rma={rma}
             handleInput={handleInput}
             handlePhone={handlePhone}
             errors={errors}
           />
-
           <AddressFieldset
             title="Billing Address"
             address={rma.billingAddress}
@@ -213,12 +207,7 @@ const RMAPage: NextPage = () => {
             errors={errors}
           />
 
-          <div className="hidden">
-            <label htmlFor="field">
-              Don&apos;t fill this out if you&apos;re human:
-              <input name="field" />
-            </label>
-          </div>
+          <HoneyPotField />
 
           <div className=" md:col-span-2">
             <PrivacyCheckbox

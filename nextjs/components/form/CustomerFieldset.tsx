@@ -1,5 +1,5 @@
 import { FaUser, FaEnvelope, FaBuilding } from "react-icons/fa";
-import PhoneField from "./PhoneField";
+import PhoneField from "./fields/PhoneField";
 import { E164Number } from "libphonenumber-js/types";
 
 interface CustomerFieldsetProps {
