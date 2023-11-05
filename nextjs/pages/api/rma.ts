@@ -1,4 +1,3 @@
-//TODO: Check Recaptcha
 import { NextApiRequest, NextApiResponse } from "next";
 import { createSendQuoteEmailTemplateCommand } from "../../lib/aws/createSendQuoteEmailTemplateCommand";
 import { sesClient } from "../../lib/aws/sesClient";
@@ -17,7 +16,7 @@ export default async function quoteHandler(
   if (!req.body.hasConsented) {
     return res
       .status(500)
-      .send({ error: "User has not consented to our Privacy Policy" });
+      .send({ error: "User has not consented to our Privacy Policy!" });
   }
 
   /* Sanitize Input */
@@ -40,6 +39,7 @@ export default async function quoteHandler(
   } else {
     return res.status(500).send({ error: "Phone number required" });
   }
+
   //TODO: Check CAPTCHA
 
   /* Create a Ref Number */
@@ -51,9 +51,11 @@ export default async function quoteHandler(
   sanitizedQuote = { ...sanitizedQuote, refId };
 
   console.log(sanitizedQuote);
+
   /* Create SES Command */
   const sendEmailCommand = createSendQuoteEmailTemplateCommand(sanitizedQuote);
   console.log(sendEmailCommand);
+
   /* Send Email and return response */
   try {
     const response = await sesClient.send(sendEmailCommand);

@@ -9,17 +9,18 @@ import Seo from "../../components/SEO";
 import initialRMAState from "../../lib/initialState/rma";
 import { RMAReducer } from "../../lib/helpers/rmaReducer";
 import { IRMAErrors } from "../../lib/types/IRMA";
-import AddressFieldset from "../../components/form/AddressFieldset";
 import { IAddress } from "../../lib/types/common";
-import PrivacyCheckbox from "../../components/form/PrivacyCheckbox";
 import { ActionKind } from "../../lib/types/IAction";
-import ToggleField from "../../components/form/fields/ToggleField";
-import CustomerFieldset from "../../components/form/CustomerFieldset";
-import ReturnAuthorizationFieldset from "../../components/form/ReturnAuthorizationFieldset";
-import HoneyPotField from "../../components/form/fields/HoneypotField";
 import { ModalContext } from "../../providers/ModalProvider";
 import SuccessModal from "../../components/modal/SuccessModal";
 import ErrorModal from "../../components/modal/ErrorModal";
+import {
+  AddressFieldset,
+  CustomerFieldset,
+  PrivacyCheckbox,
+  ReturnAuthorizationFieldset,
+} from "../../components/form";
+import { HoneypotField, ToggleField } from "../../components/form/fields";
 
 const RMAPage: NextPage = () => {
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -47,7 +48,6 @@ const RMAPage: NextPage = () => {
     });
   };
 
-  // Submit to API
   const submitRMAForm = async (gReCaptchaToken: string) => {
     const res = await fetch("/api/rma", {
       method: "POST",
@@ -174,7 +174,7 @@ const RMAPage: NextPage = () => {
 
           {/* Fieldsets */}
           <CustomerFieldset
-            rma={rma}
+            form={rma}
             handleInput={handleInput}
             handlePhone={handlePhone}
             errors={errors}
@@ -207,7 +207,7 @@ const RMAPage: NextPage = () => {
             errors={errors}
           />
 
-          <HoneyPotField />
+          <HoneypotField />
 
           <div className=" md:col-span-2">
             <PrivacyCheckbox
