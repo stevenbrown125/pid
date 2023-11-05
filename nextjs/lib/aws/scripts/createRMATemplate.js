@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+// Load the AWS SDK for Node.js
+var AWS = require("aws-sdk");
+// Set the region
+AWS.config.update({ region: "us-east-1" });
+
+// Create updateTemplate parameters
+var params = {
+  Template: {
+    TemplateName: "HNU_RMA" /* required */,
+    HtmlPart: `
+    <!DOCTYPE html>
 <html
   lang="en"
   xmlns="http://www.w3.org/1999/xhtml"
@@ -68,11 +78,6 @@
         <td style="padding: 2px">{{rma.company}}</td>
       </tr>
       <tr>
-        <td style="padding: 2px">Product</td>
-        <td style="padding: 2px">{{rma.product.title}}</td>
-      </tr>
-
-      <tr>
         <td style="padding: 2px">Billing Address</td>
         <td style="padding: 2px">
           {{rma.billingAddress.street}}<br />{{rma.billingAddress.city}},
@@ -93,7 +98,7 @@
       <tr>
         <td style="padding: 2px">Owns Product</td>
         <td style="padding: 2px">
-          {{rma.ownsEquipment}} | {{rma.whoOwnsEquipment}}
+          {{rma.ownEquipment}} | {{rma.whoOwnsEquipment}}
         </td>
       </tr>
       <tr>
@@ -105,7 +110,7 @@
       <tr>
         <td style="padding: 2px">Reason for Return</td>
         <td style="padding: 2px">
-          {{rma.reasonForReturn}} | {{rma.reasonForReturn}}
+          {{rma.reasonForReturn}} 
         </td>
       </tr>
       <tr>
@@ -119,3 +124,23 @@
     </table>
   </body>
 </html>
+
+    `,
+    SubjectPart: "HNU New RMA",
+    TextPart: `HNU RMA Request`,
+  },
+};
+
+// Create the promise and SES service object
+var templatePromise = new AWS.SES({ apiVersion: "2010-12-01" })
+  .updateTemplate(params)
+  .promise();
+
+// Handle promise's fulfilled/rejected states
+templatePromise
+  .then(function (data) {
+    console.log("Template Updated");
+  })
+  .catch(function (err) {
+    console.error(err, err.stack);
+  });

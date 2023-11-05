@@ -56,29 +56,34 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const submitQuoteForm = async (gReCaptchaToken: string) => {
-    const res = await fetch("/api/routes/quote", {
-      method: "POST",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...quote,
-        gRecaptchaToken: gReCaptchaToken,
-      }),
-    });
+    try {
+      const res = await fetch("/api/routes/quote", {
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...quote,
+          gRecaptchaToken: gReCaptchaToken,
+        }),
+      });
 
-    const data = await res.json();
-    if (data.$metadata.httpStatusCode === 200) {
-      showModal(
-        <SuccessModal
-          message={
-            "Your quotation request sent successfully. Our team will get back to you within 1 business day."
-          }
-        />
-      );
-      setQuote({ type: ActionKind.Reset });
-    } else {
+      const data = await res.json();
+      if (data.$metadata.httpStatusCode === 200) {
+        showModal(
+          <SuccessModal
+            message={
+              "Your quotation request sent successfully. Our team will get back to you within 1 business day."
+            }
+          />
+        );
+        setQuote({ type: ActionKind.Reset });
+
+        setIsLoading(false);
+        return data;
+      }
+    } catch (e) {
       showModal(
         <ErrorModal
           message={
@@ -86,9 +91,9 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
           }
         />
       );
+
+      setIsLoading(false);
     }
-    setIsLoading(false);
-    return data;
   };
 
   // Handlers

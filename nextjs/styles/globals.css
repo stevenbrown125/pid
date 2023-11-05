@@ -30,7 +30,8 @@
       svg {
         @apply w-5 mx-1;
       }
-      > span {
+      > span,
+      div > span {
         @apply absolute pl-1 text-red-600 -bottom-6;
       }
     }
@@ -47,10 +48,13 @@
     @apply flex items-center justify-center w-12 h-12 mx-auto rounded-full;
   }
   .dialog-content {
-    @apply mt-2 text-center text-gray-900 md:mt-4;
+    @apply p-1 mt-2 text-center text-gray-700;
+  }
+  .dialog-content h2 {
+    @apply font-semibold;
   }
   .dialog-content p {
-    @apply mt-2 text-sm text-gray-700;
+    @apply mt-2 text-sm leading-6 text-gray-600;
   }
 }
 

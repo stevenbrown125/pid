@@ -2,9 +2,9 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { sanitizeInput } from "../utils/sanitize";
 import { validateInput } from "../utils/validate";
 import { verifyCaptcha } from "../utils/verifyCaptcha";
-import { handleQuote } from "../controllers/quoteController";
+import { handleRMA } from "../controllers/rmaController";
 
-export default async function quoteRoute(
+export default async function rmaRoute(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
@@ -30,7 +30,8 @@ export default async function quoteRoute(
       return res.status(400).json({ error: validationResult.error });
     }
 
-    return handleQuote(req, res);
+    console.log("valid", req);
+    return handleRMA(req, res);
   } else {
     // If not a POST request, return a 405 Method Not Allowed error
     res.setHeader("Allow", ["POST"]);

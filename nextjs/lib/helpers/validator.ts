@@ -52,9 +52,6 @@ export function validateRMA(rma: IRMA) {
   if (!isEmail(rma.email)) {
     errors.email = "Email address is invalid";
   }
-  if (!rma.product) {
-    errors.product = "Product is required";
-  }
   if (!rma.hasConsented) {
     errors.hasConsented = "Privacy Policy consent is required.";
   }

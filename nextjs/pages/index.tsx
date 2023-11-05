@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import Layout from "../components/Layout";
-import LogoCloud from "../components/LogoCloud";
 import client from "../client";
 import { allProductQuery } from "../lib/sanity/allProductQuery";
 import IndustryGrid from "../components/IndustryGrid";
@@ -94,7 +93,6 @@ const Home: NextPage = (props: any) => {
           Photo Credit @Hoffmeester-CanStockPhoto
         </p>
       </div>
-      <LogoCloud />
       <SocialCloud />
       <IndustryGrid />
       <LastestNews posts={props.posts} />

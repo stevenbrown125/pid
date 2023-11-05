@@ -48,8 +48,13 @@ const RMAPage: NextPage = () => {
     });
   };
 
+  const handleIsSameAddressToggle = (value: boolean) => {
+    setIsSameAddress(value);
+    if (value) handleShippingAddressChange(rma.billingAddress);
+  };
+
   const submitRMAForm = async (gReCaptchaToken: string) => {
-    const res = await fetch("/api/rma", {
+    const res = await fetch("/api/routes/rma", {
       method: "POST",
       headers: {
         Accept: "application/json, text/plain, */*",
@@ -67,16 +72,16 @@ const RMAPage: NextPage = () => {
       showModal(
         <SuccessModal
           message={
-            "Your quotation request sent successfully. Our team will get back to you within 1 business day."
+            "Your Return Authorization form was sent to your email. Please include this number on your shipping label and when inquiring about this return. Further instructions are sent with the email."
           }
         />
       );
-      setRMA({ type: ActionKind.Reset });
+      // setRMA({ type: ActionKind.Reset });
     } else {
       showModal(
         <ErrorModal
           message={
-            "Your quotation request failed to send due to a server error. Please email us at support@hnu.com with your Quotation Request."
+            "Your Return Authoriztion request failed to send due to a server error. Please email us at support@hnu.com with your RMA Request."
           }
         />
       );
@@ -115,6 +120,7 @@ const RMAPage: NextPage = () => {
       /* Validate Client Side */
       const submissionErrors = validateRMA(rma);
       setErrors(submissionErrors);
+      console.log(submissionErrors);
       if (Object.keys(submissionErrors).length > 0) throw "Validation Error";
 
       /* Fixes E164Number toString issue */
@@ -187,7 +193,7 @@ const RMAPage: NextPage = () => {
           />
           <ToggleField
             isChecked={isSameAddress}
-            onToggle={setIsSameAddress}
+            onToggle={handleIsSameAddressToggle}
             id="sameAsBilling"
             name="sameAsBilling"
             description="Shipping address is same as billing"
