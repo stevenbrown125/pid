@@ -6,7 +6,9 @@ interface TextAreaProps {
   label: string;
   onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   value: string;
+  classes?: string;
   errors?: string | null | undefined;
+  required?: boolean;
 }
 
 const TextAreaField: FC<TextAreaProps> = ({
@@ -15,11 +17,21 @@ const TextAreaField: FC<TextAreaProps> = ({
   onChange,
   value,
   errors,
+  classes = "",
   rows = 4,
+  required = false,
 }) => (
-  <div>
+  <div className={classes}>
     <label htmlFor={id}>{label}</label>
-    <textarea rows={rows} name={id} id={id} onChange={onChange} value={value} />
+    <textarea
+      rows={rows}
+      name={id}
+      id={id}
+      onChange={onChange}
+      value={value}
+      required={required}
+      maxLength={5000}
+    />
     {errors && <span>{errors}</span>}
   </div>
 );

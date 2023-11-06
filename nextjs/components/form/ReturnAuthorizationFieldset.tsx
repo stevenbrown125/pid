@@ -25,6 +25,16 @@ const ReturnAuthorizationFieldset: React.FC<
       payload: value,
     });
   };
+
+  const handleToggleResult = (key: string, value: boolean) => {
+    if (!value)
+      setRMA({
+        type: ActionKind.HandleInput,
+        field: key,
+        payload: "",
+      });
+  };
+
   return (
     <fieldset className="grid items-center grid-cols-2 col-span-2 ">
       <legend>Equipment Details</legend>
@@ -40,7 +50,8 @@ const ReturnAuthorizationFieldset: React.FC<
         id="whoOwnsEquipment"
         label="If no, who does this equipment belong to?"
         placeholder=""
-        value={rma.whoOwnsEquipment || ""}
+        required={!rma.ownEquipment}
+        value={!rma.ownEquipment ? rma.whoOwnsEquipment : ""}
         onChange={handleInput}
         disabled={rma.ownEquipment}
         errors={errors.ownEquipment}
@@ -48,9 +59,10 @@ const ReturnAuthorizationFieldset: React.FC<
 
       <ToggleField
         isChecked={rma.communicatedWithUs}
-        onToggle={(isChecked: boolean) =>
-          handleToggle("communicatedWithUs", isChecked)
-        }
+        onToggle={(isChecked: boolean) => {
+          handleToggle("communicatedWithUs", isChecked);
+          handleToggleResult("whoWorkingWith", isChecked);
+        }}
         id="communicatedWithUs"
         name="communicatedWithUs"
         description="Have you communicated this return with us?"
@@ -60,7 +72,8 @@ const ReturnAuthorizationFieldset: React.FC<
         id="whoWorkingWith"
         label="If yes, who are you working with at PID?"
         placeholder=""
-        value={rma.whoOwnsEquipment || ""}
+        required={rma.communicatedWithUs}
+        value={rma.communicatedWithUs ? rma.whoWorkingWith : ""}
         onChange={handleInput}
         disabled={!rma.communicatedWithUs}
         errors={errors.communicatedWithUs}
@@ -73,6 +86,7 @@ const ReturnAuthorizationFieldset: React.FC<
           onChange={handleInput}
           value={rma.reasonForReturn}
           errors={errors.reasonForReturn}
+          required={true}
         />
         <InputField
           id="turnaroundTime"
@@ -81,6 +95,7 @@ const ReturnAuthorizationFieldset: React.FC<
           onChange={handleInput}
           errors={errors.turnaroundTime}
           label={<>Please indicate how fast a turnaround you need.</>}
+          required={true}
         />
         <TextAreaField
           id="holdingAccessories"

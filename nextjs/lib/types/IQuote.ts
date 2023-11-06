@@ -1,10 +1,8 @@
 import IProduct from "./IProduct";
+import { BasicRequestBody, BasicRequestBodyErrors } from "./common";
 
-export default interface IQuote {
-  name: string;
+export default interface IQuote extends BasicRequestBody {
   company: string;
-  phone: string | undefined;
-  email: string;
   timetable: string;
   applications: string;
   comments: string;
@@ -12,15 +10,11 @@ export default interface IQuote {
   city: string;
   state: string;
   country: string;
-  hasConsented: boolean;
   refId?: string;
 }
 
-export interface IQuoteErrors {
-  name?: string | null;
+export interface IQuoteErrors extends BasicRequestBodyErrors {
   company?: string | null;
-  phone?: string | null;
-  email?: string | null;
   timetable?: string | null;
   applications?: string | null;
   comments?: string | null;
@@ -28,6 +22,5 @@ export interface IQuoteErrors {
   city?: string | null;
   state?: string | null;
   country?: string | null;
-  hasConsented?: string | null;
   extra?: string | null;
 }

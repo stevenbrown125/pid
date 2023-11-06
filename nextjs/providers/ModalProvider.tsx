@@ -35,7 +35,7 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
       {children}
       {isVisible && (
         <Transition.Root show={isVisible} as={Fragment}>
-          <Dialog onClose={hideModal}>
+          <Dialog as="div" className="relative z-30" onClose={hideModal}>
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -45,11 +45,11 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <div className="fixed inset-0 transition-opacity bg-opacity-75 bg-stone-500" />
+              <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" />
             </Transition.Child>
 
             <div className="fixed inset-0 z-10 overflow-y-auto">
-              <div className="flex items-center justify-center min-h-full p-4 sm:items-center sm:p-0">
+              <div className="flex items-center justify-center min-h-full p-4 text-center sm:items-center sm:p-0">
                 <Transition.Child
                   as={Fragment}
                   enter="ease-out duration-300"
@@ -59,15 +59,15 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
                   leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                   leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 >
-                  <Dialog.Panel className="dialog-panel">
+                  <Dialog.Panel className="relative px-4 pt-5 pb-4 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
                     {content}
                     <div className="mt-5 sm:mt-6">
                       <button
                         type="button"
-                        className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:text-sm"
+                        className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:text-sm"
                         onClick={hideModal}
                       >
-                        Close this modal
+                        Close this window
                       </button>
                     </div>
                   </Dialog.Panel>

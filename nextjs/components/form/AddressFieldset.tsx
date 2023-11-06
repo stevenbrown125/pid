@@ -1,8 +1,9 @@
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
-import { FaCity, FaGlobeAmericas } from "react-icons/fa";
+import { FaCity, FaGlobeAmericas, FaMailBulk } from "react-icons/fa";
 import { GrMapLocation } from "react-icons/gr";
 import { FaLocationDot } from "react-icons/fa6";
 import { IAddress, IAddressErrors } from "../../lib/types/common";
+import { InputField } from "./fields";
 
 interface Props {
   address: IAddress;
@@ -37,27 +38,28 @@ const AddressFieldset: React.FC<Props> = ({
 
   return (
     <fieldset
-      className={`grid grid-cols-1 md:grid-cols-3 col-span-2 gap-x-6 gap-y-2  ${
+      className={`grid grid-cols-1 md:grid-cols-4 col-span-2 gap-x-6 gap-y-6  ${
         hidden && "hidden"
       }`}
     >
       <legend>{title}</legend>
-      <div className="md:col-span-3">
-        <label htmlFor="street">
-          <FaLocationDot />
-          Street
-        </label>
-        <input
+      <div className="md:col-span-4">
+        <InputField
           id="street"
-          name="street"
-          type="text"
+          label={
+            <>
+              <FaLocationDot />
+              Street
+            </>
+          }
+          placeholder=""
           value={address.street}
           onChange={handleChange}
+          errors={errors?.street}
           disabled={disabled}
+          required={true}
         />
-        {errors?.street && <span>{errors?.street}</span>}
       </div>
-
       <div>
         <label htmlFor="country" className="flex items-center ">
           <FaGlobeAmericas />
@@ -87,21 +89,32 @@ const AddressFieldset: React.FC<Props> = ({
         />
         {errors?.state && <span>{errors?.state}</span>}
       </div>
-      <div>
-        <label htmlFor="city">
-          {" "}
-          <FaCity /> City
-        </label>
-        <input
-          id="city"
-          name="city"
-          type="text"
-          value={address.city}
-          onChange={handleChange}
-          disabled={disabled}
-        />
-        {errors?.city && <span>{errors?.city}</span>}
-      </div>
+      <InputField
+        id="city"
+        label={
+          <>
+            <FaCity /> City
+          </>
+        }
+        placeholder=""
+        value={address.city || ""}
+        onChange={handleChange}
+        errors={errors?.city}
+        required={true}
+      />
+      <InputField
+        id="zip"
+        label={
+          <>
+            <FaMailBulk /> Zip Code
+          </>
+        }
+        placeholder=""
+        value={address.zip}
+        onChange={handleChange}
+        errors={errors?.zip}
+        required={true}
+      />
     </fieldset>
   );
 };

@@ -5,9 +5,6 @@ export default interface IRMA {
   company: string;
   phone: string | undefined;
   email: string;
-  applications: string;
-  comments: string;
-  product: string;
   billingAddress: IAddress;
   shippingAddress: IAddress;
   hasConsented: boolean;
@@ -26,11 +23,8 @@ export interface IRMAErrors {
   company?: string | null | undefined;
   phone?: string | null | undefined;
   email?: string | null | undefined;
-  applications?: string | null | undefined;
-  comments?: string | null | undefined;
-  product?: string | null | undefined;
-  billingAddress?: IAddressErrors;
-  shippingAddress?: IAddressErrors;
+  billingAddress: IAddressErrors;
+  shippingAddress: IAddressErrors;
   hasConsented?: string | null | undefined;
   refId?: string | null | undefined;
   ownEquipment?: string | null | undefined;

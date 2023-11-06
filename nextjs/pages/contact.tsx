@@ -30,7 +30,7 @@ const ContactPage: NextPage = () => {
 
   // Submit to API
   const submitContactForm = async (gReCaptchaToken: string) => {
-    const res = await fetch("/api/contact", {
+    const res = await fetch("/api/routes/contact", {
       method: "POST",
       headers: {
         Accept: "application/json, text/plain, */*",

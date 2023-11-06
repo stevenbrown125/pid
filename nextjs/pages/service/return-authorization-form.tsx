@@ -9,17 +9,18 @@ import Seo from "../../components/SEO";
 import initialRMAState from "../../lib/initialState/rma";
 import { RMAReducer } from "../../lib/helpers/rmaReducer";
 import { IRMAErrors } from "../../lib/types/IRMA";
-import AddressFieldset from "../../components/form/AddressFieldset";
 import { IAddress } from "../../lib/types/common";
-import PrivacyCheckbox from "../../components/form/PrivacyCheckbox";
 import { ActionKind } from "../../lib/types/IAction";
-import ToggleField from "../../components/form/fields/ToggleField";
-import CustomerFieldset from "../../components/form/CustomerFieldset";
-import ReturnAuthorizationFieldset from "../../components/form/ReturnAuthorizationFieldset";
-import HoneyPotField from "../../components/form/fields/HoneypotField";
 import { ModalContext } from "../../providers/ModalProvider";
 import SuccessModal from "../../components/modal/SuccessModal";
 import ErrorModal from "../../components/modal/ErrorModal";
+import {
+  AddressFieldset,
+  CustomerFieldset,
+  PrivacyCheckbox,
+  ReturnAuthorizationFieldset,
+} from "../../components/form";
+import { HoneypotField, ToggleField } from "../../components/form/fields";
 
 const RMAPage: NextPage = () => {
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -37,6 +38,7 @@ const RMAPage: NextPage = () => {
       field: "billingAddress",
       payload: updatedAddress,
     });
+    if (isSameAddress) handleShippingAddressChange(updatedAddress);
   };
 
   const handleShippingAddressChange = (updatedAddress: IAddress) => {
@@ -47,42 +49,51 @@ const RMAPage: NextPage = () => {
     });
   };
 
-  // Submit to API
+  const handleIsSameAddressToggle = (value: boolean) => {
+    setIsSameAddress(value);
+    if (value) {
+      handleShippingAddressChange(rma.billingAddress);
+    }
+  };
+
   const submitRMAForm = async (gReCaptchaToken: string) => {
-    const res = await fetch("/api/rma", {
-      method: "POST",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...rma,
-        gRecaptchaToken: gReCaptchaToken,
-      }),
-    });
+    try {
+      const res = await fetch("/api/routes/rma", {
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...rma,
+          gRecaptchaToken: gReCaptchaToken,
+        }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (data.$metadata.httpStatusCode === 200) {
-      showModal(
-        <SuccessModal
-          message={
-            "Your quotation request sent successfully. Our team will get back to you within 1 business day."
-          }
-        />
-      );
-      setRMA({ type: ActionKind.Reset });
-    } else {
+      if (data.$metadata.httpStatusCode === 200) {
+        showModal(
+          <SuccessModal
+            message={
+              "Your Return Authorization form was sent to your email. Please include this number on your shipping label and when inquiring about this return. Further instructions are sent with the email."
+            }
+          />
+        );
+        // setRMA({ type: ActionKind.Reset });
+      }
+      return data;
+    } catch (e: any) {
+      console.log(e);
       showModal(
         <ErrorModal
           message={
-            "Your quotation request failed to send due to a server error. Please email us at support@hnu.com with your Quotation Request."
+            "Your Return Authoriztion request failed to send due to a server error. Please email us at support@hnu.com with your RMA Request."
           }
         />
       );
     }
     setIsLoading(false);
-    return data;
   };
 
   const handleInput = (e: React.SyntheticEvent) => {
@@ -115,7 +126,18 @@ const RMAPage: NextPage = () => {
       /* Validate Client Side */
       const submissionErrors = validateRMA(rma);
       setErrors(submissionErrors);
-      if (Object.keys(submissionErrors).length > 0) throw "Validation Error";
+
+      console.log(submissionErrors);
+      const hasErrors = Object.values(submissionErrors).some((errors) => {
+        // Check if the error object itself has keys, indicating errors
+        if (typeof errors === "object" && errors !== null) {
+          return Object.keys(errors).length > 0;
+        }
+        // If it's not an object, just check if it's truthy (indicating an error message is present)
+        return !!errors;
+      });
+
+      if (hasErrors) throw "Validation Error";
 
       /* Fixes E164Number toString issue */
       setRMA({
@@ -174,7 +196,7 @@ const RMAPage: NextPage = () => {
 
           {/* Fieldsets */}
           <CustomerFieldset
-            rma={rma}
+            form={rma}
             handleInput={handleInput}
             handlePhone={handlePhone}
             errors={errors}
@@ -187,7 +209,7 @@ const RMAPage: NextPage = () => {
           />
           <ToggleField
             isChecked={isSameAddress}
-            onToggle={setIsSameAddress}
+            onToggle={handleIsSameAddressToggle}
             id="sameAsBilling"
             name="sameAsBilling"
             description="Shipping address is same as billing"
@@ -207,7 +229,7 @@ const RMAPage: NextPage = () => {
             errors={errors}
           />
 
-          <HoneyPotField />
+          <HoneypotField />
 
           <div className=" md:col-span-2">
             <PrivacyCheckbox
@@ -219,7 +241,14 @@ const RMAPage: NextPage = () => {
               className="pl-2 my-6 g-recaptcha"
               data-sitekey="6LcMc2AfAAAAAGAm9zAtZW_dPuQFaHF7eqvVsOqV"
             />
-            {Object.keys(errors).length > 0 && (
+            {Object.values(errors).some((err) => {
+              // Check if the error object itself has keys, indicating errors
+              if (typeof err === "object" && err !== null) {
+                return Object.keys(err).length > 0;
+              }
+              // If it's not an object, just check if it's truthy (indicating an error message is present)
+              return !!err;
+            }) && (
               <span className="block w-full pb-4 pl-1 font-bold text-red-600 md:col-span-2">
                 There are errors in the form. Please correct any errors before
                 attempting to submit again.

@@ -3,7 +3,7 @@ import IQuote from "../types/IQuote";
 const initialQuoteState: IQuote = {
   name: "",
   company: "",
-  phone: undefined,
+  phone: "",
   email: "",
   timetable: new Date(new Date().setMonth(new Date().getMonth() + 1))
     .toISOString()

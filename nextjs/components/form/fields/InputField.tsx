@@ -28,6 +28,11 @@ const InputField: FC<InputProps> = ({
   <div>
     <label className={`${disabled && "disabled"}`} htmlFor={id}>
       {label}
+      {!required && (
+        <span className="absolute right-0 text-sm text-neutral-500">
+          Optional
+        </span>
+      )}
     </label>
     <input
       type={type}
