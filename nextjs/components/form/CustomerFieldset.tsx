@@ -17,7 +17,7 @@ const CustomerFieldset: React.FC<CustomerFieldsetProps> = ({
   errors,
 }) => {
   return (
-    <fieldset className="grid grid-cols-1 col-span-2 gap-x-6 gap-y-2 md:grid-cols-2">
+    <fieldset className="grid grid-cols-1 col-span-2 gap-x-6 gap-y-4 md:grid-cols-2">
       <legend>Customer Infomation</legend>
       <InputField
         id="name"

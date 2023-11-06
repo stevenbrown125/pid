@@ -32,7 +32,7 @@
       }
       > span,
       div > span {
-        @apply absolute pl-1 text-red-600 -bottom-6;
+        @apply absolute pl-1 font-medium text-red-600 -bottom-6;
       }
     }
   }

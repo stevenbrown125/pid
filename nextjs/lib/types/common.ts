@@ -3,6 +3,7 @@ export interface IAddress {
   city: string;
   state: string;
   country: string;
+  zip: string;
 }
 
 export interface IAddressErrors {
@@ -10,6 +11,7 @@ export interface IAddressErrors {
   city?: string | null;
   state?: string | null;
   country?: string | null;
+  zip?: string | null;
 }
 
 /* Api */

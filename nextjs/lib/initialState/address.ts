@@ -5,6 +5,7 @@ const initialAddressState: IAddress = {
   city: "",
   state: "",
   country: "",
+  zip: "",
 };
 
 export default initialAddressState;

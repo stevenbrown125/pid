@@ -38,6 +38,7 @@ const RMAPage: NextPage = () => {
       field: "billingAddress",
       payload: updatedAddress,
     });
+    if (isSameAddress) handleShippingAddressChange(updatedAddress);
   };
 
   const handleShippingAddressChange = (updatedAddress: IAddress) => {
@@ -50,34 +51,40 @@ const RMAPage: NextPage = () => {
 
   const handleIsSameAddressToggle = (value: boolean) => {
     setIsSameAddress(value);
-    if (value) handleShippingAddressChange(rma.billingAddress);
+    if (value) {
+      handleShippingAddressChange(rma.billingAddress);
+    }
   };
 
   const submitRMAForm = async (gReCaptchaToken: string) => {
-    const res = await fetch("/api/routes/rma", {
-      method: "POST",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...rma,
-        gRecaptchaToken: gReCaptchaToken,
-      }),
-    });
+    try {
+      const res = await fetch("/api/routes/rma", {
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...rma,
+          gRecaptchaToken: gReCaptchaToken,
+        }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (data.$metadata.httpStatusCode === 200) {
-      showModal(
-        <SuccessModal
-          message={
-            "Your Return Authorization form was sent to your email. Please include this number on your shipping label and when inquiring about this return. Further instructions are sent with the email."
-          }
-        />
-      );
-      // setRMA({ type: ActionKind.Reset });
-    } else {
+      if (data.$metadata.httpStatusCode === 200) {
+        showModal(
+          <SuccessModal
+            message={
+              "Your Return Authorization form was sent to your email. Please include this number on your shipping label and when inquiring about this return. Further instructions are sent with the email."
+            }
+          />
+        );
+        // setRMA({ type: ActionKind.Reset });
+      }
+      return data;
+    } catch (e: any) {
+      console.log(e);
       showModal(
         <ErrorModal
           message={
@@ -87,7 +94,6 @@ const RMAPage: NextPage = () => {
       );
     }
     setIsLoading(false);
-    return data;
   };
 
   const handleInput = (e: React.SyntheticEvent) => {
@@ -120,8 +126,18 @@ const RMAPage: NextPage = () => {
       /* Validate Client Side */
       const submissionErrors = validateRMA(rma);
       setErrors(submissionErrors);
+
       console.log(submissionErrors);
-      if (Object.keys(submissionErrors).length > 0) throw "Validation Error";
+      const hasErrors = Object.values(submissionErrors).some((errors) => {
+        // Check if the error object itself has keys, indicating errors
+        if (typeof errors === "object" && errors !== null) {
+          return Object.keys(errors).length > 0;
+        }
+        // If it's not an object, just check if it's truthy (indicating an error message is present)
+        return !!errors;
+      });
+
+      if (hasErrors) throw "Validation Error";
 
       /* Fixes E164Number toString issue */
       setRMA({
@@ -225,7 +241,14 @@ const RMAPage: NextPage = () => {
               className="pl-2 my-6 g-recaptcha"
               data-sitekey="6LcMc2AfAAAAAGAm9zAtZW_dPuQFaHF7eqvVsOqV"
             />
-            {Object.keys(errors).length > 0 && (
+            {Object.values(errors).some((err) => {
+              // Check if the error object itself has keys, indicating errors
+              if (typeof err === "object" && err !== null) {
+                return Object.keys(err).length > 0;
+              }
+              // If it's not an object, just check if it's truthy (indicating an error message is present)
+              return !!err;
+            }) && (
               <span className="block w-full pb-4 pl-1 font-bold text-red-600 md:col-span-2">
                 There are errors in the form. Please correct any errors before
                 attempting to submit again.

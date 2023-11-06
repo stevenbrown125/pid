@@ -23,8 +23,8 @@ export interface IRMAErrors {
   company?: string | null | undefined;
   phone?: string | null | undefined;
   email?: string | null | undefined;
-  billingAddress?: IAddressErrors;
-  shippingAddress?: IAddressErrors;
+  billingAddress: IAddressErrors;
+  shippingAddress: IAddressErrors;
   hasConsented?: string | null | undefined;
   refId?: string | null | undefined;
   ownEquipment?: string | null | undefined;

@@ -3,6 +3,7 @@ import isEmail from "validator/lib/isEmail";
 import IContact, { IContactError } from "../types/IContact";
 import IQuote, { IQuoteErrors } from "../types/IQuote";
 import IRMA, { IRMAErrors } from "../types/IRMA";
+import { IAddress, IAddressErrors } from "../types/common";
 
 export default function validateQuote(quote: IQuote) {
   const errors: IQuoteErrors = {};
@@ -40,8 +41,29 @@ export default function validateQuote(quote: IQuote) {
   return errors;
 }
 
+function validateAddress(address: IAddress, errors: IAddressErrors) {
+  const zipRegex = /^(?:[A-Z0-9]+([- ]?[A-Z0-9]+)*)?$/;
+  if (!address.country) {
+    errors.country = "Country required.";
+  }
+  if (!address.state) {
+    errors.state = "State required.";
+  }
+  if (!address.city) {
+    errors.city = "City required.";
+  }
+  if (!address.zip) {
+    errors.zip = "Zip Code required.";
+  } else if (!zipRegex.test(address.zip)) {
+    errors.zip = "Zip Code not valid.";
+  }
+}
+
 export function validateRMA(rma: IRMA) {
-  const errors: IRMAErrors = {};
+  const errors: IRMAErrors = {
+    billingAddress: {},
+    shippingAddress: {},
+  };
 
   if (!rma.name) {
     errors.name = "First name is required";
@@ -52,6 +74,8 @@ export function validateRMA(rma: IRMA) {
   if (!isEmail(rma.email)) {
     errors.email = "Email address is invalid";
   }
+  validateAddress(rma.billingAddress, errors.billingAddress);
+  validateAddress(rma.shippingAddress, errors.shippingAddress);
   if (!rma.hasConsented) {
     errors.hasConsented = "Privacy Policy consent is required.";
   }

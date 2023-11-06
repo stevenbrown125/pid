@@ -30,7 +30,6 @@ export default async function rmaRoute(
       return res.status(400).json({ error: validationResult.error });
     }
 
-    console.log("valid", req);
     return handleRMA(req, res);
   } else {
     // If not a POST request, return a 405 Method Not Allowed error

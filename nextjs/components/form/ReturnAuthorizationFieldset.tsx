@@ -50,7 +50,8 @@ const ReturnAuthorizationFieldset: React.FC<
         id="whoOwnsEquipment"
         label="If no, who does this equipment belong to?"
         placeholder=""
-        value={rma.ownEquipment ? rma.whoOwnsEquipment : ""}
+        required={!rma.ownEquipment}
+        value={!rma.ownEquipment ? rma.whoOwnsEquipment : ""}
         onChange={handleInput}
         disabled={rma.ownEquipment}
         errors={errors.ownEquipment}
@@ -71,6 +72,7 @@ const ReturnAuthorizationFieldset: React.FC<
         id="whoWorkingWith"
         label="If yes, who are you working with at PID?"
         placeholder=""
+        required={rma.communicatedWithUs}
         value={rma.communicatedWithUs ? rma.whoWorkingWith : ""}
         onChange={handleInput}
         disabled={!rma.communicatedWithUs}
@@ -84,6 +86,7 @@ const ReturnAuthorizationFieldset: React.FC<
           onChange={handleInput}
           value={rma.reasonForReturn}
           errors={errors.reasonForReturn}
+          required={true}
         />
         <InputField
           id="turnaroundTime"
@@ -92,6 +95,7 @@ const ReturnAuthorizationFieldset: React.FC<
           onChange={handleInput}
           errors={errors.turnaroundTime}
           label={<>Please indicate how fast a turnaround you need.</>}
+          required={true}
         />
         <TextAreaField
           id="holdingAccessories"

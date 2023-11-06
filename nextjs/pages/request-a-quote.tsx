@@ -201,7 +201,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
 
           <fieldset className="grid grid-cols-1 md:grid-cols-3 md:col-span-2 gap-x-5">
             <CountryField
-              quote={quote}
+              form={quote}
               setQuote={setQuote}
               errors={errors.country}
             />
@@ -220,7 +220,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
               placeholder=""
               value={quote.city || ""}
               onChange={handleInput}
-              errors={errors.city}
+              errors={errors?.city}
               required={true}
             />
           </fieldset>

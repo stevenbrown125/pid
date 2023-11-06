@@ -81,14 +81,14 @@ var params = {
         <td style="padding: 2px">Billing Address</td>
         <td style="padding: 2px">
           {{rma.billingAddress.street}}<br />{{rma.billingAddress.city}},
-          {{rma.billingAddress.state}} {{rma.billingAddress.country}}
+          {{rma.billingAddress.state}} {{rma.billingAddress.zip}}, {{rma.billingAddress.country}}
         </td>
       </tr>
       <tr>
         <td style="padding: 2px">Shipping Address</td>
         <td style="padding: 2px">
           {{rma.shippingAddress.street}}<br />{{rma.shippingAddress.city}},
-          {{rma.shippingAddress.state}} {{rma.shippingAddress.country}}
+          {{rma.shippingAddress.state}} {{rma.shippingAddress.zip}}, {{rma.shippingAddress.country}}
         </td>
       </tr>
       <tr>
@@ -127,7 +127,25 @@ var params = {
 
     `,
     SubjectPart: "HNU New RMA",
-    TextPart: `HNU RMA Request`,
+    TextPart: `HNU RMA Request
+    RMA #: {{rma.refId}}
+
+    Name: {{rma.name}}
+    Email: {{rma.email}}
+    Phone: {{rma.phone}}
+    Company: {{rma.company}}
+    Billing Address: 
+      {{rma.billingAddress.street}}
+      {{rma.billingAddress.city}}, {{rma.billingAddress.state}} {{rma.billingAddress.zip}}, {{rma.billingAddress.country}}
+    Shipping Address: 
+      {{rma.shippingAddress.street}}
+      {{rma.shippingAddress.city}}, {{rma.shippingAddress.state}} {{rma.shippingAddress.zip}}, {{rma.shippingAddress.country}}
+    Turnaround Time: {{rma.turnaroundTime}}
+    Owns Product: {{rma.ownEquipment}} | {{rma.whoOwnsEquipment}}
+    Communicated With Us: {{rma.communicatedWithUs}} | {{rma.whoWorkingWith}}
+    Reason for Return: {{rma.reasonForReturn}}
+    Holding Accessories: {{rma.holdingAccessories}}
+    Other Comments: {{rma.otherComments}}`,
   },
 };
 

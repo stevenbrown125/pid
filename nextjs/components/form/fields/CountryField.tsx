@@ -2,7 +2,7 @@ import { CountryDropdown } from "react-country-region-selector";
 import { FaGlobeAmericas } from "react-icons/fa";
 import { ActionKind } from "../../../lib/types/IAction";
 
-export default function CountryField({ quote, errors, setQuote }: any) {
+export default function CountryField({ form, errors, setQuote }: any) {
   const handleInput = (val: string) => {
     setQuote({
       type: ActionKind.HandleInput,
@@ -13,13 +13,13 @@ export default function CountryField({ quote, errors, setQuote }: any) {
 
   return (
     <div>
-      <label htmlFor="state">
+      <label htmlFor="country">
         <FaGlobeAmericas />
         Country
       </label>
       <CountryDropdown
         classes="customField"
-        value={quote.country}
+        value={form.country}
         name="country"
         onChange={(val) => handleInput(val)}
       />

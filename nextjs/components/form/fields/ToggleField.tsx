@@ -20,7 +20,7 @@ const ToggleField: React.FC<ToggleSwitchProps> = ({
   activeColor = "bg-red-600",
 }) => {
   return (
-    <div className="relative flex items-center justify-start font-medium text-neutral-700 ">
+    <div className="relative flex items-center justify-start mt-2 font-medium text-neutral-700">
       <p className="order-2 pl-2 text-sm font-normal text-neutral-500">
         {description}
       </p>
