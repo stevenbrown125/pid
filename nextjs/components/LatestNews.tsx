@@ -1,14 +1,27 @@
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import Link from "next/link";
+import FacebookFeed from "./FacebookFeed";
+import { FaFacebook } from "react-icons/fa6";
 
 export default function LastestNews({ posts }: any) {
+  const firstTwoPosts = posts.slice(0, 2);
   return (
     <section className="relative px-4 pt-8 bg-cover border-b border-red-200 m:px-6 lg:px-8 bg-stripes">
       <div className="relative mx-auto max-w-7xl">
-        <div className="grid max-w-lg gap-5 mx-auto sm:max-w-5xl lg:grid-cols-3 lg:max-w-none">
-          {posts.map((post: any) => (
-            <div key={post.title} className="flex flex-col">
+        <div className="grid max-w-lg gap-5 mx-auto sm:max-w-5xl lg:grid-cols-11 lg:max-w-none xl:grid-cols-12">
+          <div className="flex flex-col flex-shrink-0 col-span-5 bg-transparent xl:col-span-4">
+            <p className="flex items-center gap-1 pb-2 font-medium text-center text-gray-900 text-md lg:text-lg lg:text-left">
+              <FaFacebook className="text-[#5c74a8]" />
+              Facebook Feed
+            </p>
+            <FacebookFeed />
+          </div>
+          {firstTwoPosts.map((post: any) => (
+            <div
+              key={post.title}
+              className="flex flex-col col-span-3 xl:col-span-4"
+            >
               <p className="pb-2 font-medium text-red-600 text-md lg:text-lg">
                 <Link
                   href={`/announcements/${post.categorySlug}`}

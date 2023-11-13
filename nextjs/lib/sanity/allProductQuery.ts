@@ -1,4 +1,4 @@
-import groq from 'groq'
+import groq from "groq";
 
 export const allProductQuery = groq`
 
@@ -13,5 +13,6 @@ export const allProductQuery = groq`
     "image": image.asset->url,
 
     "slug": slug.current,
+    "type": type->name
   }
-  `
+  `;

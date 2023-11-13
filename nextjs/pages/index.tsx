@@ -19,13 +19,9 @@ export async function getStaticProps() {
     props: {
       data,
       posts,
-      appId: process.env.SQ_APP_ID,
-      locationId: process.env.SQ_LOCATION_ID,
     },
   };
 }
-
-// <PaymentForm appId={props.appId} locationId={props.locationId} />
 
 const Home: NextPage = (props: any) => {
   return (
