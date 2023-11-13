@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function IndustryGrid() {
   return (
@@ -7,7 +8,10 @@ export default function IndustryGrid() {
         Our Industries
       </h2>
       <div className="relative grid w-full h-full gap-2 gird-cols-1 lg:grid-cols-3 md:gap-6">
-        <div className="relative z-0 h-40 md:h-80 hover:cursor-pointer group">
+        <Link
+          className="relative z-0 h-40 md:h-80 hover:cursor-pointer group"
+          href="/products/industry?type=ambient-air"
+        >
           <p className="absolute z-10 w-full text-2xl font-extrabold text-center text-white top-1/3 md:top-1/2 md:text-3xl lg:text-4xl filter drop-shadow">
             Ambient Air
           </p>
@@ -17,8 +21,11 @@ export default function IndustryGrid() {
             src="/images/categories/resized_ambientair.jpg"
             alt="Ambient Air"
           />
-        </div>
-        <div className="relative z-0 h-40 row-span-1 md:h-80 lg:h-auto lg:row-span-2 hover:cursor-pointer group">
+        </Link>
+        <Link
+          className="relative z-0 h-40 row-span-1 md:h-80 lg:h-auto lg:row-span-2 hover:cursor-pointer group"
+          href="/products/industry?type=fixed-continuous"
+        >
           <p className="absolute z-10 w-full text-2xl font-extrabold text-center text-white top-1/3 md:top-1/2 md:text-3xl lg:text-4xl filter drop-shadow">
             Fixed, Continuous
           </p>
@@ -28,8 +35,11 @@ export default function IndustryGrid() {
             src="/images/categories/resized_Fixed-continuous.jpg"
             alt="Fixed, Continuous"
           />
-        </div>
-        <div className="relative z-0 h-40 md:h-80 hover:cursor-pointer group">
+        </Link>
+        <Link
+          className="relative z-0 h-40 md:h-80 hover:cursor-pointer group"
+          href="/products/industry?type=laboratory"
+        >
           <p className="absolute z-10 w-full text-2xl font-extrabold text-center text-white top-1/3 md:top-1/2 md:text-3xl lg:text-4xl filter drop-shadow">
             Laboratory
           </p>
@@ -39,8 +49,11 @@ export default function IndustryGrid() {
             src="/images/categories/resized_Laboratory.jpg"
             alt="Laboratory"
           />
-        </div>
-        <div className="relative z-0 h-40 md:h-80 hover:cursor-pointer group">
+        </Link>
+        <Link
+          className="relative z-0 h-40 md:h-80 hover:cursor-pointer group"
+          href="/products/industry?type=portable"
+        >
           <p className="absolute z-10 w-full text-2xl font-extrabold text-center text-white top-1/3 md:top-1/2 md:text-3xl lg:text-4xl filter drop-shadow">
             Portable
           </p>
@@ -50,8 +63,11 @@ export default function IndustryGrid() {
             src="/images/categories/resized_Portables.jpg"
             alt="Portable"
           />
-        </div>
-        <div className="relative z-0 h-40 md:h-80 hover:cursor-pointer group">
+        </Link>
+        <Link
+          className="relative z-0 h-40 md:h-80 hover:cursor-pointer group"
+          href="/products/industry?type=water-quality"
+        >
           <p className="absolute z-10 w-full text-2xl font-extrabold text-center text-white top-1/3 md:top-1/2 md:text-3xl lg:text-4xl filter drop-shadow">
             Water Quality
           </p>
@@ -61,7 +77,7 @@ export default function IndustryGrid() {
             src="/images/categories/resized_waterquality.jpg"
             alt="Water Quality"
           />
-        </div>
+        </Link>
       </div>
     </section>
   );

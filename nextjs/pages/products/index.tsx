@@ -54,7 +54,7 @@ const ProductPage: NextPage = (props: any) => {
             className="w-full h-full px-8 py-12 border md:py-20 hover:bg-neutral-100"
           >
             <GiSteam className="w-20 h-20 mx-auto text-neutral-400" />
-            <p className="font-medium  text-neutral-800">
+            <p className="font-medium text-neutral-800">
               By Primary Gas to be Measured
             </p>
           </Link>
@@ -66,7 +66,7 @@ const ProductPage: NextPage = (props: any) => {
             <p className="py-4 font-medium text-neutral-800">By Application</p>
           </Link>
           <Link
-            href="/products/"
+            href="/products/industry"
             className="w-full h-full px-8 py-12 border md:py-20 hover:bg-neutral-100"
           >
             <MdDevicesOther className="w-20 h-20 mx-auto text-neutral-400" />

@@ -1,6 +1,4 @@
-import { PortableText, toPlainText } from "@portabletext/react";
-import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import CTA from "../../../components/CTA";
 import Layout from "../../../components/Layout";
@@ -8,6 +6,7 @@ import { allProductQuery } from "../../../lib/sanity/allProductQuery";
 import client from "../../../client";
 import IProduct from "../../../lib/types/IProduct";
 import ProductGrid from "../../../components/ProductGrid";
+import { useRouter } from "next/router";
 
 export async function getStaticProps() {
   const products = await client.fetch(allProductQuery);
@@ -47,22 +46,27 @@ export async function getStaticProps() {
 }
 
 const ProductsByIndustryGrid = (props: any) => {
+  const router = useRouter();
+  const { type } = router.query;
+  const { products, industries } = props;
+  const industry = industries.find((industry: any) => industry.slug === type);
   const [selectedIndustry, setSelectedIndustry] = useState<string | null>(
-    props.industries[0].name
+    industry ? industry.name : props.industries[0].name
   );
+  useEffect(() => {
+    const industry = industries.find((industry: any) => industry.slug === type);
+    if (industry && selectedIndustry !== industry.name)
+      setSelectedIndustry(industry.name);
+  }, []);
+  const sortedProducts = new Map();
+  industries.forEach((industry: any) => {
+    sortedProducts.set(industry.name, []);
+  });
 
   const pages = [
     { name: "All Products", href: "/products", current: false },
     { name: "Industry", href: "/products/industry", current: true },
   ];
-
-  const { products, industries } = props;
-
-  const sortedProducts = new Map();
-
-  industries.forEach((industry: any) => {
-    sortedProducts.set(industry.name, []);
-  });
 
   products.forEach((product: IProduct) => {
     if (sortedProducts.has(product.type)) {
@@ -72,10 +76,25 @@ const ProductsByIndustryGrid = (props: any) => {
       ]);
     }
   });
-  console.log(sortedProducts, products);
-  const handleClick = (industry: string) => {
-    setSelectedIndustry(industry);
+
+  const updateQueryParam = (paramKey: string, paramValue: string) => {
+    const newQuery = { ...router.query, [paramKey]: paramValue };
+
+    router.push(
+      {
+        pathname: router.pathname,
+        query: newQuery,
+      },
+      undefined,
+      { shallow: true }
+    );
   };
+
+  const handleClick = (industry: any) => {
+    setSelectedIndustry(industry.name);
+    updateQueryParam("type", industry.slug);
+  };
+
   return (
     <Layout>
       <section className="relative px-4 py-6 pb-10 mx-auto sm:px-12 lg:px-16 lg:max-w-7xl ">
@@ -93,7 +112,8 @@ const ProductsByIndustryGrid = (props: any) => {
           {/* Otherwise there was search query so just return all the gases*/}
           {industries.map((industry: any) => (
             <a
-              onClick={() => handleClick(industry.name)}
+              onClick={() => handleClick(industry)}
+              key={`industry-${industry.slug}`}
               className={`relative z-0 hover:cursor-pointer group transform h-40 md:h-60 transition ease-in-out  ${
                 selectedIndustry && industry.name === selectedIndustry
                   ? "scale-110 z-10"
