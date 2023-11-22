@@ -10,6 +10,11 @@ module.exports = {
     fontFamily: {
       sans: ["Inter", ...defaultTheme.fontFamily.sans],
     },
+    extend: {
+      fontSize: {
+        xxs: [".625rem", "1rem"],
+      },
+    },
   },
   corePlugins: {
     aspectRatio: false,

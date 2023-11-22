@@ -7,6 +7,8 @@ import CTA from "../../../components/CTA";
 import Layout from "../../../components/Layout";
 import { allGasQuery } from "../../../lib/sanity/allGasQuery";
 import { IGas } from "../../../lib/types/IGas";
+import Subscript from "../../../components/text/Subscript";
+import Supscript from "../../../components/text/Supscript";
 
 export async function getStaticProps() {
   const gases = await client.fetch(allGasQuery);
@@ -113,7 +115,12 @@ const ProductsByGasPage = (props: any) => {
                     >
                       <a className="w-full h-full px-8 py-12 border hover:bg-neutral-100">
                         <span className='className="py-4 text-5xl font-extrabold text-neutral-500'>
-                          <PortableText value={gas.symbol} />
+                          <PortableText
+                            value={gas.symbol}
+                            components={{
+                              marks: { sub: Subscript, sup: Supscript },
+                            }}
+                          />
                         </span>
                         <p className="py-4 font-medium text-neutral-800">
                           {gas.name}
@@ -136,7 +143,12 @@ const ProductsByGasPage = (props: any) => {
               >
                 <a className="w-full h-full px-8 py-12 md:py-20 hover:bg-neutral-100 group">
                   <span className="py-4 text-5xl font-extrabold text-neutral-500 group-hover:text-red-800">
-                    <PortableText value={gas.symbol} />
+                    <PortableText
+                      value={gas.symbol}
+                      components={{
+                        marks: { sub: Subscript, sup: Supscript },
+                      }}
+                    />
                   </span>
                   <p className="py-4 font-medium text-neutral-800 group-hover:text-red-700">
                     {gas.name}

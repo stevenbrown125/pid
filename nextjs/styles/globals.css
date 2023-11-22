@@ -67,4 +67,10 @@
   .disabled {
     @apply text-neutral-500;
   }
+  .sub {
+    @apply align-text-bottom text-xxs;
+  }
+  .sup {
+    @apply align-top text-xxs;
+  }
 }

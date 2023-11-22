@@ -47,17 +47,23 @@ export async function getStaticProps() {
 
 const ProductsByIndustryGrid = (props: any) => {
   const router = useRouter();
-  const { type } = router.query;
   const { products, industries } = props;
-  const industry = industries.find((industry: any) => industry.slug === type);
-  const [selectedIndustry, setSelectedIndustry] = useState<string | null>(
-    industry ? industry.name : props.industries[0].name
-  );
+  const [selectedIndustry, setSelectedIndustry] = useState<string | null>(null);
+
   useEffect(() => {
-    const industry = industries.find((industry: any) => industry.slug === type);
-    if (industry && selectedIndustry !== industry.name)
-      setSelectedIndustry(industry.name);
-  }, []);
+    const { type } = router.query;
+    if (type) {
+      const industry = industries.find(
+        (industry: any) => industry.slug === type
+      );
+      console.log(type);
+      if (industry && selectedIndustry !== industry.name)
+        setSelectedIndustry(industry.name);
+    } else {
+      setSelectedIndustry(props.industries[0].name);
+    }
+  }, [router.query]);
+
   const sortedProducts = new Map();
   industries.forEach((industry: any) => {
     sortedProducts.set(industry.name, []);
@@ -80,7 +86,7 @@ const ProductsByIndustryGrid = (props: any) => {
   const updateQueryParam = (paramKey: string, paramValue: string) => {
     const newQuery = { ...router.query, [paramKey]: paramValue };
 
-    router.push(
+    router.replace(
       {
         pathname: router.pathname,
         query: newQuery,
@@ -108,31 +114,31 @@ const ProductsByIndustryGrid = (props: any) => {
           <Breadcrumbs pages={pages} />
         </div>
 
-        <div className="grid items-center justify-center grid-cols-1 mt-4 text-center lg:grid-cols-5 md:grid-cols-2 justify-items-center">
+        <div className="grid items-center justify-center grid-cols-1 mt-4 text-center md:grid-cols-5 justify-items-center">
           {/* Otherwise there was search query so just return all the gases*/}
           {industries.map((industry: any) => (
             <a
               onClick={() => handleClick(industry)}
               key={`industry-${industry.slug}`}
-              className={`relative z-0 hover:cursor-pointer group transform h-40 md:h-60 transition ease-in-out  ${
+              className={`relative z-0 hover:cursor-pointer group transform h-24 md:h-60 transition ease-in-out  w-full ${
                 selectedIndustry && industry.name === selectedIndustry
-                  ? "scale-110 z-10"
-                  : "h-40 md:h-60"
+                  ? "lg:scale-110 z-10"
+                  : ""
               }`}
             >
               <p
-                className={`absolute z-10 w-full text-2xl font-extrabold text-center text-white top-1/3 md:top-1/2 md:text-3xl lg:text-2xl filter drop-shadow`}
+                className={`absolute z-10 w-full text-lg font-extrabold text-center text-white top-1/3 md:top-1/3 md:text-xl px-4 lg:text-2xl filter drop-shadow`}
               >
                 {industry.name}
               </p>
               <img
-                className={`object-cover h-full ${
+                className={`object-cover object-center h-full w-full ${
                   selectedIndustry && industry.name === selectedIndustry
                     ? "brightness-75"
                     : "group-hover:grayscale-0 grayscale brightness-50 "
                 }`}
                 src={industry.image}
-                alt="Laboratory"
+                alt={industry.name}
               />
             </a>
           ))}

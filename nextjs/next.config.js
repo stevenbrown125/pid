@@ -1,11 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-const withTM = require("next-transpile-modules")([
-  "@square/web-sdk",
-  "react-square-web-payments-sdk",
-]);
-
-const nextConfig = withTM({
+const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
@@ -17,6 +12,6 @@ const nextConfig = withTM({
   eslint: {
     ignoreDuringBuilds: true,
   },
-});
+};
 
 module.exports = nextConfig;

@@ -10,6 +10,7 @@ import ProductGrid from "../../components/ProductGrid";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import Seo from "../../components/SEO";
 import CTA from "../../components/CTA";
+import TechnologyTable from "../../components/TechnologyTable";
 
 export async function getStaticProps() {
   const data = await client.fetch(allProductQuery);
@@ -82,6 +83,7 @@ const ProductPage: NextPage = (props: any) => {
             </p>
           </Link>
         </div>
+        <TechnologyTable />
         <ProductGrid products={props.data} />
       </section>
       <CTA />

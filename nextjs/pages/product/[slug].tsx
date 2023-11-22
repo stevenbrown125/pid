@@ -9,6 +9,8 @@ import Layout from "../../components/Layout";
 import { allProductQuery } from "../../lib/sanity/allProductQuery";
 import { HiOutlineBadgeCheck } from "react-icons/hi";
 import Seo from "../../components/SEO";
+import Subscript from "../../components/text/Subscript";
+import Supscript from "../../components/text/Supscript";
 
 export async function getStaticProps({ params }: any) {
   const product = await client.fetch(
@@ -27,8 +29,6 @@ export async function getStaticProps({ params }: any) {
   return {
     props: {
       product: product[0],
-      appId: process.env.SQ_APP_ID,
-      locationId: process.env.SQ_LOCATION_ID,
     },
   };
 }
@@ -53,7 +53,7 @@ const Product: NextPage = ({ product }: any) => {
   return (
     <Layout>
       <Seo title={product.title} description={product?.SEODescription} />
-      <section className="bg-neutral-50 -mt-1">
+      <section className="-mt-1 bg-neutral-50">
         <div className="container mx-auto bg-white shadow-sm sm:px-8 max-w-7xl lg:px-12 border-x border-neutral-100">
           <div className="pb-8">
             <div className="grid grid-cols-1 pt-8 md:grid-cols-5">
@@ -67,7 +67,12 @@ const Product: NextPage = ({ product }: any) => {
 
                 <div className="my-4 space-y-6 text-base text-neutral-500">
                   {product.description && (
-                    <PortableText value={product.description} />
+                    <PortableText
+                      value={product.description}
+                      components={{
+                        marks: { sub: Subscript, sup: Supscript },
+                      }}
+                    />
                   )}
                 </div>
                 <div className="self-end w-full pb-10">
@@ -111,7 +116,12 @@ const Product: NextPage = ({ product }: any) => {
                     <dl>
                       <dt className="pb-2 font-semibold">{spec.name}</dt>
                       <dd className="px-2 text-neutral-600 ">
-                        <PortableText value={spec.description} />
+                        <PortableText
+                          value={spec.description}
+                          components={{
+                            marks: { sub: Subscript, sup: Subscript },
+                          }}
+                        />
                       </dd>
                     </dl>
                   </div>

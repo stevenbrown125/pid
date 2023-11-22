@@ -9,6 +9,8 @@ import CTA from "../../../components/CTA";
 import Layout from "../../../components/Layout";
 import ProductGrid from "../../../components/ProductGrid";
 import { allGasQuery } from "../../../lib/sanity/allGasQuery";
+import Subscript from "../../../components/text/Subscript";
+import Supscript from "../../../components/text/Supscript";
 
 export async function getStaticProps({ params }: any) {
   const gas = await client.fetch(
@@ -97,11 +99,21 @@ const ProductsByGasPage = (props: any) => {
         )}
         <dl className="flex mt-10 border rounded-md border-neutral-200 bg-neutral-100 ">
           <dt className="p-4 text-5xl font-extrabold text-red-700">
-            <PortableText value={gas.symbol} />
+            <PortableText
+              value={gas.symbol}
+              components={{
+                marks: { sub: Subscript, sup: Supscript },
+              }}
+            />
           </dt>
           <dd className="p-4 text-neutral-600">
             <span className="font-bold">{gas.name}</span>
-            <PortableText value={gas.description} />
+            <PortableText
+              value={gas.description}
+              components={{
+                marks: { sub: Subscript, sup: Subscript },
+              }}
+            />
           </dd>
         </dl>
       </section>
