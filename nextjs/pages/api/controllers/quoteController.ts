@@ -15,6 +15,7 @@ export const handleQuote = async (
   try {
     const sendEmailCommand = createSendQuoteEmailTemplateCommand(quote);
     const response = await sesClient.send(sendEmailCommand);
+    
     res.status(200).json(response);
   } catch (error) {
     res.status(500).json({ error: "Failed to send email" });

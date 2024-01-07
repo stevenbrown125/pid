@@ -1,64 +1,76 @@
 import { NextPage } from "next";
 import Link from "next/link";
-import { useReducer, useState } from "react";
+import { useContext, useReducer, useState } from "react";
 import { FaEnvelope, FaPhone, FaUser } from "react-icons/fa";
-import PhoneInput, { formatPhoneNumber } from "react-phone-number-input/input";
+import { formatPhoneNumber } from "react-phone-number-input/input";
 import Layout from "../components/Layout";
 import { ContactReducer } from "../lib/helpers/contactReducer";
 import { IContactError } from "../lib/types/IContact";
 import { E164Number } from "libphonenumber-js/types";
 import { ActionKind } from "../lib/types/IAction";
-import { Switch } from "@headlessui/react";
 import { validateContact } from "../lib/helpers/validator";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import Modal from "../components/Modal";
 import Seo from "../components/SEO";
 import initialContactState from "../lib/initialState/contact";
+import {
+  HoneypotField,
+  InputField,
+  PhoneField,
+} from "../components/form/fields";
+import { PrivacyCheckbox } from "../components/form";
+import { ModalContext } from "../providers/ModalProvider";
+import SuccessModal from "../components/modal/SuccessModal";
+import ErrorModal from "../components/modal/ErrorModal";
 
 const ContactPage: NextPage = () => {
   // Initialize Captcha
   const { executeRecaptcha } = useGoogleReCaptcha();
-
+  const { showModal } = useContext(ModalContext);
   // Set State
   const [contact, setContact] = useReducer(ContactReducer, initialContactState);
   const [errors, setErrors] = useState({} as IContactError);
   const [isLoading, setIsLoading] = useState(false);
-  //TODO: Refactor State into Reducer for  Modal
-  const [open, setOpen] = useState(false); // Modal State
-  const [message, setMessage] = useState("");
-  const [success, setSuccess] = useState(false);
 
   // Submit to API
   const submitContactForm = async (gReCaptchaToken: string) => {
-    const res = await fetch("/api/routes/contact", {
-      method: "POST",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...contact,
-        gRecaptchaToken: gReCaptchaToken,
-      }),
-    });
+    try {
+      const res = await fetch("/api/routes/contact", {
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...contact,
+          gRecaptchaToken: gReCaptchaToken,
+        }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (data.$metadata.httpStatusCode === 200) {
-      setMessage(
-        "Your message sent successfully. Our team will get back to you within 3 business days."
+      if (data.$metadata.httpStatusCode === 200) {
+        showModal(
+          <SuccessModal
+            message={
+              "Your contact request sent successfully. Our team will get back to you within 1 business day."
+            }
+          />
+        );
+        setContact({ type: ActionKind.Reset });
+
+        setIsLoading(false);
+        return data;
+      }
+    } catch (e) {
+      showModal(
+        <ErrorModal
+          message={
+            "Your contact request failed to send due to a server error. Please email us at support@hnu.com with your Quotation Request."
+          }
+        />
       );
-      setSuccess(true);
-      setOpen(true);
-      setContact({ type: ActionKind.Reset });
-    } else {
-      setMessage(
-        "Your message failed to send due to a server error. Please email us at support@hnu.com with your message."
-      );
-      setSuccess(false);
-      setOpen(true);
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   // Handlers
@@ -109,11 +121,14 @@ const ContactPage: NextPage = () => {
       const submissionResponse = await submitContactForm(gReCaptchaToken);
 
       /* Return the Phone number back to E164Number */
-      setContact({
-        type: ActionKind.HandleInput,
-        field: "phone",
-        payload: phone,
-      });
+
+      if (submissionResponse.$metadata.httpStatusCode !== 200) {
+        setContact({
+          type: ActionKind.HandleInput,
+          field: "phone",
+          payload: phone,
+        });
+      }
     } catch (e: any) {
       // Validation Error already handled
 
@@ -132,12 +147,6 @@ const ContactPage: NextPage = () => {
         title="Contact Us"
         description=" We'd love to hear from you! Fill out and submit this form and
               our team will get back to you as soon as possible."
-      />
-      <Modal
-        open={open}
-        setOpen={setOpen}
-        message={message}
-        success={success}
       />
       <section>
         <div className="relative px-4 mx-auto -mt-2 sm:px-12 lg:px-16 lg:max-w-7xl md:grid md:grid-cols-5">
@@ -199,154 +208,93 @@ const ContactPage: NextPage = () => {
           </div>
           <div className="px-4 py-6 bg-white md:shadow-md sm:px-6 md:col-span-3 md:py-12 md:px-8 xl:pl-12">
             <div className="max-w-lg mx-auto lg:max-w-none">
-              <form className="grid grid-cols-1 gap-y-6">
-                <label htmlFor="firstName" className="relative block w-full">
-                  <span className="flex items-center text-neutral-700">
-                    <FaUser className="w-5 mx-1" />
-                    Full Name
-                  </span>
-                  <input
-                    type="text"
-                    name="name"
+              <form
+                className="grid grid-cols-1 gap-y-6"
+                onSubmit={handleSubmit}
+              >
+                <fieldset>
+                  <InputField
                     id="name"
-                    autoComplete="given-name"
+                    label={
+                      <>
+                        <FaUser />
+                        Full Name
+                      </>
+                    }
                     placeholder="John Doe"
+                    autoComplete="given-name"
                     value={contact.name}
-                    disabled={isLoading}
-                    onChange={(e) => handleInput(e)}
+                    onChange={handleInput}
+                    errors={errors.name}
+                    required={true}
                   />
-                  {errors.name && (
-                    <span className="absolute pl-1 text-red-600 -bottom-6">
-                      {errors.name}
-                    </span>
-                  )}
-                </label>
-                <label htmlFor="email" className="relative block">
-                  <span className="flex items-center text-neutral-700">
-                    <FaEnvelope className="w-5 mx-1" />
-                    Email
-                  </span>
-                  <input
+                  <InputField
                     id="email"
-                    name="email"
-                    type="email"
+                    label={
+                      <>
+                        <FaEnvelope />
+                        Email
+                      </>
+                    }
                     placeholder="johndoe@email.com"
-                    value={contact.email}
-                    disabled={isLoading}
-                    onChange={(e) => handleInput(e)}
                     autoComplete="email"
+                    value={contact.email}
+                    onChange={handleInput}
+                    errors={errors.email}
+                    required={true}
                   />
-                  {errors.email && (
-                    <span className="absolute pl-1 text-red-600 -bottom-6">
-                      {errors.email}
-                    </span>
-                  )}
-                </label>
-                <label htmlFor="phone" className="relative block">
-                  <span className="flex items-center text-neutral-700">
-                    <FaPhone className="w-5 mx-1" />
-                    Phone
-                  </span>
-                  <PhoneInput
-                    type="tel"
-                    name="phone"
-                    placeholder="+1 000 000 0000"
-                    id="phone"
+                  <PhoneField
                     value={contact.phone}
-                    disabled={isLoading}
-                    onChange={(e) => handlePhone(e)}
-                    maxLength={17}
-                    autoComplete="tel"
-                    required
+                    onChange={handlePhone}
+                    errors={errors}
                   />
-                  {errors.phone && (
-                    <span className="absolute pl-1 text-red-600 -bottom-6">
-                      {errors.phone}
+                  <label htmlFor="message" className="relative block">
+                    <span className="flex items-center text-neutral-700">
+                      <FaEnvelope className="w-5 mx-1" />
+                      Message
                     </span>
-                  )}
-                </label>
-                <label htmlFor="message" className="relative block">
-                  <span className="flex items-center text-neutral-700">
-                    <FaEnvelope className="w-5 mx-1" />
-                    Message
-                  </span>
-                  <textarea
-                    rows={4}
-                    name="message"
-                    id="message"
-                    disabled={isLoading}
-                    onChange={(e) => handleInput(e)}
-                    value={contact.message}
-                  />
-                  {errors.message && (
-                    <span className="pl-1 text-red-600 md:absolute md:-bottom-6 ">
-                      {errors.message}
-                    </span>
-                  )}
-                </label>
-                <div className="hidden">
-                  <label htmlFor="field">
-                    Don&apos;t fill this out if you&apos;re human:
-                    <input name="field" />
-                  </label>
-                </div>
-                <label
-                  htmlFor="privacy"
-                  className="relative flex pb-6 font-medium text-neutral-700"
-                >
-                  <p className="order-2 pl-2 text-sm font-normal text-neutral-500">
-                    By checking this box you acknowledge that you have read and
-                    accepted our{" "}
-                    <Link href="/privacy-policy" legacyBehavior>
-                      <a
-                        className="text-red-600 underline hover:text-red-800"
-                        target="_blank"
-                      >
-                        Privacy Policy
-                      </a>
-                    </Link>
-                    .
-                  </p>
-                  <div className="flex items-center h-5 ml-3">
-                    <Switch
-                      id="privacy"
-                      aria-describedby="privacy"
-                      name="privacy"
-                      checked={contact.hasConsented}
+                    <textarea
+                      rows={4}
+                      name="message"
+                      id="message"
                       disabled={isLoading}
-                      onChange={(e: boolean) =>
-                        setContact({
-                          type: ActionKind.ToggleConsent,
-                          field: "hasConsent",
-                          payload: e,
-                        })
-                      }
-                      className={`${
-                        contact.hasConsented ? "bg-red-600" : "bg-neutral-200"
-                      } relative inline-flex h-6 w-11 items-center rounded-full`}
-                    >
-                      <span className="sr-only">Toggle Consent</span>
-                      <span
-                        className={`${
-                          contact.hasConsented
-                            ? "translate-x-6"
-                            : "translate-x-1"
-                        } inline-block h-4 w-4 transform rounded-full bg-white`}
-                      />
-                    </Switch>
+                      onChange={(e) => handleInput(e)}
+                      value={contact.message}
+                    />
+                    {errors.message && (
+                      <span className="pl-1 text-red-600 md:absolute md:-bottom-6 ">
+                        {errors.message}
+                      </span>
+                    )}
+                  </label>
+                  <div className="hidden">
+                    <label htmlFor="field">
+                      Don&apos;t fill this out if you&apos;re human:
+                      <input name="field" />
+                    </label>
                   </div>
-                  {errors.hasConsented && (
-                    <span className="absolute pl-1 text-red-600 -bottom-3">
-                      {errors.hasConsented}
+                  <HoneypotField />
+                </fieldset>
+                <div className="md:col-span-2">
+                  <PrivacyCheckbox
+                    hasConsented={contact.hasConsented}
+                    setRMA={setContact}
+                    errors={errors}
+                  />
+                  <div
+                    className="pl-2 my-6 g-recaptcha"
+                    data-sitekey="6LcMc2AfAAAAAGAm9zAtZW_dPuQFaHF7eqvVsOqV"
+                  />
+                  {Object.keys(errors).length > 0 && (
+                    <span className="block w-full pb-4 pl-1 font-bold text-red-600 md:col-span-2">
+                      There are errors in the form. Please correct any errors
+                      before attempting to submit again.
                     </span>
                   )}
-                </label>
-                <div className="ml-2">
                   <button
-                    type="button"
+                    type="submit"
                     disabled={isLoading}
-                    onClick={handleSubmit}
-                    className="inline-flex justify-center w-full px-10 py-3 text-base font-medium text-white bg-red-700 border border-transparent rounded-md shadow-sm md:max-w-max hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600"
+                    className="w-full px-10 py-4 text-base font-medium text-white bg-red-700 border border-transparent rounded-md shadow-sm md:ml-2 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600 sm:w-auto"
                   >
                     Submit
                   </button>

@@ -7,7 +7,6 @@ import { createSendRMAResponseEmailTemplateCommand } from "../../../lib/aws/crea
 
 export const handleRMA = async (req: NextApiRequest, res: NextApiResponse) => {
   const rma: IRMA = req.body;
-
   rma.refId = generateRMAId(req.body.name);
 
   try {
@@ -16,15 +15,10 @@ export const handleRMA = async (req: NextApiRequest, res: NextApiResponse) => {
     const customerResponse = await sesClient.send(sendCustomerEmailCommand);
 
     if (customerResponse.$metadata.httpStatusCode === 200) {
-      // const sendEmailCommand = createSendRMAEmailTemplateCommand(rma);
-      // const response = await sesClient.send(sendEmailCommand);
-      // res.status(200).json(response);
-
       setTimeout(async () => {
         console.log(rma);
         const sendEmailCommand = createSendRMAEmailTemplateCommand(rma);
         const response = await sesClient.send(sendEmailCommand);
-
         res.status(200).json(response);
       }, 2000); // 2000 milliseconds delay
     } else {
