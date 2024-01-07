@@ -212,7 +212,7 @@ const ContactPage: NextPage = () => {
                 className="grid grid-cols-1 gap-y-6"
                 onSubmit={handleSubmit}
               >
-                <fieldset>
+                <fieldset className="grid grid-cols-1 gap-y-1">
                   <InputField
                     id="name"
                     label={

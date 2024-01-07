@@ -12,13 +12,11 @@ export const handleContact = async (req: NextApiRequest, res: NextApiResponse) =
     const sendContactEmailCommand =
     createSendContactEmailTemplateCommand(form);
     const contactResponse = await sesClient.send(sendContactEmailCommand);
-    console.log(contactResponse)
     if (contactResponse.$metadata.httpStatusCode === 200) {
       await setTimeout(async () => {
         // Send to customer
         const sendEmailCommand = createSendContactCustomerEmailTemplateCommand(form);
         const response = await sesClient.send(sendEmailCommand);
-        console.log(response)
         return res.status(200).json(response);
       }, 2000); // 2000 milliseconds delay
     } else {

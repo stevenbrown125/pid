@@ -14,7 +14,7 @@ const PhoneField: React.FC<PhoneInputFieldProps> = ({
   errors,
 }) => {
   return (
-    <div>
+    <div className="col-span-2 md:col-span-1">
       <label htmlFor="phone">
         <FaPhone className="w-5 mx-1" />
         Phone

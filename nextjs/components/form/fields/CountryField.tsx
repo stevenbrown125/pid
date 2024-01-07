@@ -12,7 +12,7 @@ export default function CountryField({ form, errors, setQuote }: any) {
   };
 
   return (
-    <div>
+    <div className="col-span-2 md:col-span-1">
       <label htmlFor="country">
         <FaGlobeAmericas />
         Country

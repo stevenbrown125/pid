@@ -1,10 +1,10 @@
 import { SendTemplatedEmailCommand } from "@aws-sdk/client-ses";
-import IContact from "../types/IContact";
+import IQuote from "../types/IQuote";
 
 const fromAddress = process.env.SES_FROM_ADDRESS || "sales@hnu.com";
 
-export const createSendContactCustomerEmailTemplateCommand = (form: IContact) => {
-  const templateName = "HNU_Contact_Customer";
+export const createSendQuoteCustomerEmailTemplate = (form: IQuote) => {
+  const templateName = "HNU_Quote_Customer";
   const toAddress = form.email
 
   return new SendTemplatedEmailCommand({

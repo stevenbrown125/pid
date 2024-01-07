@@ -25,7 +25,7 @@ const InputField: FC<InputProps> = ({
   disabled = false,
   required = false,
 }) => (
-  <div>
+  <div className="col-span-2 md:col-span-1">
     <label className={`${disabled && "disabled"}`} htmlFor={id}>
       {label}
       {!required && (
