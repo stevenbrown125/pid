@@ -60,7 +60,7 @@ const ProductPage: NextPage = (props: any) => {
             </p>
           </Link>
           <Link
-            href="/products/"
+            href="/products/application"
             className="w-full h-full px-8 py-12 border md:py-20 hover:bg-neutral-100"
           >
             <IoAnalyticsOutline className="w-20 h-20 mx-auto text-neutral-400" />
