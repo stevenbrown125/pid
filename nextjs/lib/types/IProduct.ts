@@ -5,9 +5,8 @@ export default interface IProduct {
   id?: string;
   title: string;
   slug: string;
-  type?: string;
   gasesMeasured?: Array<IGas>;
-  industries?: string;
+  industries?: string[];
   price?: number;
   image?: any;
   description?: PortableTextBlock;

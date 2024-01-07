@@ -18,7 +18,7 @@ export async function getStaticProps({ params }: any) {
     title,
     description,
     "id": _id,
-    "image": image.asset->url,
+    "image": image.secure_url,
     specifications,
     features,
     "slug": slug.current,
@@ -81,25 +81,33 @@ const Product: NextPage = ({ product }: any) => {
                       pathname: `/request-a-quote`,
                       query: { slug: product.slug },
                     }}
-                    legacyBehavior
+                    className="flex items-center justify-center w-full px-8 py-3 text-base font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-50 focus:ring-red-700"
                   >
-                    <a className="flex items-center justify-center w-full px-8 py-3 text-base font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-50 focus:ring-red-700">
                       Request a Quote
-                    </a>
                   </Link>
                 </div>
               </div>
               <div className="relative order-1 col-span-2 mx-20 md:order-2">
                 <div className="relative aspect-w-2 aspect-h-3">
-                  <Image
+                  {product.image ? <Image
                     src={product.image}
                     alt={product.title}
                     fill
-                    sizes="100vw"
+                    priority
+                    sizes="(max-width: 768px) 100vw, 100vw"
                     style={{
                       objectFit: "contain",
                     }}
-                  />
+                  /> :  <Image
+                  src="https://res.cloudinary.com/hnu/image/upload/v1659747194/image-coming-soon-placeholder-768x768_hgwfpx.png"
+                  alt={`${product.title} image coming soon`}
+
+                  sizes="(max-width: 768px) 100vw, 100vw"
+                  fill
+                  priority
+                  style={{
+                    objectFit: "contain",}}
+                /> }
                 </div>
               </div>
             </div>

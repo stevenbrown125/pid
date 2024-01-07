@@ -18,12 +18,6 @@ export default {
       },
     },
     {
-      name: "type",
-      title: "Product Type",
-      type: "reference",
-      to: { type: "productType" },
-    },
-    {
       name: "gasesMeasured",
       title: "Gases Measured",
       type: "array",
@@ -33,6 +27,12 @@ export default {
           to: { type: "gas" },
         },
       ],
+    },
+    {
+      name: "multigas",
+      title: "Multigas Analzyer?",
+      type: "boolean",
+      initialValue: false,
     },
     {
       name: "industries",

@@ -4,39 +4,15 @@ import CTA from "../../../components/CTA";
 import Layout from "../../../components/Layout";
 import { allProductQuery } from "../../../lib/sanity/allProductQuery";
 import client from "../../../client";
-import IProduct from "../../../lib/types/IProduct";
 import ProductGrid from "../../../components/ProductGrid";
 import { useRouter } from "next/router";
+import { allIndustryQuery } from "../../../lib/sanity/allIndustryQuery";
+import IProduct from "../../../lib/types/IProduct";
 
 export async function getStaticProps() {
   const products = await client.fetch(allProductQuery);
-  const industries = [
-    {
-      name: "Ambient Air",
-      image: "../images/categories/resized_ambientair.jpg",
-      slug: "ambient-air",
-    },
-    {
-      name: "Portable",
-      image: "../images/categories/resized_Portables.jpg",
-      slug: "portable",
-    },
-    {
-      name: "Fixed, Continuous",
-      image: "../images/categories/resized_Fixed-continuous.jpg",
-      slug: "fixed-continuous",
-    },
-    {
-      name: "Laboratory",
-      image: "../images/categories/resized_Laboratory.jpg",
-      slug: "laboratory",
-    },
-    {
-      name: "Water Quality",
-      image: "../images/categories/resized_waterquality.jpg",
-      slug: "water-quality",
-    },
-  ];
+  const industries = await client.fetch(allIndustryQuery);
+
   return {
     props: {
       products,
@@ -51,14 +27,13 @@ const ProductsByIndustryGrid = (props: any) => {
   const [selectedIndustry, setSelectedIndustry] = useState<string | null>(null);
 
   useEffect(() => {
-    const { type } = router.query;
-    if (type) {
-      const industry = industries.find(
-        (industry: any) => industry.slug === type
+    const { industry } = router.query;
+    if (industry) {
+      const urlIndustry = industries.find(
+        (i: any) => i.slug === industry
       );
-      console.log(type);
-      if (industry && selectedIndustry !== industry.name)
-        setSelectedIndustry(industry.name);
+      if (industry && selectedIndustry !== urlIndustry.name)
+        setSelectedIndustry(urlIndustry.name);
     } else {
       setSelectedIndustry(props.industries[0].name);
     }
@@ -75,14 +50,16 @@ const ProductsByIndustryGrid = (props: any) => {
   ];
 
   products.forEach((product: IProduct) => {
-    if (sortedProducts.has(product.type)) {
-      sortedProducts.set(product.type, [
-        ...sortedProducts.get(product.type),
-        product,
-      ]);
-    }
+    if(product.industries)
+      product.industries.forEach((industry) => {
+        if (sortedProducts.has(industry)) {
+          sortedProducts.set(industry, [...sortedProducts.get(industry), product]);
+        } else {
+          sortedProducts.set(industry, [product]);
+        }
+      });
   });
-
+  
   const updateQueryParam = (paramKey: string, paramValue: string) => {
     const newQuery = { ...router.query, [paramKey]: paramValue };
 
@@ -98,7 +75,7 @@ const ProductsByIndustryGrid = (props: any) => {
 
   const handleClick = (industry: any) => {
     setSelectedIndustry(industry.name);
-    updateQueryParam("type", industry.slug);
+    updateQueryParam("industry", industry.slug);
   };
 
   return (

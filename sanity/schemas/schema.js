@@ -1,9 +1,7 @@
-// We import object and document schemas
 import blockContent from "./blockContent";
 import post from "./post";
 import author from "./author";
 import product from "./product";
-import productType from "./productType";
 import postCategory from "./postCategory";
 import industry from "./industry";
 import specification from "./specification";
@@ -21,7 +19,6 @@ const schema = [
   industry,
   blockContent,
   product,
-  productType,
   specification,
   feature,
   PDF,

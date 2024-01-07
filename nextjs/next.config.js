@@ -7,7 +7,7 @@ const nextConfig = {
     esmExternals: "loose",
   },
   images: {
-    domains: ["cdn.sanity.io", "images.unsplash.com"],
+    domains: ["cdn.sanity.io", "images.unsplash.com", 'res.cloudinary.com'],
   },
   eslint: {
     ignoreDuringBuilds: true,

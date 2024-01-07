@@ -74,7 +74,7 @@ const ProductPage: NextPage = (props: any) => {
             <p className="py-4 font-medium text-neutral-800">By Industry</p>
           </Link>
           <Link
-            href="/products/"
+            href="/products/multigas"
             className="w-full h-full px-8 py-12 border md:py-20 hover:bg-neutral-100"
           >
             <MdOutlineMultilineChart className="w-20 h-20 mx-auto text-neutral-400" />
