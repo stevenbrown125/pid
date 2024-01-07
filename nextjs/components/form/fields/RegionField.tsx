@@ -17,7 +17,7 @@ export default function RegionField({ quote, errors, setQuote }: any) {
   };
 
   return (
-    <div>
+    <div className="col-span-2 md:col-span-1">
       <label htmlFor="state">
         <GrMapLocation />
         State / Province

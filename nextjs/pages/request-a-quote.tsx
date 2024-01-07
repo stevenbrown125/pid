@@ -226,11 +226,11 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
           </fieldset>
 
           {/* Product Information */}
-          <h2 className="pt-4 pb-1 text-2xl font-extrabold text-center border-b text-neutral-800 md:col-span-2 md:text-left sm:text-3xl lg:text-4xl filter drop-shadow-sm">
+          <h2 className="col-span-2 pt-4 pb-1 text-2xl font-extrabold text-center border-b text-neutral-800 md:col-span-2 md:text-left sm:text-3xl lg:text-4xl filter drop-shadow-sm">
             Product Info
           </h2>
-          <fieldset className="grid grid-cols-2 md:col-span-2 gap-x-6 gap-y-2 ">
-            <div className="relative z-10 block md:col-span-2">
+          <fieldset className="grid grid-cols-1 col-span-2 gap-x-6 gap-y-4 md:grid-cols-2">
+            <div className="relative z-10 block col-span-2">
               <Listbox
                 value={selectedProduct}
                 onChange={(e: IProduct) =>
@@ -313,7 +313,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
                 </span>
               )}
             </div>
-            <div>
+            <div className="col-span-2 md:col-span-1">
               <label htmlFor="timetable">Purchase Timetable</label>
               <input
                 type="date"
@@ -347,7 +347,7 @@ const RequestAQuotePage: NextPage = ({ products }: any) => {
           </fieldset>
           <HoneypotField />
 
-          <div className="md:col-span-2">
+          <div className="md:col-span-2 ">
             <PrivacyCheckbox
               hasConsented={quote.hasConsented}
               setRMA={setQuote}

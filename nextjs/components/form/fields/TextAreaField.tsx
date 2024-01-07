@@ -21,7 +21,7 @@ const TextAreaField: FC<TextAreaProps> = ({
   rows = 4,
   required = false,
 }) => (
-  <div className={classes}>
+  <div className={`${classes} col-span-2`}>
     <label htmlFor={id}>{label}</label>
     <textarea
       rows={rows}

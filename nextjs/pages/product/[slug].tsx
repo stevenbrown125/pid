@@ -101,7 +101,6 @@ const Product: NextPage = ({ product }: any) => {
                   /> :  <Image
                   src="https://res.cloudinary.com/hnu/image/upload/v1659747194/image-coming-soon-placeholder-768x768_hgwfpx.png"
                   alt={`${product.title} image coming soon`}
-
                   sizes="(max-width: 768px) 100vw, 100vw"
                   fill
                   priority
